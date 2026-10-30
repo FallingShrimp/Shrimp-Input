@@ -1,6 +1,16 @@
 [gd_scene format=3 uid="uid://ccqlvicfg44ji"]
 
 [ext_resource type="Script" uid="uid://bnbax26v3kflw" path="res://addons/shrimp_input/example/player/player.gd" id="1_u8a8r"]
+[ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="2_tcb8m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_st2pc"]
+size = Vector2(128, 128)
 
 [node name="Player" type="CharacterBody2D" unique_id=375308569]
 script = ExtResource("1_u8a8r")
+
+[node name="Texture" type="Sprite2D" parent="." unique_id=605714463]
+texture = ExtResource("2_tcb8m")
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1418019904]
+shape = SubResource("RectangleShape2D_st2pc")

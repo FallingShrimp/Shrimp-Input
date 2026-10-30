@@ -1,22 +1,13 @@
 @tool
 extends EditorPlugin
 
+const TIME_MANAGER = "shrimp_plugin_time_manager"
 
 func _enable_plugin() -> void:
-	# Add autoloads here.
-	pass
-
-
+	add_autoload_singleton(TIME_MANAGER, "res://addons/shrimp_input/managers/TimeManager.gd")
 func _disable_plugin() -> void:
-	# Remove autoloads here.
-	pass
-
-
+	remove_autoload_singleton(TIME_MANAGER)
 func _enter_tree() -> void:
-	# Initialization of the plugin goes here.
 	pass
-
-
 func _exit_tree() -> void:
-	# Clean-up of the plugin goes here.
 	pass
