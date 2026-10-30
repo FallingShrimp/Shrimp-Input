@@ -1,7 +1,7 @@
-class_name ShrimpInputExampleAction
+extends RefCounted
 
-static var MOVE_UP = SemanticAction.new("move_up")
-static var MOVE_DOWN = SemanticAction.new("move_down")
-static var MOVE_LEFT = SemanticAction.new("move_left")
-static var MOVE_RIGHT = SemanticAction.new("move_right")
-static var ATTACK = SemanticAction.new("attack")
+var MOVE_UP = SemanticAction.new("move_up")
+var MOVE_DOWN = SemanticAction.new("move_down")
+var MOVE_LEFT = SemanticAction.new("move_left")
+var MOVE_RIGHT = SemanticAction.new("move_right")
+var ATTACK = SemanticAction.new("attack")
