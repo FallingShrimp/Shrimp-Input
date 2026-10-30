@@ -13,3 +13,5 @@ func _process(delta: float) -> void:
 
 static func current() -> float:
 	return instance.timeLived
+static func frame():
+	return await instance.get_tree().process_frame
