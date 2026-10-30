@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ccqlvicfg44ji"]
+
+[ext_resource type="Script" uid="uid://bnbax26v3kflw" path="res://addons/shrimp_input/example/player/player.gd" id="1_u8a8r"]
+
+[node name="Player" type="CharacterBody2D" unique_id=375308569]
+script = ExtResource("1_u8a8r")
