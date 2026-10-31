@@ -1,3 +1,4 @@
+@tool
 extends Node
 class_name ShrimpBuffer
 
@@ -7,23 +8,37 @@ class BufferItem:
 	var event: InputEvent
 	var tick: float
 
+@export_storage var actions: Array[StringName] = []
 @export var maxLength: int = 10
 @export var itemLifetime: float = 0.35
+@export var clock: ShrimpClock
 
-var clock: ShrimpClock
 var stack: Array[BufferItem] = []
 var head: int = 0
 var tail: int = 0
 var currentLength: int = 0
 
 func _ready() -> void:
-	clock = ShrimpClock.findIn(self)
+	if !is_instance_valid(clock):
+		clock = ShrimpClock.findIn(self)
 	stack.resize(maxLength)
 	for i in maxLength:
 		stack[i] = BufferItem.new()
+func _physics_process(_delta: float) -> void:
+	InputMap.get_actions()
+func _get_property_list() -> Array[Dictionary]:
+	return [
+		{
+			"name": "actions",
+			"type": TYPE_ARRAY,
+			"hint": PROPERTY_HINT_TYPE_STRING,
+			"hint_string": "%d/%d:%s" % [TYPE_STRING_NAME, PROPERTY_HINT_ENUM, ",".join(InputMap.get_actions())],
+			"usage": PROPERTY_USAGE_SCRIPT_VARIABLE | PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE,
+			"default": []
+		}
+	]
 
 func push(event: InputEvent) -> void:
-	if not event.is_pressed(): return
 	var hair = (head + 1) % maxLength
 	if currentLength == maxLength:
 		tail = (tail + 1) % maxLength
@@ -53,7 +68,7 @@ func count(inputEvents: Array[String], lifetimeOverride: float = -1.0) -> int:
 		pointer = (pointer + 1) % maxLength
 	return -1
 func consume(length: int) -> void:
-	for i in range(min(length, currentLength)):
+	for i in min(length, currentLength):
 		tail = (tail + 1) % maxLength
 		currentLength -= 1
 func clear() -> void:

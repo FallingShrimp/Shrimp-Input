@@ -1,12 +1,13 @@
 extends Node
 class_name ShrimpInput
 
-var clock: ShrimpClock
+@export var clock: ShrimpClock = null
 var buffer: ShrimpBuffer
 var charging: Dictionary[SemanticAction, float] = {} # action->开始时间戳
 
 func _ready() -> void:
-	clock = ShrimpClock.findIn(self)
+	if !is_instance_valid(clock):
+		clock = ShrimpClock.findIn(self)
 	buffer = ShrimpBuffer.findIn(self, false)
 
 func press(action: SemanticAction, timeout: float = INF) -> float:

@@ -11,24 +11,26 @@
 script = ExtResource("2_5la7w")
 stance = 0
 
-[node name="ShrimpInput" type="Node" parent="." index="0" unique_id=474048355]
-unique_name_in_owner = true
-script = ExtResource("2_sqyos")
-metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
-
-[node name="ShrimpClock" type="Node" parent="ShrimpInput" index="0" unique_id=68787657]
+[node name="ShrimpClock" type="Node" parent="." index="0" unique_id=68787657]
 script = ExtResource("4_q7jji")
 metadata/_custom_type_script = "uid://d3opmcnhhbjbp"
 
-[node name="ShrimpBuffer" type="Node" parent="ShrimpInput" index="1" unique_id=202595940]
+[node name="ShrimpInput" type="Node" parent="." index="1" unique_id=474048355 node_paths=PackedStringArray("clock")]
+unique_name_in_owner = true
+script = ExtResource("2_sqyos")
+clock = NodePath("../ShrimpClock")
+metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
+
+[node name="ShrimpBuffer" type="Node" parent="ShrimpInput" index="0" unique_id=202595940 node_paths=PackedStringArray("clock")]
 script = ExtResource("5_0l8nm")
+clock = NodePath("../../ShrimpClock")
 metadata/_custom_type_script = "uid://doy0uuccb5iml"
 
-[node name="ChargeRing" parent="." index="1" unique_id=1016301323 instance=ExtResource("3_vdjcy")]
+[node name="ChargeRing" parent="." index="2" unique_id=1016301323 instance=ExtResource("3_vdjcy")]
 unique_name_in_owner = true
 
-[node name="Texture" parent="." index="2" unique_id=605714463]
+[node name="Texture" parent="." index="3" unique_id=605714463]
 self_modulate = Color(0.22378641, 1, 0.24686164, 1)
 
-[node name="Hitbox" parent="." index="3" unique_id=1418019904]
+[node name="Hitbox" parent="." index="4" unique_id=1418019904]
 visible = false
