@@ -1,5 +1,6 @@
 @tool
 extends EditorPlugin
+class_name ShrimpInputPlugin
 
 const TIME_MANAGER = "shrimp_plugin_time_manager"
 

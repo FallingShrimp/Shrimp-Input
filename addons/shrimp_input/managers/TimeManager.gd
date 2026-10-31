@@ -2,16 +2,16 @@
 extends Node
 class_name ShrimpTimeManager
 
-static var instance: ShrimpTimeManager
-
 var timeLived: float = 0
 
-func _ready() -> void:
-	instance = self
 func _process(delta: float) -> void:
 	timeLived += delta
 
-static func current() -> float:
-	return instance.timeLived
-static func frame():
-	return await instance.get_tree().process_frame
+static func getInstance(from: Node) -> ShrimpTimeManager:
+	return from.get_tree().root.get_node(ShrimpInputPlugin.TIME_MANAGER)
+static func current(from: Node) -> float:
+	return getInstance(from).timeLived
+static func frame(from: Node):
+	return await from.get_tree().process_frame
+static func seconds(duration: float, from: Node):
+	return await from.get_tree().create_timer(duration).timeout

@@ -1,0 +1,203 @@
+[gd_scene format=3 uid="uid://bt4xclj7ja1od"]
+
+[ext_resource type="Script" uid="uid://cnkrxd0fyajfv" path="res://addons/shrimp_input/example/bullet/bullet.gd" id="1_yj8la"]
+[ext_resource type="Texture2D" uid="uid://do6qddxx5t4g8" path="res://addons/shrimp_input/example/bullet/bullet.png" id="2_jxrye"]
+
+[sub_resource type="Curve" id="Curve_onxtc"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vpwpg"]
+curve = SubResource("Curve_onxtc")
+
+[sub_resource type="Curve" id="Curve_m2q3k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_y6sco"]
+curve = SubResource("Curve_m2q3k")
+
+[sub_resource type="Curve" id="Curve_1b232"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.75), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hy6lm"]
+curve = SubResource("Curve_1b232")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cu2d3"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 35.0
+angle_min = -179.99998
+angle_max = 180.00002
+angle_curve = SubResource("CurveTexture_y6sco")
+direction = Vector3(-1, 0, 0)
+spread = 15.0
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.14999999
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_hy6lm")
+alpha_curve = SubResource("CurveTexture_vpwpg")
+
+[sub_resource type="Animation" id="Animation_jxrye"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Trail:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_6ldkd"]
+resource_name = "loop"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.5, 0, -6.28, -0.5, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_m33o8"]
+resource_name = "spawn"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Trail:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0.3, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.25)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0.3, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.25)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.25)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m33o8"]
+_data = {
+&"RESET": SubResource("Animation_jxrye"),
+&"loop": SubResource("Animation_6ldkd"),
+&"spawn": SubResource("Animation_m33o8")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jxrye"]
+radius = 77.27872
+
+[node name="Bullet" type="Area2D" unique_id=483333088]
+script = ExtResource("1_yj8la")
+
+[node name="Trail" type="GPUParticles2D" parent="." unique_id=1210106142]
+emitting = false
+amount = 10
+texture = ExtResource("2_jxrye")
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_cu2d3")
+
+[node name="Texture" type="Sprite2D" parent="." unique_id=2039264544]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_jxrye")
+
+[node name="LoopAnimator" type="AnimationPlayer" parent="Texture" unique_id=864190255]
+libraries/ = SubResource("AnimationLibrary_m33o8")
+autoplay = &"loop"
+
+[node name="SpawnAnimator" type="AnimationPlayer" parent="Texture" unique_id=2070724682]
+libraries/ = SubResource("AnimationLibrary_m33o8")
+autoplay = &"spawn"
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=540549799]
+shape = SubResource("CircleShape2D_jxrye")

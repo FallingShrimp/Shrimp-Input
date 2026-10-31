@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ccqlvicfg44ji"]
 
 [ext_resource type="Script" uid="uid://bnbax26v3kflw" path="res://addons/shrimp_input/example/player/player.gd" id="1_u8a8r"]
+[ext_resource type="Script" uid="uid://dmwj2kqg0ik6u" path="res://addons/shrimp_input/statemachine/ShrimpInput.gd" id="2_st2pc"]
 [ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="2_tcb8m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_st2pc"]
@@ -8,7 +9,13 @@ size = Vector2(128, 128)
 
 [node name="Player" type="RigidBody2D" unique_id=1010191855]
 gravity_scale = 0.0
+linear_damp = 5.0
 script = ExtResource("1_u8a8r")
+
+[node name="ShrimpInput" type="Node" parent="." unique_id=353693278]
+unique_name_in_owner = true
+script = ExtResource("2_st2pc")
+metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
 
 [node name="Texture" type="Sprite2D" parent="." unique_id=605714463]
 texture = ExtResource("2_tcb8m")
