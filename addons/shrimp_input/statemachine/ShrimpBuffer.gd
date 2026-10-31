@@ -1,6 +1,8 @@
 extends Node
 class_name ShrimpBuffer
 
+const ERR_NOT_FOUND = "Please add a ShrimpBuffer below the node."
+
 class BufferItem:
 	var event: InputEvent
 	var tick: float
@@ -21,8 +23,7 @@ func _ready() -> void:
 		stack[i] = BufferItem.new()
 
 func push(event: InputEvent) -> void:
-	if not event is InputEventAction:
-		return
+	if not event.is_pressed(): return
 	var hair = (head + 1) % maxLength
 	if currentLength == maxLength:
 		tail = (tail + 1) % maxLength
@@ -61,3 +62,11 @@ func clear() -> void:
 	currentLength = 0
 func getLength() -> int:
 	return currentLength
+
+static func findIn(node: Node, asserts: bool = true) -> ShrimpBuffer:
+	for i in node.get_children():
+		if i is ShrimpBuffer:
+			return i
+	if asserts:
+		assert(false, ERR_NOT_FOUND)
+	return null

@@ -1,7 +1,7 @@
 extends Node
 class_name ShrimpClock
 
-const ERR_NO_CLOCK = "Please add a ShrimpClock below the input node."
+const ERR_NOT_FOUND = "Please add a ShrimpClock below the node."
 
 var __scale__: float = 1
 var tickAnchor: float = 0
@@ -31,9 +31,10 @@ func frame() -> float:
 func seconds(duration: float):
 	await get_tree().create_timer(duration / timeScale).timeout
 
-static func findIn(node: Node) -> ShrimpClock:
+static func findIn(node: Node, asserts: bool = true) -> ShrimpClock:
 	for i in node.get_children():
 		if i is ShrimpClock:
 			return i
-	assert(false, ERR_NO_CLOCK)
+	if asserts:
+		assert(false, ERR_NOT_FOUND)
 	return null

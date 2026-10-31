@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://db6rgqxskuoir" path="res://addons/shrimp_input/example/entities/player/player.gd" id="2_5la7w"]
 [ext_resource type="Script" uid="uid://dmwj2kqg0ik6u" path="res://addons/shrimp_input/statemachine/ShrimpInput.gd" id="2_sqyos"]
 [ext_resource type="PackedScene" uid="uid://dvpqd1ppoba6m" path="res://addons/shrimp_input/example/charge_ring/charge_ring.tscn" id="3_vdjcy"]
+[ext_resource type="Script" uid="uid://d3opmcnhhbjbp" path="res://addons/shrimp_input/statemachine/ShrimpClock.gd" id="4_q7jji"]
+[ext_resource type="Script" uid="uid://doy0uuccb5iml" path="res://addons/shrimp_input/statemachine/ShrimpBuffer.gd" id="5_0l8nm"]
 
 [node name="Player" unique_id=1010191855 instance=ExtResource("1_57u0y")]
 script = ExtResource("2_5la7w")
@@ -13,6 +15,14 @@ stance = 0
 unique_name_in_owner = true
 script = ExtResource("2_sqyos")
 metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
+
+[node name="ShrimpClock" type="Node" parent="ShrimpInput" index="0" unique_id=68787657]
+script = ExtResource("4_q7jji")
+metadata/_custom_type_script = "uid://d3opmcnhhbjbp"
+
+[node name="ShrimpBuffer" type="Node" parent="ShrimpInput" index="1" unique_id=202595940]
+script = ExtResource("5_0l8nm")
+metadata/_custom_type_script = "uid://doy0uuccb5iml"
 
 [node name="ChargeRing" parent="." index="1" unique_id=1016301323 instance=ExtResource("3_vdjcy")]
 unique_name_in_owner = true
