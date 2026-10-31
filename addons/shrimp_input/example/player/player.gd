@@ -1,6 +1,7 @@
 extends RigidBody2D
 
-const bullet = preload("res://addons/shrimp_input/example/bullet/bullet.tscn")
+const BULLET = preload("res://addons/shrimp_input/example/BULLET/BULLET.tscn")
+const MAX_CHARGE = 2.0
 
 @onready var input: ShrimpInput = $%ShrimpInput
 @onready var charge: ExampleShrimpChargeRing = $%ChargeRing
@@ -21,15 +22,20 @@ func inputLoop():
 	while true:
 		await ShrimpTimeManager.frame(self)
 		await input.press(actions.ATTACK)
-		var b = bullet.instantiate() as Area2D
-		b.position = position
-		b.rotation = position.angle_to_point(get_global_mouse_position())
-		get_parent().add_child.call_deferred(b)
+		shoot(10)
 		if await input.hold(actions.ATTACK, 0.2):
+			charge.maxValue = MAX_CHARGE
 			var hold = 0
-			while input.charge(actions.ATTACK, charge.maxValue):
+			while input.charge(actions.ATTACK, MAX_CHARGE):
 				hold += await input.frame()
 				charge.value = hold
-			print(hold)
+			shoot(10 + hold / MAX_CHARGE * 50)
+			charge.value = 0
 		await ShrimpTimeManager.seconds(0.3, self)
 		await input.release(actions.ATTACK)
+func shoot(damage: float):
+	var b = BULLET.instantiate() as ExampleShrimpBullet
+	b.damage = damage
+	b.position = position
+	b.rotation = position.angle_to_point(get_global_mouse_position())
+	get_parent().add_child.call_deferred(b)

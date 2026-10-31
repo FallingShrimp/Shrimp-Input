@@ -1,6 +1,7 @@
 extends Node
 class_name ShrimpInput
 
+@export var timeScale: float = 1
 var charging: Dictionary[SemanticAction, float] = {} # action->开始时间戳
 
 func press(action: SemanticAction, timeout: float = INF) -> float:
@@ -24,7 +25,7 @@ func hold(action: SemanticAction, minTime: float) -> float:
 func charge(action: SemanticAction, maxTime: float) -> bool:
 	if !charging.has(action):
 		charging[action] = currentTick()
-	var state = currentTick() - charging[action] <= maxTime
+	var state = isPressed(action) && currentTick() - charging[action] <= maxTime
 	if !state:
 		charging.erase(action)
 	return state
@@ -34,4 +35,4 @@ func isPressed(action: SemanticAction) -> bool:
 func frame() -> float:
 	return await ShrimpTimeManager.frame(self)
 func currentTick() -> float:
-	return ShrimpTimeManager.current(self)
+	return ShrimpTimeManager.current(self) * timeScale

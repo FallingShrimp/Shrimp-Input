@@ -229,10 +229,14 @@ _data = {
 &"loop": SubResource("Animation_6ldkd")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_jxrye"]
+font_size = 200
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_jxrye"]
 radius = 77.27872
 
 [node name="Bullet" type="Area2D" unique_id=483333088]
+z_index = 1
 script = ExtResource("1_yj8la")
 
 [node name="Animator" type="AnimationPlayer" parent="." unique_id=2070724682]
@@ -258,6 +262,21 @@ texture = ExtResource("2_jxrye")
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_jxrye")
 autoplay = &"loop"
+
+[node name="Anchor" type="Node2D" parent="Texture" unique_id=809186392]
+unique_name_in_owner = true
+
+[node name="Damage" type="Label" parent="Texture/Anchor" unique_id=1388941279]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "%DMG%"
+label_settings = SubResource("LabelSettings_jxrye")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=540549799]
 shape = SubResource("CircleShape2D_jxrye")
