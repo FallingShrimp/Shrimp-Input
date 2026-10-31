@@ -10,10 +10,13 @@ enum Stance {
 @export var stance: Stance = Stance.ENEMY
 
 @onready var healthLabel: Label = $%Health
+@onready var sounds: Node2D = $%Sounds
 
 func _process(_delta: float) -> void:
 	healthLabel.text = str(health)
 
+func playSound(nameX: String):
+	(sounds.get_node(nameX) as AudioStreamPlayer2D).play()
 func shoot(bullet: PackedScene, damage: float, rotationX: float = 0):
 	var instance = bullet.instantiate() as ExampleShrimpBaseBullet
 	instance.launcher = self

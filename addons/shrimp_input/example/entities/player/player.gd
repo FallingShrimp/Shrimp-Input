@@ -40,9 +40,11 @@ func inputLoop():
 		await input.clock.frame()
 		var atk = await input.presses([Actions.STAB, Actions.ATTACK])
 		if atk == Actions.STAB:
+			playSound("Dash")
 			input.buffer.consume(2)
 			shoot(DASH_BULLET, 20, linear_velocity.angle())
 		elif atk == Actions.ATTACK:
+			playSound("Attack")
 			input.buffer.consume(1)
 			shoot(SHRIMP_BULLET, 10, getMouseAngle())
 		if await input.hold(Actions.ATTACK, 0.2):
