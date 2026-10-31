@@ -17,11 +17,17 @@ normal = Vector2(-1, 0)
 [node name="World" type="Node2D" unique_id=757863350]
 y_sort_enabled = true
 
+[node name="BG" type="Sprite2D" parent="." unique_id=1832834129]
+modulate = Color(1, 1, 1, 0.2)
+z_index = -1
+z_as_relative = false
+scale = Vector2(10.3, 3.445)
+texture = ExtResource("1_iabe6")
+
 [node name="Wall1" type="StaticBody2D" parent="." unique_id=703385547 groups=["wall"]]
 position = Vector2(0, -500)
 
 [node name="Texture" type="Sprite2D" parent="Wall1" unique_id=651015958]
-z_index = -1
 z_as_relative = false
 scale = Vector2(10, 0.3)
 texture = ExtResource("1_iabe6")
@@ -33,7 +39,6 @@ shape = SubResource("WorldBoundaryShape2D_6hacf")
 position = Vector2(0, 500)
 
 [node name="Texture" type="Sprite2D" parent="Wall2" unique_id=927782054]
-z_index = -1
 z_as_relative = false
 scale = Vector2(10, 0.3)
 texture = ExtResource("1_iabe6")
@@ -45,7 +50,6 @@ shape = SubResource("WorldBoundaryShape2D_0pvs7")
 position = Vector2(-1500, 0)
 
 [node name="Texture" type="Sprite2D" parent="Wall3" unique_id=861540825]
-z_index = -1
 z_as_relative = false
 scale = Vector2(0.3, 3.5)
 texture = ExtResource("1_iabe6")
@@ -57,7 +61,6 @@ shape = SubResource("WorldBoundaryShape2D_iabe6")
 position = Vector2(1500, 0)
 
 [node name="Texture" type="Sprite2D" parent="Wall4" unique_id=2128971250]
-z_index = -1
 z_as_relative = false
 scale = Vector2(0.3, 3.5)
 texture = ExtResource("1_iabe6")

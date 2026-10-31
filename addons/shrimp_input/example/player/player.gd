@@ -1,8 +1,10 @@
 extends RigidBody2D
 
+const bullet = preload("res://addons/shrimp_input/example/bullet/bullet.tscn")
+
 @onready var input: ShrimpInput = $%ShrimpInput
+@onready var charge: ExampleShrimpChargeRing = $%ChargeRing
 var actions = preload("res://addons/shrimp_input/example/actions.gd").new()
-var bullet = preload("res://addons/shrimp_input/example/bullet/bullet.tscn")
 
 func _ready() -> void:
 	inputLoop()
@@ -23,5 +25,11 @@ func inputLoop():
 		b.position = position
 		b.rotation = position.angle_to_point(get_global_mouse_position())
 		get_parent().add_child.call_deferred(b)
+		if await input.hold(actions.ATTACK, 0.2):
+			var hold = 0
+			while input.charge(actions.ATTACK, charge.maxValue):
+				hold += await input.frame()
+				charge.value = hold
+			print(hold)
 		await ShrimpTimeManager.seconds(0.3, self)
 		await input.release(actions.ATTACK)
