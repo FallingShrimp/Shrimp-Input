@@ -35,7 +35,8 @@ func dashLoop():
 func inputLoop():
 	while true:
 		await input.clock.frame()
-		await input.press(Actions.ATTACK)
+		var atk = await input.presses([Actions.STAB, Actions.ATTACK])
+		print(atk)
 		shoot(10)
 		if await input.hold(Actions.ATTACK, 0.2):
 			charge.maxValue = MAX_CHARGE

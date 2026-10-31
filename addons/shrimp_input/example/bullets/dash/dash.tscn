@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ot3drpv2ucse"]
+
+[ext_resource type="PackedScene" uid="uid://bt4xclj7ja1od" path="res://addons/shrimp_input/example/abstracts/bullet/base_bullet.tscn" id="1_1cafv"]
+[ext_resource type="Script" uid="uid://chqvuso2g2xtt" path="res://addons/shrimp_input/example/bullets/dash/dash.gd" id="2_3olmt"]
+[ext_resource type="Texture2D" uid="uid://c212t8gr7uf1u" path="res://addons/shrimp_input/example/bullets/dash/arrow.svg" id="2_p118p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p118p"]
+size = Vector2(194, 98)
+
+[node name="Bullet" unique_id=483333088 instance=ExtResource("1_1cafv")]
+script = ExtResource("2_3olmt")
+
+[node name="Texture" parent="." index="1" unique_id=2039264544]
+position = Vector2(132, 0)
+texture = ExtResource("2_p118p")
+
+[node name="Hitbox" parent="." index="2" unique_id=540549799]
+position = Vector2(66, 0)
+shape = SubResource("RectangleShape2D_p118p")

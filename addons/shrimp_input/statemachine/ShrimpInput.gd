@@ -17,6 +17,14 @@ func press(action: SemanticAction, timeout: float = INF) -> float:
 		if clock.currentTick() - start >= timeout:
 			return timeout
 	return clock.currentTick() - start
+func presses(actions: Array[SemanticAction], timeout: float = INF) -> SemanticAction:
+	var start = clock.currentTick()
+	while clock.currentTick() - start < timeout:
+		await clock.frame()
+		for action in actions:
+			if isPressed(action):
+				return action
+	return null
 func release(action: SemanticAction, timeout: float = INF) -> float:
 	if !isPressed(action): return 0
 	var start = clock.currentTick()

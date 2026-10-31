@@ -19,8 +19,6 @@ libraries/ = SubResource("AnimationLibrary_gmn06")
 autoplay = &"spawn"
 
 [node name="Texture" type="Sprite2D" parent="." unique_id=2039264544]
-modulate = Color(1, 1, 1, 0)
-scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("2_gmn06")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=540549799]
