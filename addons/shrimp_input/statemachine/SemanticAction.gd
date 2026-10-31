@@ -1,16 +1,17 @@
+@abstract
 extends Node
 class_name SemanticAction
 
 signal unban()
 
-var inputEvent: StringName = ""
-var banned: bool = false
+@export var actionName: StringName = ""
+@export var banned: bool = false
 
 func _init(event: StringName = "") -> void:
-	inputEvent = event
+	actionName = event
 
-func isPressed() -> bool:
-	return Input.is_action_pressed(inputEvent)
+@abstract
+func isPressed() -> bool
 
 func canPress() -> bool:
 	var parent = get_parent()

@@ -12,7 +12,7 @@ func _ready() -> void:
 	charge.hide()
 func _physics_process(_delta: float) -> void:
 	var dir = Input.get_vector(
-		actions.MOVE_LEFT.inputEvent,
+		actions.MOVE_LEFT.actionName,
 		actions.MOVE_RIGHT.inputEvent,
 		actions.MOVE_UP.inputEvent,
 		actions.MOVE_DOWN.inputEvent
