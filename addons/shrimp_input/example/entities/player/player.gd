@@ -39,6 +39,7 @@ func inputLoop():
 		await input.release(actions.ATTACK)
 func shoot(damage: float):
 	var b = BULLET.instantiate() as ExampleShrimpBaseBullet
+	b.launcher = self
 	b.damage = damage
 	b.position = position
 	b.rotation = position.angle_to_point(get_global_mouse_position())

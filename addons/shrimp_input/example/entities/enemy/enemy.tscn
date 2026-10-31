@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ccqlvicfg44ji" path="res://addons/shrimp_input/example/abstracts/entity/base_entity.tscn" id="1_wju12"]
 
 [node name="Entity" unique_id=1010191855 instance=ExtResource("1_wju12")]
+health = 1000.0
 
 [node name="Texture" parent="." index="0" unique_id=605714463]
 self_modulate = Color(1, 0.6879781, 0, 1)

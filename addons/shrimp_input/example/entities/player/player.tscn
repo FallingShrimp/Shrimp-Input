@@ -7,6 +7,7 @@
 
 [node name="Player" unique_id=1010191855 instance=ExtResource("1_57u0y")]
 script = ExtResource("2_5la7w")
+stance = 0
 
 [node name="ShrimpInput" type="Node" parent="." index="0" unique_id=474048355]
 unique_name_in_owner = true

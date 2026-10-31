@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://0r0nayji3n74" path="res://addons/shrimp_input/example/map/map.png" id="1_iabe6"]
 [ext_resource type="PackedScene" uid="uid://cg7nn7yisq41j" path="res://addons/shrimp_input/example/entities/player/player.tscn" id="2_iabe6"]
+[ext_resource type="PackedScene" uid="uid://d03f6hc6a2dk1" path="res://addons/shrimp_input/example/entities/enemy/enemy.tscn" id="3_0pvs7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hacf"]
 normal = Vector2(0, 1)
@@ -71,3 +72,12 @@ shape = SubResource("WorldBoundaryShape2D_j3w3d")
 [node name="Player" parent="." unique_id=1010191855 instance=ExtResource("2_iabe6")]
 
 [node name="Camera" type="Camera2D" parent="Player" unique_id=1665012161]
+
+[node name="Entity" parent="." unique_id=91094242 instance=ExtResource("3_0pvs7")]
+position = Vector2(570, -127)
+
+[node name="Entity2" parent="." unique_id=487063051 instance=ExtResource("3_0pvs7")]
+position = Vector2(360, 258)
+
+[node name="Entity3" parent="." unique_id=1775808084 instance=ExtResource("3_0pvs7")]
+position = Vector2(879, 154)

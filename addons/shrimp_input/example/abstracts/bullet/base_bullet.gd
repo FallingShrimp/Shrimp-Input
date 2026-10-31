@@ -13,6 +13,7 @@ enum BulletState {
 
 @onready var animator: AnimationPlayer = $%Animator
 var state: BulletState = BulletState.LIVING
+var launcher: ExampleShrimpBaseEntity
 
 func _ready() -> void:
 	body_entered.connect(hitTest)
@@ -27,10 +28,16 @@ func ai(_delta: float) -> void:
 func onDie():
 	await ShrimpTimeManager.frame(self)
 
+func goDie():
+	state = BulletState.DIEING
+	await onDie()
+	queue_free()
 func hitTest(body):
 	if state != BulletState.LIVING: return
 	if body is StaticBody2D:
 		if body.is_in_group("wall"):
-			state = BulletState.DIEING
-			await onDie()
-			queue_free()
+			goDie()
+	elif body is ExampleShrimpBaseEntity:
+		if launcher.stance != body.stance:
+			body.health -= damage
+			goDie()
