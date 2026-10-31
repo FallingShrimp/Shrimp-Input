@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://djggy2slammpn"]
 
-[ext_resource type="Texture2D" uid="uid://do6qddxx5t4g8" path="res://addons/shrimp_input/example/bullet/bullet.png" id="1_dumn3"]
+[ext_resource type="Texture2D" uid="uid://do6qddxx5t4g8" path="res://addons/shrimp_input/example/bullets/shrimp/shrimp.png" id="1_dumn3"]
 
 [sub_resource type="Curve" id="Curve_r10bl"]
 _data = [Vector2(0, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

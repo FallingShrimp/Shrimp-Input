@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dvpqd1ppoba6m"]
 
-[ext_resource type="Shader" uid="uid://dtnp07nqk45nr" path="res://addons/shrimp_input/example/player/chargering.gdshader" id="1_6bci6"]
-[ext_resource type="Script" uid="uid://4j3abufbktnu" path="res://addons/shrimp_input/example/player/charge_ring.gd" id="2_7e7gt"]
+[ext_resource type="Shader" uid="uid://dtnp07nqk45nr" path="res://addons/shrimp_input/example/charge_ring/charge_ring.gdshader" id="1_6bci6"]
+[ext_resource type="Script" uid="uid://4j3abufbktnu" path="res://addons/shrimp_input/example/charge_ring/charge_ring.gd" id="2_7e7gt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s176e"]
 shader = ExtResource("1_6bci6")

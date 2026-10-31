@@ -1,5 +1,5 @@
 extends Area2D
-class_name ExampleShrimpBullet
+class_name ExampleShrimpBaseBullet
 
 const BLOOD = preload("res://addons/shrimp_input/example/blood_effect/blood_effect.tscn")
 

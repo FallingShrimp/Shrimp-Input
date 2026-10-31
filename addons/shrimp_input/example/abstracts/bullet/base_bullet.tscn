@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bt4xclj7ja1od"]
+
+[ext_resource type="Script" uid="uid://cnkrxd0fyajfv" path="res://addons/shrimp_input/example/abstracts/bullet/base_bullet.gd" id="1_yj8la"]
+[ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="2_gmn06"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gmn06"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jxrye"]
+radius = 77.27872
+
+[node name="Bullet" type="Area2D" unique_id=483333088]
+z_index = 1
+script = ExtResource("1_yj8la")
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=2070724682]
+unique_name_in_owner = true
+root_node = NodePath("../Texture")
+libraries/ = SubResource("AnimationLibrary_gmn06")
+autoplay = &"spawn"
+
+[node name="Texture" type="Sprite2D" parent="." unique_id=2039264544]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_gmn06")
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=540549799]
+shape = SubResource("CircleShape2D_jxrye")

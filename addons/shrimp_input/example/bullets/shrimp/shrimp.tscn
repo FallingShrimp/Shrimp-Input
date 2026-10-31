@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://y0wstii68e7i"]
+
+[ext_resource type="PackedScene" uid="uid://bt4xclj7ja1od" path="res://addons/shrimp_input/example/abstracts/bullet/base_bullet.tscn" id="1_7uk7g"]
+[ext_resource type="Material" uid="uid://brqxe8vplgs0x" path="res://addons/shrimp_input/example/bullets/shrimp/trail.tres" id="2_kfxkw"]
+[ext_resource type="AnimationLibrary" uid="uid://bdwwp0v6in2i3" path="res://addons/shrimp_input/example/bullets/shrimp/animation.res" id="2_nwlo6"]
+[ext_resource type="Texture2D" uid="uid://do6qddxx5t4g8" path="res://addons/shrimp_input/example/bullets/shrimp/shrimp.png" id="3_gj7h4"]
+[ext_resource type="AnimationLibrary" uid="uid://b4rf20383ldwf" path="res://addons/shrimp_input/example/bullets/shrimp/rotate.res" id="4_gj7h4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8fibf"]
+font_size = 200
+outline_size = 1
+
+[node name="Bullet" unique_id=483333088 instance=ExtResource("1_7uk7g")]
+
+[node name="Animator" parent="." index="0" unique_id=2070724682]
+libraries/ = ExtResource("2_nwlo6")
+
+[node name="Trail" type="GPUParticles2D" parent="." index="1" unique_id=1376083421]
+emitting = false
+texture = ExtResource("3_gj7h4")
+process_material = ExtResource("2_kfxkw")
+
+[node name="Texture" parent="." index="2" unique_id=2039264544]
+texture = ExtResource("3_gj7h4")
+
+[node name="Rotate" type="AnimationPlayer" parent="Texture" index="0" unique_id=156077756]
+unique_name_in_owner = true
+libraries/rotate = ExtResource("4_gj7h4")
+
+[node name="Anchor" type="Node2D" parent="Texture" index="1" unique_id=551850913]
+unique_name_in_owner = true
+
+[node name="Damage" type="Label" parent="Texture/Anchor" index="0" unique_id=1759327638]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "%DMG%"
+label_settings = SubResource("LabelSettings_8fibf")
+horizontal_alignment = 1
+vertical_alignment = 1

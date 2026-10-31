@@ -1,11 +1,11 @@
-extends RigidBody2D
+extends ExampleShrimpBaseEntity
 
-const BULLET = preload("res://addons/shrimp_input/example/BULLET/BULLET.tscn")
+const BULLET = preload("res://addons/shrimp_input/example/bullets/shrimp/shrimp.tscn")
 const MAX_CHARGE = 2.0
 
+var actions = preload("res://addons/shrimp_input/example/actions.gd").new()
 @onready var input: ShrimpInput = $%ShrimpInput
 @onready var charge: ExampleShrimpChargeRing = $%ChargeRing
-var actions = preload("res://addons/shrimp_input/example/actions.gd").new()
 
 func _ready() -> void:
 	inputLoop()
@@ -34,7 +34,7 @@ func inputLoop():
 		await input.clock.seconds(0.3)
 		await input.release(actions.ATTACK)
 func shoot(damage: float):
-	var b = BULLET.instantiate() as ExampleShrimpBullet
+	var b = BULLET.instantiate() as ExampleShrimpBaseBullet
 	b.damage = damage
 	b.position = position
 	b.rotation = position.angle_to_point(get_global_mouse_position())
