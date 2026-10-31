@@ -35,6 +35,14 @@ func charge(action: SemanticAction, maxTime: float) -> bool:
 	if !state:
 		charging.erase(action)
 	return state
+func direction(up: SemanticAction, down: SemanticAction, left: SemanticAction, right: SemanticAction, default: Vector2 = Vector2.RIGHT):
+	var result = ([
+		Vector2(0, -1) * int(isPressed(up)),
+		Vector2(0, 1) * int(isPressed(down)),
+		Vector2(-1, 0) * int(isPressed(left)),
+		Vector2(1, 0) * int(isPressed(right)),
+	].reduce(func(a, b): return a + b, Vector2.ZERO) as Vector2).normalized()
+	return result if len(result) else default
 func isPressed(action: SemanticAction) -> bool:
 	if !action.canPress(): return false
 	return action.isPressed(self)
