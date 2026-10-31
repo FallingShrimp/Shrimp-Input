@@ -11,6 +11,9 @@
 font_size = 200
 outline_size = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7881n"]
+radius = 41.04875
+
 [node name="Bullet" unique_id=483333088 instance=ExtResource("1_7uk7g")]
 script = ExtResource("2_7881n")
 speed = 700.0
@@ -21,7 +24,7 @@ libraries/ = ExtResource("2_nwlo6")
 
 [node name="Trail" type="GPUParticles2D" parent="." index="1" unique_id=1376083421]
 emitting = false
-amount = 10
+amount = 15
 texture = ExtResource("3_gj7h4")
 process_material = ExtResource("2_kfxkw")
 
@@ -47,3 +50,6 @@ text = "%DMG%"
 label_settings = SubResource("LabelSettings_8fibf")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Hitbox" parent="." index="3" unique_id=540549799]
+shape = SubResource("CircleShape2D_7881n")

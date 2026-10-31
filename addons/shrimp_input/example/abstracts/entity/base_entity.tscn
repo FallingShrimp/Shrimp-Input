@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="2_tcb8m"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nev1e"]
-friction = 0.75
-bounce = 0.25
+friction = 0.5
+bounce = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_10yih"]
 font_size = 30
