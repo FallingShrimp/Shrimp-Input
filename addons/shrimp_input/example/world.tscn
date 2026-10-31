@@ -22,11 +22,11 @@ y_sort_enabled = true
 modulate = Color(1, 1, 1, 0.2)
 z_index = -1
 z_as_relative = false
-scale = Vector2(10.3, 3.445)
+scale = Vector2(10, 10)
 texture = ExtResource("1_iabe6")
 
 [node name="Wall1" type="StaticBody2D" parent="." unique_id=703385547 groups=["wall"]]
-position = Vector2(0, -500)
+position = Vector2(0, -1500)
 
 [node name="Texture" type="Sprite2D" parent="Wall1" unique_id=651015958]
 z_as_relative = false
@@ -37,7 +37,7 @@ texture = ExtResource("1_iabe6")
 shape = SubResource("WorldBoundaryShape2D_6hacf")
 
 [node name="Wall2" type="StaticBody2D" parent="." unique_id=794317460 groups=["wall"]]
-position = Vector2(0, 500)
+position = Vector2(0, 1500)
 
 [node name="Texture" type="Sprite2D" parent="Wall2" unique_id=927782054]
 z_as_relative = false
@@ -52,7 +52,7 @@ position = Vector2(-1500, 0)
 
 [node name="Texture" type="Sprite2D" parent="Wall3" unique_id=861540825]
 z_as_relative = false
-scale = Vector2(0.3, 3.5)
+scale = Vector2(0.3, 10)
 texture = ExtResource("1_iabe6")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Wall3" unique_id=1672039171]
@@ -63,7 +63,7 @@ position = Vector2(1500, 0)
 
 [node name="Texture" type="Sprite2D" parent="Wall4" unique_id=2128971250]
 z_as_relative = false
-scale = Vector2(0.3, 3.5)
+scale = Vector2(0.3, 10)
 texture = ExtResource("1_iabe6")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Wall4" unique_id=404317751]
@@ -72,6 +72,8 @@ shape = SubResource("WorldBoundaryShape2D_j3w3d")
 [node name="Player" parent="." unique_id=1010191855 instance=ExtResource("2_iabe6")]
 
 [node name="Camera" type="Camera2D" parent="Player" unique_id=1665012161]
+process_callback = 0
+position_smoothing_enabled = true
 
 [node name="Entity" parent="." unique_id=91094242 instance=ExtResource("3_0pvs7")]
 position = Vector2(570, -127)

@@ -29,7 +29,7 @@ func dashLoop():
 		var dir = getInputDirection()
 		if !dir.length():
 			dir = Actions.ATTACK.getPosition() - position
-		apply_central_impulse(dir.normalized() * 5000)
+		apply_central_impulse(dir.normalized() * 2500)
 		await input.clock.seconds(0.5)
 		await input.release(Actions.DASH)
 func inputLoop():
