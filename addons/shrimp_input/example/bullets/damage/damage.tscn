@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dye72s78mlyuu"]
+
+[ext_resource type="PackedScene" uid="uid://bt4xclj7ja1od" path="res://addons/shrimp_input/example/abstracts/bullet/base_bullet.tscn" id="1_g8l1b"]
+[ext_resource type="Script" uid="uid://bxg3m1ln1kanc" path="res://addons/shrimp_input/example/bullets/damage/damage.gd" id="2_u8h1u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g8l1b"]
+font_size = 40
+font_color = Color(1, 0, 0, 1)
+outline_size = 5
+
+[node name="Bullet" unique_id=483333088 instance=ExtResource("1_g8l1b")]
+script = ExtResource("2_u8h1u")
+lifeTime = 3.0
+
+[node name="Texture" parent="." index="1" unique_id=2039264544]
+texture = null
+
+[node name="Anchor" type="Node2D" parent="Texture" index="0" unique_id=629485319]
+
+[node name="DMG" type="Label" parent="Texture/Anchor" index="0" unique_id=1459928298]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "%DMG%"
+label_settings = SubResource("LabelSettings_g8l1b")
+
+[node name="Hitbox" parent="." index="2" unique_id=540549799]
+disabled = true

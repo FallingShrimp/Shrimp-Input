@@ -71,15 +71,17 @@ func count(inputEvents: Array[StringName], lifetimeOverride: float = -1.0) -> in
 	var pointer = tail
 	for i in currentLength:
 		var item = stack[pointer]
+		pointer = (pointer + 1) % maxLength
 		if startTime - item.spawnTick > lifetimeOverride:
-			break
+			continue
 		if item.action == inputEvents[result]:
 			result += 1
 			if result == len(inputEvents):
 				return result
+		elif item.action == inputEvents[0]:
+			result = 1
 		else:
 			result = 0
-		pointer = (pointer + 1) % maxLength
 	return -1
 func consume(length: int) -> void:
 	for i in min(length, currentLength):

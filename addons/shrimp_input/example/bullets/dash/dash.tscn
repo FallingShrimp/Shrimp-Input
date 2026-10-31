@@ -5,15 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://c212t8gr7uf1u" path="res://addons/shrimp_input/example/bullets/dash/arrow.svg" id="2_p118p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p118p"]
-size = Vector2(194, 98)
+size = Vector2(223, 98)
 
 [node name="Bullet" unique_id=483333088 instance=ExtResource("1_1cafv")]
 script = ExtResource("2_3olmt")
+lifeTime = 0.25
 
 [node name="Texture" parent="." index="1" unique_id=2039264544]
 position = Vector2(132, 0)
+scale = Vector2(2.1578233, 2.1578233)
 texture = ExtResource("2_p118p")
 
 [node name="Hitbox" parent="." index="2" unique_id=540549799]
-position = Vector2(66, 0)
+position = Vector2(80.5, 0)
 shape = SubResource("RectangleShape2D_p118p")

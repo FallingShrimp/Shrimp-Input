@@ -1,5 +1,7 @@
 extends ExampleShrimpBaseBullet
 
+const BLOOD = preload("res://addons/shrimp_input/example/blood_effect/blood_effect.tscn")
+
 @onready var rotator: AnimationPlayer = $%Rotate
 @onready var anchor: Node2D = $%Anchor
 @onready var dmg: Label = $%Damage

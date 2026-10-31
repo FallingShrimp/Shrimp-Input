@@ -25,8 +25,9 @@ metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
 [node name="ShrimpBuffer" type="Node" parent="ShrimpInput" index="0" unique_id=202595940 node_paths=PackedStringArray("clock")]
 script = ExtResource("5_0l8nm")
 clock = NodePath("../../ShrimpClock")
-handleActions = Array[StringName]([&"move_up", &"move_down", &"move_left", &"move_right", &"attack"])
-handleActions = Array[StringName]([&"move_up", &"move_down", &"move_left", &"move_right", &"attack"])
+actionLifetime = 1.0
+handleActions = Array[StringName]([&"attack", &"dash"])
+handleActions = Array[StringName]([&"attack", &"dash"])
 metadata/_custom_type_script = "uid://doy0uuccb5iml"
 
 [node name="ChargeRing" parent="." index="2" unique_id=1016301323 instance=ExtResource("3_vdjcy")]
