@@ -5,8 +5,7 @@ var clock: ShrimpClock
 var charging: Dictionary[SemanticAction, float] = {} # action->开始时间戳
 
 func _ready() -> void:
-	clock = ShrimpClock.new()
-	add_child(clock)
+	clock = ShrimpClock.findIn(self)
 
 func press(action: SemanticAction, timeout: float = INF) -> float:
 	var start = clock.currentTick()
