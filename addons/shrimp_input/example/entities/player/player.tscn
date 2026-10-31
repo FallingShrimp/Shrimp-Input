@@ -33,6 +33,3 @@ unique_name_in_owner = true
 
 [node name="Texture" parent="." index="3" unique_id=605714463]
 self_modulate = Color(0.22378641, 1, 0.24686164, 1)
-
-[node name="Hitbox" parent="." index="4" unique_id=1418019904]
-visible = false

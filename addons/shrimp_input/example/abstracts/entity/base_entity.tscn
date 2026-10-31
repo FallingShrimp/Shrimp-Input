@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://bnbax26v3kflw" path="res://addons/shrimp_input/example/abstracts/entity/base_entity.gd" id="1_u8a8r"]
 [ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="2_tcb8m"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nev1e"]
+friction = 0.75
+bounce = 0.25
+
 [sub_resource type="LabelSettings" id="LabelSettings_10yih"]
 font_size = 30
 font_color = Color(0.7561407, 0, 1, 1)
@@ -13,10 +17,11 @@ font_size = 30
 font_color = Color(1, 0, 0, 1)
 outline_size = 5
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_st2pc"]
-size = Vector2(128, 128)
+[sub_resource type="CircleShape2D" id="CircleShape2D_nev1e"]
+radius = 70.035706
 
 [node name="Entity" type="RigidBody2D" unique_id=1010191855]
+physics_material_override = SubResource("PhysicsMaterial_nev1e")
 gravity_scale = 0.0
 lock_rotation = true
 linear_damp = 5.0
@@ -46,4 +51,4 @@ text = "%DMG%"
 label_settings = SubResource("LabelSettings_nev1e")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1418019904]
-shape = SubResource("RectangleShape2D_st2pc")
+shape = SubResource("CircleShape2D_nev1e")

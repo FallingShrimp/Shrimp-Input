@@ -10,6 +10,7 @@ enum BulletState {
 
 @export var damage: float = 10
 @export var speed: float = 500
+@export var knockback: float = 0
 
 @onready var animator: AnimationPlayer = $%Animator
 var state: BulletState = BulletState.LIVING
@@ -40,4 +41,5 @@ func hitTest(body):
 	elif body is ExampleShrimpBaseEntity:
 		if launcher.stance != body.stance:
 			body.health -= damage
+			body.apply_central_impulse((body.position - position).normalized() * knockback)
 			goDie()

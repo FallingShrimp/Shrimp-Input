@@ -14,6 +14,7 @@ outline_size = 1
 [node name="Bullet" unique_id=483333088 instance=ExtResource("1_7uk7g")]
 script = ExtResource("2_7881n")
 speed = 700.0
+knockback = 500.0
 
 [node name="Animator" parent="." index="0" unique_id=2070724682]
 libraries/ = ExtResource("2_nwlo6")

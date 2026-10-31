@@ -11,6 +11,7 @@ func _ready() -> void:
 	inputLoop()
 	dashLoop()
 	charge.hide()
+	add_child(Actions.ATTACK)
 func _physics_process(_delta: float) -> void:
 	apply_central_force(getInputDirection() * 3000)
 
@@ -19,14 +20,18 @@ func getInputDirection() -> Vector2:
 		Actions.MOVE_UP,
 		Actions.MOVE_DOWN,
 		Actions.MOVE_LEFT,
-		Actions.MOVE_RIGHT,
-		Actions.ATTACK.getPosition() - position
+		Actions.MOVE_RIGHT
 	)
 func dashLoop():
 	while true:
 		await input.clock.frame()
 		await input.press(Actions.DASH)
-		apply_central_impulse(getInputDirection() * 200)
+		var dir = getInputDirection()
+		if !dir.length():
+			dir = Actions.ATTACK.getPosition() - position
+		apply_central_impulse(dir.normalized() * 5000)
+		await input.clock.seconds(0.5)
+		await input.release(Actions.DASH)
 func inputLoop():
 	while true:
 		await input.clock.frame()
@@ -49,6 +54,7 @@ func shoot(damage: float):
 	var b = BULLET.instantiate() as ExampleShrimpBaseBullet
 	b.launcher = self
 	b.damage = damage
+	b.knockback *= damage / 10
 	b.position = position
-	b.rotation = position.angle_to_point(get_global_mouse_position())
+	b.rotation = position.angle_to_point(Actions.ATTACK.getPosition())
 	get_parent().add_child.call_deferred(b)

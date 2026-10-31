@@ -12,8 +12,8 @@ func _init(event: StringName = "") -> void:
 
 @abstract
 func isPressed(inputNode: ShrimpInput) -> bool
-# func getPosition() -> Vector2:
-# 	return Vector2.ZERO
+func getPosition() -> Vector2:
+	return Vector2.ZERO
 
 func canPress() -> bool:
 	var parent = get_parent()
