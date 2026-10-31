@@ -42,7 +42,7 @@ func direction(up: SemanticAction, down: SemanticAction, left: SemanticAction, r
 		Vector2(-1, 0) * int(isPressed(left)),
 		Vector2(1, 0) * int(isPressed(right)),
 	].reduce(func(a, b): return a + b, Vector2.ZERO) as Vector2).normalized()
-	return result if len(result) else default
+	return result if result.length() else default
 func isPressed(action: SemanticAction) -> bool:
 	if !action.canPress(): return false
 	return action.isPressed(self)
