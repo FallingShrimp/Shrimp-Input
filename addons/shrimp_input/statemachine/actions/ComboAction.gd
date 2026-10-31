@@ -8,6 +8,6 @@ func _init(comboX: Array[StringName]) -> void:
 
 func isPressed(inputNode: ShrimpInput) -> bool:
 	if is_instance_valid(inputNode.buffer):
-		return inputNode.buffer.count(combo)
+		return inputNode.buffer.count(combo) != -1
 	else:
 		return false
