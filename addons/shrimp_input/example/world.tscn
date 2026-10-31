@@ -3,13 +3,67 @@
 [ext_resource type="PackedScene" uid="uid://ccqlvicfg44ji" path="res://addons/shrimp_input/example/player/player.tscn" id="1_1f588"]
 [ext_resource type="Texture2D" uid="uid://0r0nayji3n74" path="res://addons/shrimp_input/example/map/map.png" id="1_iabe6"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hacf"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0pvs7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iabe6"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_j3w3d"]
+normal = Vector2(-1, 0)
+
 [node name="World" type="Node2D" unique_id=757863350]
 y_sort_enabled = true
 
-[node name="Map" type="Sprite2D" parent="." unique_id=651015958]
+[node name="Wall1" type="StaticBody2D" parent="." unique_id=703385547 groups=["wall"]]
+position = Vector2(0, -500)
+
+[node name="Texture" type="Sprite2D" parent="Wall1" unique_id=651015958]
 z_index = -1
 z_as_relative = false
+scale = Vector2(10, 0.3)
 texture = ExtResource("1_iabe6")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Wall1" unique_id=989244307]
+shape = SubResource("WorldBoundaryShape2D_6hacf")
+
+[node name="Wall2" type="StaticBody2D" parent="." unique_id=794317460 groups=["wall"]]
+position = Vector2(0, 500)
+
+[node name="Texture" type="Sprite2D" parent="Wall2" unique_id=927782054]
+z_index = -1
+z_as_relative = false
+scale = Vector2(10, 0.3)
+texture = ExtResource("1_iabe6")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Wall2" unique_id=265726206]
+shape = SubResource("WorldBoundaryShape2D_0pvs7")
+
+[node name="Wall3" type="StaticBody2D" parent="." unique_id=953225881 groups=["wall"]]
+position = Vector2(-1500, 0)
+
+[node name="Texture" type="Sprite2D" parent="Wall3" unique_id=861540825]
+z_index = -1
+z_as_relative = false
+scale = Vector2(0.3, 3.5)
+texture = ExtResource("1_iabe6")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Wall3" unique_id=1672039171]
+shape = SubResource("WorldBoundaryShape2D_iabe6")
+
+[node name="Wall4" type="StaticBody2D" parent="." unique_id=295000225 groups=["wall"]]
+position = Vector2(1500, 0)
+
+[node name="Texture" type="Sprite2D" parent="Wall4" unique_id=2128971250]
+z_index = -1
+z_as_relative = false
+scale = Vector2(0.3, 3.5)
+texture = ExtResource("1_iabe6")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Wall4" unique_id=404317751]
+shape = SubResource("WorldBoundaryShape2D_j3w3d")
 
 [node name="Player" parent="." unique_id=375308569 instance=ExtResource("1_1f588")]
 

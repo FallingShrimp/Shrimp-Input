@@ -24,3 +24,4 @@ func inputLoop():
 		b.rotation = position.angle_to_point(get_global_mouse_position())
 		get_parent().add_child.call_deferred(b)
 		await ShrimpTimeManager.seconds(0.3, self)
+		await input.release(actions.ATTACK)
