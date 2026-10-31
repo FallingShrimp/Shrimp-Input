@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://daw61onyah6o1"]
 
-[ext_resource type="PackedScene" uid="uid://ccqlvicfg44ji" path="res://addons/shrimp_input/example/abstracts/entity/base_entity.tscn" id="1_1f588"]
 [ext_resource type="Texture2D" uid="uid://0r0nayji3n74" path="res://addons/shrimp_input/example/map/map.png" id="1_iabe6"]
+[ext_resource type="PackedScene" uid="uid://cg7nn7yisq41j" path="res://addons/shrimp_input/example/entities/player/player.tscn" id="2_iabe6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hacf"]
 normal = Vector2(0, 1)
@@ -68,8 +68,6 @@ texture = ExtResource("1_iabe6")
 [node name="Hitbox" type="CollisionShape2D" parent="Wall4" unique_id=404317751]
 shape = SubResource("WorldBoundaryShape2D_j3w3d")
 
-[node name="Player" parent="." unique_id=375308569 instance=ExtResource("1_1f588")]
+[node name="Player" parent="." unique_id=1010191855 instance=ExtResource("2_iabe6")]
 
-[node name="Camera" type="Camera2D" parent="Player" unique_id=573538450]
-process_callback = 0
-position_smoothing_enabled = true
+[node name="Camera" type="Camera2D" parent="Player" unique_id=1665012161]

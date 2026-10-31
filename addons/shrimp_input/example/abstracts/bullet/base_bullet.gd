@@ -16,6 +16,8 @@ var state: BulletState = BulletState.LIVING
 
 func _ready() -> void:
 	body_entered.connect(hitTest)
+func _process(_delta: float) -> void:
+	pass
 func _physics_process(delta: float) -> void:
 	if state == BulletState.LIVING:
 		ai(delta)
@@ -30,8 +32,5 @@ func hitTest(body):
 	if body is StaticBody2D:
 		if body.is_in_group("wall"):
 			state = BulletState.DIEING
-			animator.play("die")
 			await onDie()
-			if animator.is_playing():
-				await animator.animation_finished
 			queue_free()

@@ -20,6 +20,7 @@ libraries/ = ExtResource("2_nwlo6")
 
 [node name="Trail" type="GPUParticles2D" parent="." index="1" unique_id=1376083421]
 emitting = false
+amount = 10
 texture = ExtResource("3_gj7h4")
 process_material = ExtResource("2_kfxkw")
 
@@ -29,6 +30,7 @@ texture = ExtResource("3_gj7h4")
 [node name="Rotate" type="AnimationPlayer" parent="Texture" index="0" unique_id=156077756]
 unique_name_in_owner = true
 libraries/rotate = ExtResource("4_gj7h4")
+autoplay = &"rotate/loop"
 
 [node name="Anchor" type="Node2D" parent="Texture" index="1" unique_id=551850913]
 unique_name_in_owner = true

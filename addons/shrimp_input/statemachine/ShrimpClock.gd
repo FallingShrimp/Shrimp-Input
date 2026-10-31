@@ -12,8 +12,7 @@ var timeScale: float:
 		tickAnchor = currentTick()
 		__scale__ = value
 
-func _init(timeScaleX: float = 1.0) -> void:
-	timeScale = timeScaleX
+func _ready() -> void:
 	reset()
 
 func reset() -> void:

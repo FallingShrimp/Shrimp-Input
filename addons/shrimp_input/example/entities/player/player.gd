@@ -29,6 +29,7 @@ func inputLoop():
 			while input.charge(actions.ATTACK, MAX_CHARGE):
 				hold += await input.clock.frame()
 				charge.value = hold
+			await input.release(actions.ATTACK)
 			shoot(10 + hold / MAX_CHARGE * 50)
 			charge.value = 0
 		await input.clock.seconds(0.3)

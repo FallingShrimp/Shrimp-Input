@@ -8,6 +8,7 @@ func _ready() -> void:
 	super._ready()
 	dmg.text = str(damage)
 func _process(_delta: float) -> void:
+	super._process(_delta)
 	anchor.global_rotation = 0
 
 func ai(delta: float) -> void:
@@ -18,3 +19,5 @@ func onDie():
 	add_child(effect)
 	effect.global_rotation = 0
 	rotator.stop(true)
+	animator.play("die")
+	await animator.animation_finished
