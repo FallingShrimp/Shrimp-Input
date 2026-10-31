@@ -9,6 +9,7 @@ var actions = preload("res://addons/shrimp_input/example/actions.gd").new()
 
 func _ready() -> void:
 	inputLoop()
+	charge.hide()
 func _physics_process(_delta: float) -> void:
 	var dir = Input.get_vector(
 		actions.MOVE_LEFT.inputEvent,
@@ -25,12 +26,14 @@ func inputLoop():
 		shoot(10)
 		if await input.hold(actions.ATTACK, 0.2):
 			charge.maxValue = MAX_CHARGE
+			charge.show()
 			var hold = 0
 			while input.charge(actions.ATTACK, MAX_CHARGE):
 				hold += await input.clock.frame()
 				charge.value = hold
 			await input.release(actions.ATTACK)
 			shoot(10 + hold / MAX_CHARGE * 50)
+			charge.hide()
 			charge.value = 0
 		await input.clock.seconds(0.3)
 		await input.release(actions.ATTACK)

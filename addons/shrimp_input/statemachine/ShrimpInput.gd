@@ -29,7 +29,7 @@ func hold(action: SemanticAction, minTime: float) -> float:
 func charge(action: SemanticAction, maxTime: float) -> bool:
 	if !charging.has(action):
 		charging[action] = clock.currentTick()
-	var state = isPressed(action) && clock.currentTick() - charging[action] <= maxTime
+	var state = isPressed(action) && clock.currentTick() - charging[action] <= maxTime + ShrimpTimeManager.getInstance(self).lastDelta
 	if !state:
 		charging.erase(action)
 	return state

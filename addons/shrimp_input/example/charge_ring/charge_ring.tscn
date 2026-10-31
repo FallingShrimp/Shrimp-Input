@@ -9,11 +9,10 @@ shader_parameter/angle = 0.999999977648
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bci6"]
 shader = ExtResource("1_6bci6")
-shader_parameter/angle = 1.045
+shader_parameter/angle = 0.0
 
 [node name="ChargeRing" type="Node2D" unique_id=1016301323]
 script = ExtResource("2_7e7gt")
-value = 2.09
 fillingColor = Color(0, 1, 0.8235294, 1)
 fulledColor = Color(1, 0.94692034, 0.3158576, 1)
 
@@ -44,4 +43,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0.94692034, 0.3158576, 1)
+color = Color(0, 1, 0.8235294, 1)
