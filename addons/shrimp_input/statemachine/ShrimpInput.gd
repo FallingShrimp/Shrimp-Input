@@ -37,4 +37,4 @@ func charge(action: SemanticAction, maxTime: float) -> bool:
 	return state
 func isPressed(action: SemanticAction) -> bool:
 	if !action.canPress(): return false
-	return action.isPressed()
+	return action.isPressed(self)

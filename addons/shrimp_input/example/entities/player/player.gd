@@ -13,9 +13,9 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	var dir = Input.get_vector(
 		actions.MOVE_LEFT.actionName,
-		actions.MOVE_RIGHT.inputEvent,
-		actions.MOVE_UP.inputEvent,
-		actions.MOVE_DOWN.inputEvent
+		actions.MOVE_RIGHT.actionName,
+		actions.MOVE_UP.actionName,
+		actions.MOVE_DOWN.actionName
 	)
 	apply_central_force(dir * 3000)
 

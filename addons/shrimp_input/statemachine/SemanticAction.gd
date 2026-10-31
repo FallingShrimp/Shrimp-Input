@@ -11,7 +11,7 @@ func _init(event: StringName = "") -> void:
 	actionName = event
 
 @abstract
-func isPressed() -> bool
+func isPressed(inputNode: ShrimpInput) -> bool
 
 func canPress() -> bool:
 	var parent = get_parent()
