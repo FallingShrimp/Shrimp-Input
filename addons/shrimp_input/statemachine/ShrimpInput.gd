@@ -1,7 +1,6 @@
 extends Node
 class_name ShrimpInput
 
-@export var timeScale: float = 1
 var clock: ShrimpClock
 var charging: Dictionary[SemanticAction, float] = {} # action->开始时间戳
 
