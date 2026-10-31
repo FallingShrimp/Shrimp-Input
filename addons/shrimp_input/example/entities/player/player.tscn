@@ -27,8 +27,8 @@ metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
 script = ExtResource("5_0l8nm")
 clock = NodePath("../../ShrimpClock")
 actionLifetime = 1.0
-handleActions = Array[StringName]([&"attack", &"dash"])
-handleActions = Array[StringName]([&"attack", &"dash"])
+handleActions = Array[StringName]([&"dash", &"attack"])
+handleActions = Array[StringName]([&"dash", &"attack"])
 metadata/_custom_type_script = "uid://doy0uuccb5iml"
 
 [node name="ChargeRing" parent="." index="2" unique_id=1016301323 instance=ExtResource("3_vdjcy")]
