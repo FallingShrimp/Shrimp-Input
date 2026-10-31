@@ -3,6 +3,16 @@
 [ext_resource type="Script" uid="uid://bnbax26v3kflw" path="res://addons/shrimp_input/example/abstracts/entity/base_entity.gd" id="1_u8a8r"]
 [ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="2_tcb8m"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_10yih"]
+font_size = 30
+font_color = Color(0.7561407, 0, 1, 1)
+outline_size = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_nev1e"]
+font_size = 30
+font_color = Color(1, 0, 0, 1)
+outline_size = 5
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_st2pc"]
 size = Vector2(128, 128)
 
@@ -13,6 +23,26 @@ script = ExtResource("1_u8a8r")
 
 [node name="Texture" type="Sprite2D" parent="." unique_id=605714463]
 texture = ExtResource("2_tcb8m")
+
+[node name="Anchor" type="Node2D" parent="Texture" unique_id=359015896]
+
+[node name="HealthTip" type="HBoxContainer" parent="Texture/Anchor" unique_id=1381396426]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tip" type="Label" parent="Texture/Anchor/HealthTip" unique_id=1574210222]
+layout_mode = 2
+text = "Current HP:"
+label_settings = SubResource("LabelSettings_10yih")
+
+[node name="Health" type="Label" parent="Texture/Anchor/HealthTip" unique_id=2081981210]
+unique_name_in_owner = true
+layout_mode = 2
+text = "%DMG%"
+label_settings = SubResource("LabelSettings_nev1e")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1418019904]
 shape = SubResource("RectangleShape2D_st2pc")

@@ -15,3 +15,9 @@ metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
 
 [node name="ChargeRing" parent="." index="1" unique_id=1016301323 instance=ExtResource("3_vdjcy")]
 unique_name_in_owner = true
+
+[node name="Texture" parent="." index="2" unique_id=605714463]
+self_modulate = Color(0.22378641, 1, 0.24686164, 1)
+
+[node name="Hitbox" parent="." index="3" unique_id=1418019904]
+visible = false
