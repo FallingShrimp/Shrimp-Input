@@ -2,37 +2,38 @@ extends Node
 class_name ShrimpInput
 
 @export var timeScale: float = 1
+var clock: ShrimpClock
 var charging: Dictionary[SemanticAction, float] = {} # action->开始时间戳
 
+func _ready() -> void:
+	clock = ShrimpClock.new()
+	add_child(clock)
+
 func press(action: SemanticAction, timeout: float = INF) -> float:
-	var start = currentTick()
+	var start = clock.currentTick()
 	while !isPressed(action):
-		await frame()
-		if currentTick() - start >= timeout:
+		await clock.frame()
+		if clock.currentTick() - start >= timeout:
 			return timeout
-	return currentTick() - start
+	return clock.currentTick() - start
 func release(action: SemanticAction, timeout: float = INF) -> float:
 	if !isPressed(action): return 0
-	var start = currentTick()
+	var start = clock.currentTick()
 	while isPressed(action):
-		await frame()
-		if currentTick() - start >= timeout:
+		await clock.frame()
+		if clock.currentTick() - start >= timeout:
 			return timeout
-	return currentTick() - start
+	return clock.currentTick() - start
 func hold(action: SemanticAction, minTime: float) -> float:
 	var time = await release(action, minTime)
 	return time if time >= minTime else 0.0
 func charge(action: SemanticAction, maxTime: float) -> bool:
 	if !charging.has(action):
-		charging[action] = currentTick()
-	var state = isPressed(action) && currentTick() - charging[action] <= maxTime
+		charging[action] = clock.currentTick()
+	var state = isPressed(action) && clock.currentTick() - charging[action] <= maxTime
 	if !state:
 		charging.erase(action)
 	return state
 func isPressed(action: SemanticAction) -> bool:
 	if !action.canPress(): return false
 	return action.isPressed()
-func frame() -> float:
-	return await ShrimpTimeManager.frame(self)
-func currentTick() -> float:
-	return ShrimpTimeManager.current(self) * timeScale
