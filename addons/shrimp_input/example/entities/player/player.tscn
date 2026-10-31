@@ -15,10 +15,11 @@ stance = 0
 script = ExtResource("4_q7jji")
 metadata/_custom_type_script = "uid://d3opmcnhhbjbp"
 
-[node name="ShrimpInput" type="Node" parent="." index="1" unique_id=474048355 node_paths=PackedStringArray("clock")]
+[node name="ShrimpInput" type="Node" parent="." index="1" unique_id=474048355 node_paths=PackedStringArray("clock", "buffer")]
 unique_name_in_owner = true
 script = ExtResource("2_sqyos")
 clock = NodePath("../ShrimpClock")
+buffer = NodePath("ShrimpBuffer")
 metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
 
 [node name="ShrimpBuffer" type="Node" parent="ShrimpInput" index="0" unique_id=202595940 node_paths=PackedStringArray("clock")]
