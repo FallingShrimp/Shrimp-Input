@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://y0wstii68e7i"]
 
 [ext_resource type="PackedScene" uid="uid://bt4xclj7ja1od" path="res://addons/shrimp_input/example/abstracts/bullet/base_bullet.tscn" id="1_7uk7g"]
+[ext_resource type="Script" uid="uid://dkwpftopfu4p0" path="res://addons/shrimp_input/example/bullets/shrimp/shrimp.gd" id="2_7881n"]
 [ext_resource type="Material" uid="uid://brqxe8vplgs0x" path="res://addons/shrimp_input/example/bullets/shrimp/trail.tres" id="2_kfxkw"]
 [ext_resource type="AnimationLibrary" uid="uid://bdwwp0v6in2i3" path="res://addons/shrimp_input/example/bullets/shrimp/animation.res" id="2_nwlo6"]
 [ext_resource type="Texture2D" uid="uid://do6qddxx5t4g8" path="res://addons/shrimp_input/example/bullets/shrimp/shrimp.png" id="3_gj7h4"]
@@ -11,6 +12,8 @@ font_size = 200
 outline_size = 1
 
 [node name="Bullet" unique_id=483333088 instance=ExtResource("1_7uk7g")]
+script = ExtResource("2_7881n")
+speed = 700.0
 
 [node name="Animator" parent="." index="0" unique_id=2070724682]
 libraries/ = ExtResource("2_nwlo6")
