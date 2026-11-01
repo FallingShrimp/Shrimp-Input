@@ -28,3 +28,15 @@ func shoot(bullet: PackedScene, damage: float, rotationX: float = 0):
 	instance.position = position
 	instance.rotation = rotationX
 	get_parent().add_child.call_deferred(instance)
+
+static func closet(node: Node2D, filter: Callable = func(_e): return true) -> ExampleShrimpBaseEntity:
+	var last = INF
+	var result = null
+	for i in node.get_tree().get_nodes_in_group("enemy"):
+		if i is ExampleShrimpBaseEntity:
+			if filter.call(i):
+				var d = i.position.distance_to(node.position)
+				if d < last:
+					result = i
+					last = d
+	return result

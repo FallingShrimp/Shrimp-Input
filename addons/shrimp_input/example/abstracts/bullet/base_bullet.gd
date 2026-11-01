@@ -11,9 +11,10 @@ enum BulletState {
 @export var damage: float = 10
 @export var speed: float = 500
 @export var knockback: float = 0
-@export var lifeTime: float = 1
-@export var penetrate: float = 0
-@export var bounce: int = 0
+@export var lifeTime: float = INF
+@export var penetrate: float = 1
+@export var bounce: float = INF
+@export var reflect: float = INF
 
 @onready var animator: AnimationPlayer = $%Animator
 var spawnWhen: float = 0
@@ -48,19 +49,20 @@ func hitTest(body):
 	if body is StaticBody2D:
 		if body.is_in_group("wall"):
 			if bounce > 0:
-				for i in get_tree().get_nodes_in_group("enemy"):
-					if i is ExampleShrimpBaseEntity:
-						rotation = position.angle_to_point(i.position)
-						bounce -= 1
-						break
-					else:
-						rotation *= -1
+				var e = ExampleShrimpBaseEntity.closet(self)
+				if is_instance_valid(e):
+					rotation = position.angle_to_point(e.position)
+				else:
+					rotation += PI
+					rotation += randf_range(-1, 1) * deg_to_rad(10)
+				bounce -= 1
 			else:
 				goDie()
 	elif body is ExampleShrimpBaseEntity:
 		if launcher.stance != body.stance:
 			body.health -= damage
 			body.apply_central_impulse((body.position - position).normalized() * knockback)
+			body.playSound("Hurt")
 			if body.health <= 0:
 				body.queue_free()
 			var dmg = DAMAGE.instantiate() as ExampleShrimpBaseBullet
@@ -68,3 +70,10 @@ func hitTest(body):
 			dmg.position = position
 			get_tree().root.add_child.call_deferred(dmg)
 			damage *= penetrate
+			if reflect > 0:
+				var e = ExampleShrimpBaseEntity.closet(self, func(i: ExampleShrimpBaseEntity): return i != body)
+				if is_instance_valid(e):
+					rotation = position.angle_to_point(e.position)
+				else:
+					rotation = randf() * TAU
+				reflect -= 1
