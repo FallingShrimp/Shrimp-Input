@@ -17,7 +17,7 @@ func _ready() -> void:
 	else:
 		if damage < 0:
 			damageLabel.label_settings.font_color = Color.GREEN
-			damageLabel.text = "+%d" % ceil(damage)
+			damageLabel.text = "+%d" % abs(ceil(damage))
 		else:
 			damageLabel.label_settings.font_color = Color.RED
 			damageLabel.text = "%d" % ceil(damage)
