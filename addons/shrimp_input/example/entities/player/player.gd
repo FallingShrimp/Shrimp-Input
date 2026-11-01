@@ -3,7 +3,6 @@ extends ExampleShrimpBaseEntity
 const SHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/shrimp/shrimp.tscn")
 const FIRESHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/fire-shrimp/fire-shrimp.tscn")
 const DASH_BULLET = preload("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
-const ENEMY = preload("res://addons/shrimp_input/example/entities/enemy/enemy.tscn")
 const MAX_CHARGE = 2.0
 var Actions = ExampleShrimpActions
 
@@ -17,10 +16,6 @@ func _ready() -> void:
 	charge.hide()
 	add_child(Actions.ATTACK)
 	add_to_group("player")
-	for i in 10:
-		var enemy = ENEMY.instantiate() as ExampleShrimpBaseEntity
-		enemy.position = Vector2.from_angle(randf() * TAU) * randf_range(800, 1500)
-		get_tree().root.add_child.call_deferred(enemy)
 func _physics_process(_delta: float) -> void:
 	apply_central_force(getInputDirection() * 3000)
 
