@@ -17,14 +17,14 @@ func _ready() -> void:
 		"dext.png":
 			health *= 2
 		"jwx.png":
-			damageFactor += 0.2
+			damageFactor *= 1.3
 		"laism.png":
 			speed *= 1.15
 		"sg.png":
 			health *= 0.4
 		"yy.png":
-			damageFactor *= 1.08
-			redamage += 1
+			speed = 0
+			damageFactor *= 2
 	super._ready()
 func ai(_delta: float) -> void:
 	for i in get_tree().get_nodes_in_group("player"):

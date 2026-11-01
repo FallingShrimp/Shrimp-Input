@@ -145,6 +145,16 @@ font_size = 50
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_6daqi"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o30de"]
+font_size = 15
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
 [node name="UI" type="Control" unique_id=32345486]
 layout_mode = 3
 anchors_preset = 15
@@ -232,30 +242,61 @@ layout_mode = 2
 text = "波即将开始！"
 label_settings = SubResource("LabelSettings_807fw")
 
-[node name="WaveTip" type="HBoxContainer" parent="." unique_id=1495024437]
+[node name="WaveTip" type="VBoxContainer" parent="." unique_id=1815897257]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 0.1
+offset_bottom = 161.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="A" type="Label" parent="WaveTip" unique_id=1544417264]
+[node name="Text" type="HBoxContainer" parent="WaveTip" unique_id=758133489]
+layout_mode = 2
+alignment = 1
+
+[node name="A" type="Label" parent="WaveTip/Text" unique_id=1544417264]
 layout_mode = 2
 size_flags_vertical = 8
 text = "第"
 label_settings = SubResource("LabelSettings_x0nlo")
 
-[node name="Wave" type="Label" parent="WaveTip" unique_id=136184498]
+[node name="Wave" type="Label" parent="WaveTip/Text" unique_id=136184498]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 text = "20"
 label_settings = SubResource("LabelSettings_nqex3")
 
-[node name="B" type="Label" parent="WaveTip" unique_id=944690477]
+[node name="B" type="Label" parent="WaveTip/Text" unique_id=944690477]
 layout_mode = 2
 size_flags_vertical = 8
 text = "波"
 label_settings = SubResource("LabelSettings_x0nlo")
+
+[node name="Quotes" type="VBoxContainer" parent="WaveTip" unique_id=1748333305]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Text" type="HBoxContainer" parent="WaveTip/Quotes" unique_id=1758863074]
+layout_mode = 2
+
+[node name="Quote" type="Label" parent="WaveTip/Quotes/Text" unique_id=341414192]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "蛋糕是个谎言。The cake is a lie!!!"
+label_settings = SubResource("LabelSettings_6daqi")
+
+[node name="Padding" type="MarginContainer" parent="WaveTip/Quotes/Text" unique_id=973419718]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="Author" type="Label" parent="WaveTip/Quotes" unique_id=1603765778]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "—— 《传送门》"
+label_settings = SubResource("LabelSettings_o30de")
