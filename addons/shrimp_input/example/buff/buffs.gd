@@ -28,11 +28,11 @@ class Dmg3 extends ExampleShrimpBuff:
 		entity.damageFactor += 0.25
 class ScoreMult extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "分数倍率+50%"
+		return "分数倍率+25%"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.scoreMult += 0.5
+		entity.scoreMult += 0.25
 class Crit extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "暴击+5%"
@@ -99,8 +99,8 @@ class Reflect extends ExampleShrimpBuff:
 		entity.reflect += 2
 class MoreScore extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "获得大量分数"
+		return "分数倍率+80%"
 	func getQuality() -> Quality:
 		return Quality.LEGENDARY
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		ExampleShrimpUI.addScore(ExampleShrimpUI.instance.rewardMax, entity.get_tree().root)
+		entity.scoreMult += 0.8
