@@ -18,6 +18,7 @@ static func buff(tip: String, color: Color):
 	color.a *= 0.6
 	instance.buffBox.bg_color = color
 	instance.buffLabel.text = tip
+	instance.buffAnimator.stop()
 	instance.buffAnimator.play("buff")
 static func level(count: int):
 	instance.levelLabel.text = str(count)

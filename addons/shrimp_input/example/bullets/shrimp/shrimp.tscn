@@ -18,6 +18,7 @@ radius = 41.04875
 script = ExtResource("2_7881n")
 speed = 700.0
 knockback = 500.0
+launchRecoil = 300.0
 lifeTime = 10.0
 bounce = 20.0
 reflect = 35.0

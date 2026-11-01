@@ -8,7 +8,7 @@ class Buff extends RefCounted:
 	@abstract
 	func getQuality() -> Quality
 	@abstract
-	func execute(entity: ExampleShrimpBaseEntity) -> void
+	func execute(entity: ExampleShrimpPlayer) -> void
 
 enum Quality {
 	NORMAL,

@@ -1,14 +1,15 @@
 extends ExampleShrimpBaseEntity
+class_name ExampleShrimpPlayer
 
 const SHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/shrimp/shrimp.tscn")
 const FIRESHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/fire-shrimp/fire-shrimp.tscn")
 const DASH_BULLET = preload("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
 const MAX_CHARGE = 2.0
-const MAX_REGENERATE = 100.0
 var Actions = ExampleShrimpActions
 
 @onready var input: ShrimpInput = $%ShrimpInput
 @onready var charge: ExampleShrimpChargeRing = $%ChargeRing
+var regeneration: float = 0
 
 func _ready() -> void:
 	super._ready()
@@ -19,8 +20,8 @@ func _ready() -> void:
 	add_to_group("player")
 func _physics_process(delta: float) -> void:
 	apply_central_force(getInputDirection() * 3000)
-	if health < MAX_REGENERATE:
-		health += 1 * delta
+	if health < initialHealth:
+		health += regeneration * delta
 
 func getInputDirection() -> Vector2:
 	return input.direction(
@@ -66,6 +67,8 @@ func inputLoop():
 			while input.charge(Actions.ATTACK, MAX_CHARGE):
 				hold += await input.clock.frame()
 				charge.value = hold
+			if hold >= MAX_CHARGE:
+				playSound("Charged")
 			await input.release(Actions.ATTACK)
 			playSound("HeavyShot")
 			shoot(FIRESHRIMP_BULLET, 10 + hold / MAX_CHARGE * 50, getMouseAngle())

@@ -11,6 +11,7 @@ enum BulletState {
 @export var speed: float = 500
 @export var knockback: float = 0
 @export var recoil: float = 0
+@export var launchRecoil: float = 0
 @export var lifeTime: float = INF
 @export var penetrate: float = 1
 @export var bounce: float = INF

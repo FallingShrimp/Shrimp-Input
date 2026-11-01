@@ -67,8 +67,10 @@ content_margin_bottom = 20.0
 bg_color = Color(0, 0.74509805, 0.25882354, 0.6)
 
 [sub_resource type="LabelSettings" id="LabelSettings_807fw"]
+resource_local_to_scene = true
 font_size = 40
-outline_size = 1
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_807fw"]
 length = 0.001

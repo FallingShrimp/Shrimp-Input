@@ -47,6 +47,7 @@ func shoot(bullet: PackedScene, damage: float, rotationX: float = 0) -> ExampleS
 	instance.position = position
 	instance.rotation = rotationX
 	get_tree().root.add_child.call_deferred(instance)
+	apply_central_impulse(-Vector2.from_angle(rotationX) * instance.launchRecoil)
 	return instance
 func hurt(total: float, crited: bool, launcher: ExampleShrimpBaseEntity):
 	if !invincible:
