@@ -1,53 +1,67 @@
 class_name ExampleShrimpBuffs
 
 static var buffs = (
-	[Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult]
+	[Crit, Dmg, Dmg2, Dmg3, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult]
 		.map(func(e: GDScript): return e.new())
 )
 
 class Dmg extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "伤害+3%"
+		return "伤害+15%"
 	func getQuality() -> Quality:
 		return Quality.NORMAL
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.damageFactor += 0.03
+		entity.damageFactor += 0.15
+class Dmg2 extends ExampleShrimpBuff:
+	func getName() -> StringName:
+		return "伤害+20%"
+	func getQuality() -> Quality:
+		return Quality.NORMAL
+	func execute(entity: ExampleShrimpPlayer) -> void:
+		entity.damageFactor += 0.2
+class Dmg3 extends ExampleShrimpBuff:
+	func getName() -> StringName:
+		return "伤害+25%"
+	func getQuality() -> Quality:
+		return Quality.NORMAL
+	func execute(entity: ExampleShrimpPlayer) -> void:
+		entity.damageFactor += 0.25
 class ScoreMult extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "分数倍率+5%"
+		return "分数倍率+50%"
 	func getQuality() -> Quality:
-		return Quality.NORMAL
+		return Quality.EPIC
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.scoreMult += 0.05
+		entity.scoreMult += 0.5
 class Crit extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "暴击+4%"
+		return "暴击+5%"
 	func getQuality() -> Quality:
 		return Quality.RARE
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.critRate += 0.04
+		entity.critRate += 0.05
 class Reg extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "生命恢复+1"
+		return "生命恢复+2"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.regeneration += 1
+		entity.regeneration += 2
 class HpMax extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "生命上限+20"
+		return "生命上限+30"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.initialHealth += 20
-		entity.health += 20
+		entity.initialHealth += 30
+		entity.health += 30
 class Luck extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "幸运+1"
+		return "幸运+2"
 	func getQuality() -> Quality:
 		return Quality.RARE
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.lucky += 1
+		entity.lucky += 2
 class Heal extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "获得30点治疗"
@@ -57,18 +71,18 @@ class Heal extends ExampleShrimpBuff:
 		entity.hurt(-30, false)
 class AtkSpd extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "攻击速度+10%"
+		return "攻击速度+25%"
 	func getQuality() -> Quality:
-		return Quality.NORMAL
+		return Quality.RARE
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.attackSpeed += 0.1
+		entity.attackSpeed += 0.25
 class Redamage extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "荆棘反伤+3"
+		return "荆棘反伤+15"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.redamage += 3
+		entity.redamage += 15
 class Bounce extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "反弹+1"
