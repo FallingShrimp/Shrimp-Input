@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dvpqd1ppoba6m" path="res://addons/shrimp_input/example/charge_ring/charge_ring.tscn" id="3_vdjcy"]
 [ext_resource type="Script" uid="uid://d3opmcnhhbjbp" path="res://addons/shrimp_input/statemachine/ShrimpClock.gd" id="4_q7jji"]
 [ext_resource type="Script" uid="uid://doy0uuccb5iml" path="res://addons/shrimp_input/statemachine/ShrimpBuffer.gd" id="5_0l8nm"]
-[ext_resource type="AudioStream" uid="uid://dg6sy6etxbeaj" path="res://addons/shrimp_input/example/entities/player/dash.wav" id="7_w137e"]
+[ext_resource type="AudioStream" uid="uid://dg6sy6etxbeaj" path="res://addons/shrimp_input/example/entities/player/sounds/dash.wav" id="7_cxhto"]
+[ext_resource type="AudioStream" uid="uid://0apftpg6dljc" path="res://addons/shrimp_input/example/entities/player/sounds/heavy-shot.mp3" id="8_ai477"]
 
 [node name="Player" unique_id=1010191855 instance=ExtResource("1_57u0y")]
 script = ExtResource("2_5la7w")
@@ -35,7 +36,10 @@ metadata/_custom_type_script = "uid://doy0uuccb5iml"
 unique_name_in_owner = true
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="1" unique_id=1117221722]
-stream = ExtResource("7_w137e")
+stream = ExtResource("7_cxhto")
+
+[node name="HeavyShot" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="2" unique_id=1728303242]
+stream = ExtResource("8_ai477")
 
 [node name="Texture" parent="." index="4" unique_id=605714463]
 self_modulate = Color(0.22378641, 1, 0.24686164, 1)

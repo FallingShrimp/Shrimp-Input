@@ -12,6 +12,9 @@ enum Stance {
 @onready var healthLabel: Label = $%Health
 @onready var sounds: Node2D = $%Sounds
 
+func _ready() -> void:
+	if stance == Stance.ENEMY:
+		add_to_group("enemy")
 func _process(_delta: float) -> void:
 	healthLabel.text = str(health)
 

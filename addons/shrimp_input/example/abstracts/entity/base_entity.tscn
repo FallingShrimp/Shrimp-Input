@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ccqlvicfg44ji"]
 
 [ext_resource type="Script" uid="uid://bnbax26v3kflw" path="res://addons/shrimp_input/example/abstracts/entity/base_entity.gd" id="1_u8a8r"]
-[ext_resource type="AudioStream" uid="uid://c0157j6auefgv" path="res://addons/shrimp_input/example/entities/player/attack.wav" id="2_10yih"]
+[ext_resource type="AudioStream" uid="uid://c0157j6auefgv" path="res://addons/shrimp_input/example/entities/player/sounds/attack.wav" id="2_10yih"]
 [ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="2_tcb8m"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nev1e"]

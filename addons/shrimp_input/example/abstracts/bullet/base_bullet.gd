@@ -12,6 +12,8 @@ enum BulletState {
 @export var speed: float = 500
 @export var knockback: float = 0
 @export var lifeTime: float = 1
+@export var penetrate: float = 0
+@export var bounce: int = 0
 
 @onready var animator: AnimationPlayer = $%Animator
 var spawnWhen: float = 0
@@ -26,7 +28,7 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if state == BulletState.LIVING:
 		ai(delta)
-		if timeLived() > lifeTime:
+		if timeLived() > lifeTime || damage <= 0:
 			goDie()
 
 func ai(_delta: float) -> void:
@@ -45,13 +47,24 @@ func hitTest(body):
 	if state != BulletState.LIVING: return
 	if body is StaticBody2D:
 		if body.is_in_group("wall"):
-			goDie()
+			if bounce > 0:
+				for i in get_tree().get_nodes_in_group("enemy"):
+					if i is ExampleShrimpBaseEntity:
+						rotation = position.angle_to_point(i.position)
+						bounce -= 1
+						break
+					else:
+						rotation *= -1
+			else:
+				goDie()
 	elif body is ExampleShrimpBaseEntity:
 		if launcher.stance != body.stance:
 			body.health -= damage
 			body.apply_central_impulse((body.position - position).normalized() * knockback)
+			if body.health <= 0:
+				body.queue_free()
 			var dmg = DAMAGE.instantiate() as ExampleShrimpBaseBullet
 			dmg.damage = damage
 			dmg.position = position
 			get_tree().root.add_child.call_deferred(dmg)
-			goDie()
+			damage *= penetrate

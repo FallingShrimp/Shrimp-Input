@@ -18,7 +18,9 @@ radius = 41.04875
 script = ExtResource("2_7881n")
 speed = 700.0
 knockback = 500.0
-lifeTime = 5.0
+lifeTime = 50.0
+penetrate = 1.0
+bounce = 50
 
 [node name="Animator" parent="." index="0" unique_id=2070724682]
 libraries/ = ExtResource("2_nwlo6")

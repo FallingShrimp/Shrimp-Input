@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://bo5g0n07ubiln"]
+
+[ext_resource type="PackedScene" uid="uid://bt4xclj7ja1od" path="res://addons/shrimp_input/example/abstracts/bullet/base_bullet.tscn" id="1_ohj0w"]
+[ext_resource type="Script" uid="uid://bhhux5h0mcxbf" path="res://addons/shrimp_input/example/bullets/fire-shrimp/fire_shrimp.gd" id="2_eqjhu"]
+[ext_resource type="Texture2D" uid="uid://do6qddxx5t4g8" path="res://addons/shrimp_input/example/bullets/shrimp/shrimp.png" id="2_xfeng"]
+
+[sub_resource type="Curve" id="Curve_xfeng"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_eqjhu"]
+curve = SubResource("Curve_xfeng")
+
+[sub_resource type="Gradient" id="Gradient_tajfd"]
+colors = PackedColorArray(1, 0.20464611, 0, 1, 1, 0.8096056, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f24gt"]
+gradient = SubResource("Gradient_tajfd")
+
+[sub_resource type="Curve" id="Curve_o008i"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w4a7f"]
+curve = SubResource("Curve_o008i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xfeng"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 69.22
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 500.0
+initial_velocity_max = 800.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -200.0
+radial_accel_max = -100.0
+scale_min = 5.0
+scale_max = 15.0
+scale_curve = SubResource("CurveTexture_w4a7f")
+color_initial_ramp = SubResource("GradientTexture1D_f24gt")
+alpha_curve = SubResource("CurveTexture_eqjhu")
+
+[node name="Bullet" unique_id=483333088 instance=ExtResource("1_ohj0w")]
+script = ExtResource("2_eqjhu")
+speed = 2000.0
+knockback = 750.0
+lifeTime = 100.0
+penetrate = 0.9
+bounce = 20
+
+[node name="Particles" type="GPUParticles2D" parent="." index="1" unique_id=1915141885]
+amount = 300
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_xfeng")
+
+[node name="Texture" parent="." index="2" unique_id=2039264544]
+scale = Vector2(0.28723323, 0.28723323)
+texture = ExtResource("2_xfeng")

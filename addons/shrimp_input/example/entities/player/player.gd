@@ -1,6 +1,7 @@
 extends ExampleShrimpBaseEntity
 
 const SHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/shrimp/shrimp.tscn")
+const FIRESHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/fire-shrimp/fire-shrimp.tscn")
 const DASH_BULLET = preload("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
 const MAX_CHARGE = 2.0
 var Actions = ExampleShrimpActions
@@ -9,6 +10,7 @@ var Actions = ExampleShrimpActions
 @onready var charge: ExampleShrimpChargeRing = $%ChargeRing
 
 func _ready() -> void:
+	super._ready()
 	inputLoop()
 	dashLoop()
 	charge.hide()
@@ -55,7 +57,8 @@ func inputLoop():
 				hold += await input.clock.frame()
 				charge.value = hold
 			await input.release(Actions.ATTACK)
-			shoot(SHRIMP_BULLET, 10 + hold / MAX_CHARGE * 50, getMouseAngle())
+			playSound("HeavyShot")
+			shoot(FIRESHRIMP_BULLET, 10 + hold / MAX_CHARGE * 50, getMouseAngle())
 			charge.hide()
 			charge.value = 0
 		await input.clock.seconds(0.3)
