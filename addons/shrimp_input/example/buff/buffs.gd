@@ -1,7 +1,7 @@
 class_name ExampleShrimpBuffs
 
 static var buffs = (
-	[Crit, Dmg, Dmg2, Dmg3, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult]
+	[Crit, Dmg, Dmg2, Dmg3, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult, MoreScore]
 		.map(func(e: GDScript): return e.new())
 )
 
@@ -97,3 +97,10 @@ class Reflect extends ExampleShrimpBuff:
 		return Quality.RARE
 	func execute(entity: ExampleShrimpPlayer) -> void:
 		entity.reflect += 2
+class MoreScore extends ExampleShrimpBuff:
+	func getName() -> StringName:
+		return "获得大量分数"
+	func getQuality() -> Quality:
+		return Quality.LEGENDARY
+	func execute(entity: ExampleShrimpPlayer) -> void:
+		ExampleShrimpUI.addScore(ExampleShrimpUI.instance.rewardMax * 10, entity.get_tree().root)
