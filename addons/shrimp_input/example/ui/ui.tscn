@@ -61,9 +61,10 @@ _data = {
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0nlo"]
+resource_local_to_scene = true
 content_margin_top = 20.0
 content_margin_bottom = 20.0
-bg_color = Color(0, 0.7455232, 0.25888026, 0.6)
+bg_color = Color(0, 0.74509805, 0.25882354, 0.6)
 
 [sub_resource type="LabelSettings" id="LabelSettings_807fw"]
 font_size = 40
@@ -156,6 +157,7 @@ root_node = NodePath("../BuffNotice")
 libraries/ = SubResource("AnimationLibrary_nqex3")
 
 [node name="BuffNotice" type="PanelContainer" parent="Anchor2" unique_id=2121739481]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_x0nlo")

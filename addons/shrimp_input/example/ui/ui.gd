@@ -7,11 +7,16 @@ static var instance: ExampleShrimpUI
 @onready var levelLabel: Label = $%Level
 @onready var buffAnimator: AnimationPlayer = $%BuffAnimator
 @onready var buffLabel: Label = $%Buff
+@onready var buffNotice: Control = $%BuffNotice
+@onready var buffBox: StyleBoxFlat
 
 func _ready() -> void:
 	instance = self
+	buffBox = buffNotice.get_theme_stylebox("panel")
 
-static func buff(tip: String):
+static func buff(tip: String, color: Color):
+	color.a *= 0.6
+	instance.buffBox.bg_color = color
 	instance.buffLabel.text = tip
 	instance.buffAnimator.play("buff")
 static func level(count: int):

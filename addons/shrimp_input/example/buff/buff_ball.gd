@@ -26,8 +26,9 @@ var mat: ShaderMaterial
 
 func _ready() -> void:
 	buff = gacha()
+	var color = qualityColor[buff.getQuality()]
 	mat = texture.material
-	mat.set_shader_parameter("line_color", qualityColor[buff.getQuality()])
+	mat.set_shader_parameter("line_color", color)
 	apply_central_impulse(Vector2.from_angle(randf() * TAU) * randf() * 2000)
 	apply_torque_impulse(randf_range(-1, 1) * 10000)
 	scale *= randf_range(0.5, 2)
@@ -37,7 +38,7 @@ func _ready() -> void:
 				if e.stance == ExampleShrimpBaseEntity.Stance.PLAYER:
 					e.playSound("Collect")
 					buff.execute(e)
-					ExampleShrimpUI.buff(buff.getName())
+					ExampleShrimpUI.buff(buff.getName(), color)
 					queue_free()
 	)
 
