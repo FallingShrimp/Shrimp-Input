@@ -53,6 +53,8 @@ corner_radius_bottom_left = 1000
 corner_detail = 1
 
 [node name="Player" unique_id=1010191855 instance=ExtResource("1_57u0y")]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("2_5la7w")
 stance = 0
 critRate = 0.1

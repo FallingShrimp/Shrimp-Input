@@ -29,6 +29,10 @@ func ai(delta: float) -> void:
 	if health < initialHealth:
 		health += regeneration * delta
 
+func defocus(state: bool):
+	set_collision_mask_value(1, !state)
+	set_collision_layer_value(1, !state)
+	invincible = state
 func getInputDirection() -> Vector2:
 	return input.direction(
 		Actions.MOVE_UP,
@@ -53,12 +57,12 @@ func dashLoop():
 				d.scale *= 2
 		dashProgress.value = 0
 		dashTrail.emitting = true
-		hitbox.disabled = true
+		defocus(true)
 		var hold = 0
 		while input.charge(Actions.ROOT_ACTION, DASH_INVINCIBLE):
 			hold += await input.clock.frame()
 			dashProgress.value = 1 - hold / DASH_INVINCIBLE
-		hitbox.disabled = false
+		defocus(false)
 		dashTrail.emitting = false
 		hold = 0
 		while input.charge(Actions.ROOT_ACTION, DASH_COOLDOWN):
