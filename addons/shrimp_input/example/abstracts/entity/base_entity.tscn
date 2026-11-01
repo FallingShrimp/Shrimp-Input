@@ -11,15 +11,13 @@ bounce = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_nev1e"]
 radius = 70.035706
 
-[sub_resource type="LabelSettings" id="LabelSettings_10yih"]
-font_size = 30
-font_color = Color(0.7561407, 0, 1, 1)
-outline_size = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10yih"]
+bg_color = Color(0, 0, 0, 0.70000005)
+skew = Vector2(0.4, 0)
 
-[sub_resource type="LabelSettings" id="LabelSettings_nev1e"]
-font_size = 30
-font_color = Color(1, 0, 0, 1)
-outline_size = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aviv2"]
+bg_color = Color(1, 0, 0, 1)
+skew = Vector2(0.4, 0)
 
 [node name="Entity" type="RigidBody2D" unique_id=1010191855]
 physics_material_override = SubResource("PhysicsMaterial_nev1e")
@@ -43,21 +41,21 @@ texture = ExtResource("2_tcb8m")
 shape = SubResource("CircleShape2D_nev1e")
 
 [node name="Anchor" type="Node2D" parent="." unique_id=359015896]
+position = Vector2(0, -81)
 
-[node name="HealthTip" type="HBoxContainer" parent="Anchor" unique_id=1381396426]
+[node name="Health" type="ProgressBar" parent="Anchor" unique_id=103602856]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 15)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -13.0
+offset_right = 75.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Tip" type="Label" parent="Anchor/HealthTip" unique_id=1574210222]
-layout_mode = 2
-text = "Current HP:"
-label_settings = SubResource("LabelSettings_10yih")
-
-[node name="Health" type="Label" parent="Anchor/HealthTip" unique_id=2081981210]
-unique_name_in_owner = true
-layout_mode = 2
-text = "%DMG%"
-label_settings = SubResource("LabelSettings_nev1e")
+theme_override_styles/background = SubResource("StyleBoxFlat_10yih")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aviv2")
+value = 50.0
+show_percentage = false

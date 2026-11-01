@@ -10,8 +10,8 @@ enum Stance {
 @export var stance: Stance = Stance.ENEMY
 @export var damageFactor: float = 1
 
-@onready var healthLabel: Label = $%Health
 @onready var sounds: Node2D = $%Sounds
+@onready var healthBar: ProgressBar = $%Health
 var invincible: bool = false
 var initialHealth: float
 
@@ -20,7 +20,8 @@ func _ready() -> void:
 	if stance == Stance.ENEMY:
 		add_to_group("enemy")
 func _process(_delta: float) -> void:
-	healthLabel.text = "%d" % health
+	healthBar.max_value = initialHealth
+	healthBar.value = health
 
 func die():
 	await get_tree().process_frame
