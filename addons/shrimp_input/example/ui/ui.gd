@@ -111,6 +111,7 @@ func _ready() -> void:
 	buffBox = buffNotice.get_theme_stylebox("panel")
 	addScore(0, get_tree().root)
 
+
 static func addScore(amount: float, where: Node):
 	var player = where.get_tree().get_nodes_in_group("player")[0] as ExampleShrimpPlayer
 	instance.score += amount * (1 + player.lucky * 0.04) * player.scoreMult

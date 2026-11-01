@@ -31,10 +31,6 @@ metadata/_custom_type_script = "uid://d3opmcnhhbjbp"
 script = ExtResource("1_0pvs7")
 metadata/_custom_type_script = "uid://c1b333x2wgh0s"
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1560198821]
-
-[node name="UI" parent="UI" unique_id=32345486 instance=ExtResource("2_6hacf")]
-
 [node name="BG" type="Sprite2D" parent="." unique_id=1832834129]
 modulate = Color(1, 1, 1, 0.2)
 z_index = -1
@@ -103,3 +99,7 @@ script = ExtResource("5_j3w3d")
 
 [node name="BuffBall" parent="." unique_id=749221857 instance=ExtResource("7_btfoq")]
 position = Vector2(-296, 14)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1560198821]
+
+[node name="UI" parent="UI" unique_id=32345486 instance=ExtResource("2_6hacf")]
