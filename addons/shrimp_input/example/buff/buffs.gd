@@ -1,6 +1,9 @@
 class_name ExampleShrimpBuffs
 
-static var buffs = [Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage]
+static var buffs = (
+	[Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage]
+		.map(func(e: GDScript): return e.new())
+)
 
 class Dmg extends ExampleShrimpBuff:
 	func getName() -> StringName:

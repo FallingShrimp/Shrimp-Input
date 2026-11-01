@@ -4,6 +4,8 @@ class_name ShrimpTimeManager
 
 static var instance: ShrimpTimeManager
 
+const TIME_MANAGER: NodePath = "shrimp_plugin_time_manager"
+
 var timeLived: float = 0
 var lastDelta: float = 0
 
@@ -14,7 +16,7 @@ func _process(delta: float) -> void:
 	timeLived += delta
 
 static func getInstance(from: Node) -> ShrimpTimeManager:
-	return from.get_tree().root.get_node(ShrimpInputPlugin.TIME_MANAGER)
+	return from.get_tree().root.get_node(TIME_MANAGER)
 static func current(from: Node) -> float:
 	return getInstance(from).timeLived
 static func frame(from: Node) -> float:

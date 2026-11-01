@@ -29,8 +29,8 @@ func _ready() -> void:
 
 func gacha(player: ExampleShrimpPlayer) -> ExampleShrimpBuff:
 	var pool = (
-		ExampleShrimpBuffs.buffs
-			.map(func(e: GDScript): return e.new())
+		ExampleShrimpBuffs
+			.buffs
 			.reduce(
 				func(cur: Dictionary, next: ExampleShrimpBuff):
 					var q = next.getQuality()
