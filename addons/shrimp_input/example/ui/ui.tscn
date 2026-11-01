@@ -155,6 +155,25 @@ font_size = 15
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_hvddb"]
+font_size = 18
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqex3"]
+bg_color = Color(0, 0.20627734, 0.3991601, 0.7019608)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6daqi"]
+bg_color = Color(0, 0.5196078, 1, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
 [node name="UI" type="Control" unique_id=32345486]
 layout_mode = 3
 anchors_preset = 15
@@ -280,23 +299,70 @@ layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="Text" type="HBoxContainer" parent="WaveTip/Quotes" unique_id=1758863074]
+[node name="Text" type="VBoxContainer" parent="WaveTip/Quotes" unique_id=1741319293]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Text" type="HBoxContainer" parent="WaveTip/Quotes/Text" unique_id=1758863074]
 layout_mode = 2
 
-[node name="Quote" type="Label" parent="WaveTip/Quotes/Text" unique_id=341414192]
+[node name="Quote" type="Label" parent="WaveTip/Quotes/Text/Text" unique_id=341414192]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "蛋糕是个谎言。The cake is a lie!!!"
 label_settings = SubResource("LabelSettings_6daqi")
 
-[node name="Padding" type="MarginContainer" parent="WaveTip/Quotes/Text" unique_id=973419718]
+[node name="Padding" type="MarginContainer" parent="WaveTip/Quotes/Text/Text" unique_id=973419718]
 layout_mode = 2
 theme_override_constants/margin_right = 20
 
-[node name="Author" type="Label" parent="WaveTip/Quotes" unique_id=1603765778]
+[node name="Author" type="Label" parent="WaveTip/Quotes/Text" unique_id=1603765778]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 text = "—— 《传送门》"
 label_settings = SubResource("LabelSettings_o30de")
+
+[node name="Score" type="HBoxContainer" parent="WaveTip/Quotes" unique_id=680132382]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Tip" type="HBoxContainer" parent="WaveTip/Quotes/Score" unique_id=2120926262]
+layout_mode = 2
+alignment = 1
+
+[node name="CurrentScore" type="Label" parent="WaveTip/Quotes/Score/Tip" unique_id=857478175]
+unique_name_in_owner = true
+layout_mode = 2
+text = "50"
+label_settings = SubResource("LabelSettings_hvddb")
+
+[node name="Sep" type="Label" parent="WaveTip/Quotes/Score/Tip" unique_id=111610246]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_hvddb")
+
+[node name="MaxScore" type="Label" parent="WaveTip/Quotes/Score/Tip" unique_id=649617006]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_hvddb")
+
+[node name="ScoreProgress" type="ProgressBar" parent="WaveTip/Quotes/Score" unique_id=1180498170]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 10)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_nqex3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6daqi")
+value = 50.0
+show_percentage = false
+
+[node name="Lv" type="Label" parent="WaveTip/Quotes/Score" unique_id=462442589]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lv.0"
+label_settings = SubResource("LabelSettings_hvddb")

@@ -22,5 +22,6 @@ func _physics_process(_delta: float) -> void:
 					enemy.health = randf_range(20, 60) * level
 					enemy.position = p.position + Vector2.from_angle(randf() * TAU) * randf_range(1000, 2000)
 					enemy.damageFactor += 0.04 * level
+					enemy.score = 100 + 25 * level
 					get_tree().root.add_child.call_deferred(enemy)
 					restEnemyToSpawn -= 1

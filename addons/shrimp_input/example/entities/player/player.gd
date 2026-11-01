@@ -15,6 +15,7 @@ var DASH_INVINCIBLE = 0.3
 var regeneration: float = 0
 var lucky: float = 0
 var attackSpeed: float = 1
+var scoreMult: float = 1
 
 func _ready() -> void:
 	super._ready()

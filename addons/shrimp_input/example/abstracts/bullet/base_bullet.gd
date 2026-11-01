@@ -71,8 +71,8 @@ func hitTest(body):
 			var total = damage * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
 			if crit:
 				total *= 2 + max(launcher.critRate - 0.85, 0) * 2
-			body.hurt(total, crit, self)
-			launcher.hurt(body.redamage, false, null)
+			body.hurt(total, crit)
+			launcher.hurt(body.redamage, false)
 			body.apply_central_impulse((body.position - position).normalized() * knockback)
 			launcher.apply_central_impulse((position - body.position).normalized() * recoil)
 			if reflect + launcher.reflect > 0:

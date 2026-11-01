@@ -96,11 +96,34 @@ static var instance: ExampleShrimpUI
 @onready var buffBox: StyleBoxFlat
 @onready var quoteLabel: Label = $%Quote
 @onready var authorLabel: Label = $%Author
+@onready var currentScoreLabel: Label = $%CurrentScore
+@onready var maxScoreLabel: Label = $%MaxScore
+@onready var scoreProgress: ProgressBar = $%ScoreProgress
+@onready var lvLabel: Label = $%Lv
+var score: float = 0
+var scoredTimes: int = 0
+var rewardMax: float:
+	get:
+		return 200 + scoredTimes * 300
 
 func _ready() -> void:
 	instance = self
 	buffBox = buffNotice.get_theme_stylebox("panel")
+	addScore(0, get_tree().root)
 
+static func addScore(amount: float, where: Node):
+	var player = where.get_tree().get_nodes_in_group("player")[0] as ExampleShrimpPlayer
+	instance.score += amount * (1 + player.lucky * 0.04) * player.scoreMult
+	if instance.score >= instance.rewardMax:
+		instance.score -= instance.rewardMax
+		instance.scoredTimes += 1
+		for i in randi_range(1, 2):
+			ExampleShrimpBuffBall.reward(where, player.position + Vector2.from_angle(randf() * TAU) * randf_range(50, 200))
+	instance.currentScoreLabel.text = "%d" % instance.score
+	instance.maxScoreLabel.text = "%d" % instance.rewardMax
+	instance.scoreProgress.max_value = instance.rewardMax
+	instance.scoreProgress.value = instance.score
+	instance.lvLabel.text = "Lv.%d" % instance.scoredTimes
 static func buff(tip: String, color: Color):
 	color.a *= 0.6
 	instance.buffBox.bg_color = color

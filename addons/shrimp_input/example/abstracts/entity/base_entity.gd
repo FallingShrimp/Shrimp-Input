@@ -25,6 +25,8 @@ var initialHealth: float
 var bounce: int = 0
 var reflect: int = 0
 var redamage: float = 0
+var score: float = 0
+var valueMult: float = 1
 var isLiving: bool:
 	get:
 		return health > 0
@@ -44,20 +46,11 @@ func ai(_delta: float):
 func die():
 	await get_tree().process_frame
 
-func goDie(by: ExampleShrimpBaseBullet):
+func goDie():
 	await die()
 	match stance:
 		Stance.ENEMY:
-			if is_instance_valid(by) && is_instance_valid(by.launcher):
-				if by.launcher is ExampleShrimpPlayer:
-					var launch = by.launcher as ExampleShrimpPlayer
-					var rate = 0.2 + launch.lucky * 0.06
-					var out = floor(rate)
-					var count = out + int(randf() < rate - out)
-					for i in count:
-						var ball = BUFFBALL.instantiate() as ExampleShrimpBuffBall
-						ball.position = position
-						get_tree().root.add_child.call_deferred(ball)
+			ExampleShrimpUI.addScore(score * valueMult, get_tree().root)
 			queue_free()
 		Stance.PLAYER:
 			hitbox.disabled = true
@@ -74,7 +67,7 @@ func shoot(bullet: PackedScene, damage: float, rotationX: float = 0) -> ExampleS
 	get_tree().root.add_child.call_deferred(instance)
 	apply_central_impulse(-Vector2.from_angle(rotationX) * instance.launchRecoil)
 	return instance
-func hurt(total: float, crited: bool, by: ExampleShrimpBaseBullet):
+func hurt(total: float, crited: bool):
 	if invincible || total == 0:
 		return
 	health -= total
@@ -85,7 +78,7 @@ func hurt(total: float, crited: bool, by: ExampleShrimpBaseBullet):
 	dmg.fromPlayer = stance == Stance.ENEMY
 	ExampleShrimpCameraManager.addShake(ExampleShrimpCircleSampler.new(5, 0.1))
 	if died:
-		goDie(by)
+		goDie()
 	else:
 		playSound("Hurt")
 		animator.play("hurt")

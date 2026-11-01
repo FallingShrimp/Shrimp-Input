@@ -1,7 +1,7 @@
 class_name ExampleShrimpBuffs
 
 static var buffs = (
-	[Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage]
+	[Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult]
 		.map(func(e: GDScript): return e.new())
 )
 
@@ -12,6 +12,13 @@ class Dmg extends ExampleShrimpBuff:
 		return Quality.NORMAL
 	func execute(entity: ExampleShrimpPlayer) -> void:
 		entity.damageFactor += 0.03
+class ScoreMult extends ExampleShrimpBuff:
+	func getName() -> StringName:
+		return "分数倍率+5%"
+	func getQuality() -> Quality:
+		return Quality.NORMAL
+	func execute(entity: ExampleShrimpPlayer) -> void:
+		entity.scoreMult += 0.05
 class Crit extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "暴击+4%"
@@ -47,7 +54,7 @@ class Heal extends ExampleShrimpBuff:
 	func getQuality() -> Quality:
 		return Quality.LEGENDARY
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.hurt(-30, false, null)
+		entity.hurt(-30, false)
 class AtkSpd extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "攻击速度+10%"

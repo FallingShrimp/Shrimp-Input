@@ -1,6 +1,8 @@
 extends RigidBody2D
 class_name ExampleShrimpBuffBall
 
+const BUFFBALL = preload("res://addons/shrimp_input/example/buff/buff_ball.tscn")
+
 @export var qualityLuckyOffset: Dictionary[ExampleShrimpBuff.Quality, float] = {}
 @export var qualityWeight: Dictionary[ExampleShrimpBuff.Quality, float] = {}
 @export var qualityColor: Dictionary[ExampleShrimpBuff.Quality, Color] = {}
@@ -48,3 +50,8 @@ func gacha(player: ExampleShrimpPlayer) -> ExampleShrimpBuff:
 		if taregt < pointer:
 			return item
 	return pool.keys().back()
+
+static func reward(where: Node, positionX: Vector2):
+	var ball = BUFFBALL.instantiate() as ExampleShrimpBuffBall
+	ball.position = positionX
+	where.add_child.call_deferred(ball)
