@@ -24,6 +24,7 @@ var invincible: bool = false
 var initialHealth: float
 var bounce: int = 0
 var reflect: int = 0
+var redamage: float = 0
 var isLiving: bool:
 	get:
 		return health > 0

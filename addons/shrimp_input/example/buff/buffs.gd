@@ -1,6 +1,6 @@
 class_name ExampleShrimpBuffs
 
-static var buffs = [Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect]
+static var buffs = [Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage]
 
 class Dmg extends ExampleShrimpBuff:
 	func getName() -> StringName:
@@ -52,6 +52,13 @@ class AtkSpd extends ExampleShrimpBuff:
 		return Quality.NORMAL
 	func execute(entity: ExampleShrimpPlayer) -> void:
 		entity.attackSpeed += 0.1
+class Redamage extends ExampleShrimpBuff:
+	func getName() -> StringName:
+		return "荆棘反伤+3"
+	func getQuality() -> Quality:
+		return Quality.EPIC
+	func execute(entity: ExampleShrimpPlayer) -> void:
+		entity.redamage += 3
 class Bounce extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "反弹+1"

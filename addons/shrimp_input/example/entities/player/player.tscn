@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://dg6sy6etxbeaj" path="res://addons/shrimp_input/example/entities/player/sounds/dash.wav" id="7_cxhto"]
 [ext_resource type="AudioStream" uid="uid://c0157j6auefgv" path="res://addons/shrimp_input/example/entities/player/sounds/attack.wav" id="7_sjn1i"]
 [ext_resource type="AudioStream" uid="uid://0apftpg6dljc" path="res://addons/shrimp_input/example/entities/player/sounds/heavy-shot.mp3" id="8_ai477"]
-[ext_resource type="Texture2D" uid="uid://bi1s7ur0ew2ka" path="res://addons/shrimp_input/example/entities/enemy/peoples/yy.png" id="9_ai477"]
 [ext_resource type="AudioStream" uid="uid://ok2eq57whwxl" path="res://addons/shrimp_input/example/entities/player/sounds/hurt.wav" id="10_818ll"]
 [ext_resource type="AudioStream" uid="uid://xyfub7a16d8e" path="res://addons/shrimp_input/example/entities/player/sounds/collect.wav" id="11_6440c"]
 [ext_resource type="AudioStream" uid="uid://cqaogb5iab5xk" path="res://addons/shrimp_input/example/entities/player/sounds/flash.ogg" id="12_l08ey"]
@@ -99,8 +98,9 @@ texture = ExtResource("13_klb6x")
 [node name="DashTrail" type="GPUParticles2D" parent="Texture" index="0" unique_id=182551101]
 unique_name_in_owner = true
 z_index = -1
+emitting = false
 amount = 10
-texture = ExtResource("9_ai477")
+texture = ExtResource("13_klb6x")
 lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_l08ey")
 
