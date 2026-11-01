@@ -48,15 +48,16 @@ func goDie(by: ExampleShrimpBaseBullet):
 	await die()
 	match stance:
 		Stance.ENEMY:
-			if by.launcher is ExampleShrimpPlayer:
-				var launch = by.launcher as ExampleShrimpPlayer
-				var rate = 0.2 + launch.lucky * 0.06
-				var out = floor(rate)
-				var count = out + int(randf() < rate - out)
-				for i in count:
-					var ball = BUFFBALL.instantiate() as ExampleShrimpBuffBall
-					ball.position = position
-					get_tree().root.add_child.call_deferred(ball)
+			if is_instance_valid(by) && is_instance_valid(by.launcher):
+				if by.launcher is ExampleShrimpPlayer:
+					var launch = by.launcher as ExampleShrimpPlayer
+					var rate = 0.2 + launch.lucky * 0.06
+					var out = floor(rate)
+					var count = out + int(randf() < rate - out)
+					for i in count:
+						var ball = BUFFBALL.instantiate() as ExampleShrimpBuffBall
+						ball.position = position
+						get_tree().root.add_child.call_deferred(ball)
 			queue_free()
 		Stance.PLAYER:
 			hitbox.disabled = true
