@@ -21,6 +21,6 @@ func _physics_process(_delta: float) -> void:
 					var enemy = ENEMY.instantiate() as ExampleShrimpBaseEntity
 					enemy.health = randf_range(20, 60) * level
 					enemy.position = p.position + Vector2.from_angle(randf() * TAU) * randf_range(1000, 2000)
-					enemy.damageFactor += 0.05
+					enemy.damageFactor += 0.04 * level
 					get_tree().root.add_child.call_deferred(enemy)
 					restEnemyToSpawn -= 1
