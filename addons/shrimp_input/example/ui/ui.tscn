@@ -135,6 +135,16 @@ content_margin_top = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(1, 0, 0, 0.6)
 
+[sub_resource type="LabelSettings" id="LabelSettings_x0nlo"]
+font_size = 30
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqex3"]
+font_size = 50
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
 [node name="UI" type="Control" unique_id=32345486]
 layout_mode = 3
 anchors_preset = 15
@@ -208,7 +218,7 @@ size_flags_horizontal = 4
 
 [node name="Tip" type="Label" parent="Anchor/LevelNotice/Wrapper" unique_id=1745690868]
 layout_mode = 2
-text = "LEVEL"
+text = "第"
 label_settings = SubResource("LabelSettings_807fw")
 
 [node name="Level" type="Label" parent="Anchor/LevelNotice/Wrapper" unique_id=619907165]
@@ -216,3 +226,36 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "1"
 label_settings = SubResource("LabelSettings_807fw")
+
+[node name="Tip2" type="Label" parent="Anchor/LevelNotice/Wrapper" unique_id=468034651]
+layout_mode = 2
+text = "波即将开始！"
+label_settings = SubResource("LabelSettings_807fw")
+
+[node name="WaveTip" type="HBoxContainer" parent="." unique_id=1495024437]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.1
+grow_horizontal = 2
+alignment = 1
+
+[node name="A" type="Label" parent="WaveTip" unique_id=1544417264]
+layout_mode = 2
+size_flags_vertical = 8
+text = "第"
+label_settings = SubResource("LabelSettings_x0nlo")
+
+[node name="Wave" type="Label" parent="WaveTip" unique_id=136184498]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "20"
+label_settings = SubResource("LabelSettings_nqex3")
+
+[node name="B" type="Label" parent="WaveTip" unique_id=944690477]
+layout_mode = 2
+size_flags_vertical = 8
+text = "波"
+label_settings = SubResource("LabelSettings_x0nlo")

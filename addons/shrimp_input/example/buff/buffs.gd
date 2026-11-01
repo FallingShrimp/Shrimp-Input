@@ -21,11 +21,11 @@ class Crit extends ExampleShrimpBuff:
 		entity.critRate += 0.04
 class Reg extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "生命恢复+0.6"
+		return "生命恢复+1"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.regeneration += 0.6
+		entity.regeneration += 1
 class HpMax extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "生命上限+20"

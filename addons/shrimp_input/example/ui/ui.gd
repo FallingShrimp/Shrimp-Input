@@ -8,6 +8,7 @@ static var instance: ExampleShrimpUI
 @onready var buffAnimator: AnimationPlayer = $%BuffAnimator
 @onready var buffLabel: Label = $%Buff
 @onready var buffNotice: Control = $%BuffNotice
+@onready var waveTip: Label = $%Wave
 @onready var buffBox: StyleBoxFlat
 
 func _ready() -> void:
@@ -21,5 +22,6 @@ static func buff(tip: String, color: Color):
 	instance.buffAnimator.stop()
 	instance.buffAnimator.play("buff")
 static func level(count: int):
+	instance.waveTip.text = str(count)
 	instance.levelLabel.text = str(count)
 	instance.levelAnimator.play("level")
