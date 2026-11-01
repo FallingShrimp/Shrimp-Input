@@ -11,7 +11,8 @@ func _ready() -> void:
 	texture.texture = load("%s/%s" % [TEXTURE_DIR, skin])
 	match skin:
 		"ak.png":
-			damageFactor *= 0.25
+			damageFactor *= 0.5
+			speed *= -0.25
 		"dext.png":
 			health *= 3
 		"jwx.png":
