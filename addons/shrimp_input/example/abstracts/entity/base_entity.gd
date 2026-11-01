@@ -49,8 +49,9 @@ func goDie(by: ExampleShrimpBaseBullet):
 		Stance.ENEMY:
 			if by.launcher is ExampleShrimpPlayer:
 				var launch = by.launcher as ExampleShrimpPlayer
-				var out = floor(launch.lucky)
-				var count = out + int(randf() < launch.lucky - out)
+				var rate = 0.2 + launch.lucky * 0.06
+				var out = floor(rate)
+				var count = out + int(randf() < rate - out)
 				for i in count:
 					var ball = BUFFBALL.instantiate() as ExampleShrimpBuffBall
 					ball.position = position

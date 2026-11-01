@@ -58,6 +58,12 @@ max_contacts_reported = 50
 linear_damp = 5.0
 constant_torque = 5000.0
 script = ExtResource("1_337x7")
+qualityLuckyOffset = Dictionary[int, float]({
+0: -2.0,
+1: 0.0,
+2: 2.0,
+3: 3.0
+})
 qualityWeight = Dictionary[int, float]({
 0: 15.0,
 1: 10.0,

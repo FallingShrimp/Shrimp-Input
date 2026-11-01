@@ -1,16 +1,19 @@
 extends ExampleShrimpBaseEntity
 class_name ExampleShrimpPlayer
 
-const SHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/shrimp/shrimp.tscn")
-const FIRESHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/fire-shrimp/fire-shrimp.tscn")
-const DASH_BULLET = preload("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
 const MAX_CHARGE = 2.0
 
 @onready var input: ShrimpInput = $%ShrimpInput
 @onready var charge: ExampleShrimpChargeRing = $%ChargeRing
 @onready var dashTrail: GPUParticles2D = $%DashTrail
+@onready var dashProgress: ProgressBar = $%DashProgress
+var SHRIMP_BULLET = load("res://addons/shrimp_input/example/bullets/shrimp/shrimp.tscn")
+var FIRESHRIMP_BULLET = load("res://addons/shrimp_input/example/bullets/fire-shrimp/fire-shrimp.tscn")
+var DASH_BULLET = load("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
+var DASH_COOLDOWN = 0.5
+var DASH_INVINCIBLE = 0.3
 var regeneration: float = 0
-var lucky: float = 0.2
+var lucky: float = 0
 var attackSpeed: float = 1
 
 func _ready() -> void:
@@ -20,6 +23,7 @@ func _ready() -> void:
 	charge.hide()
 	add_child(Actions.ROOT_ACTION)
 	add_to_group("player")
+	dashProgress.value = 1
 func ai(delta: float) -> void:
 	apply_central_force(getInputDirection() * 3000)
 	if health < initialHealth:
@@ -45,14 +49,21 @@ func dashLoop():
 		playSound("Dash")
 		for d in [shoot(DASH_BULLET, 10, dir.angle())]:
 			if d is ExampleShrimpBaseBullet:
-				d.lifeTime = 0.3
+				d.lifeTime = DASH_INVINCIBLE
 				d.scale *= 2
+		dashProgress.value = 0
 		dashTrail.emitting = true
-		invincible = true
-		await input.clock.seconds(0.3)
-		invincible = false
+		hitbox.disabled = true
+		var hold = 0
+		while input.charge(Actions.ROOT_ACTION, DASH_INVINCIBLE):
+			hold += await input.clock.frame()
+			dashProgress.value = 1 - hold / DASH_INVINCIBLE
+		hitbox.disabled = false
 		dashTrail.emitting = false
-		await input.clock.seconds(0.5)
+		hold = 0
+		while input.charge(Actions.ROOT_ACTION, DASH_COOLDOWN):
+			hold += await input.clock.frame()
+			dashProgress.value = hold / DASH_COOLDOWN
 		await input.release(Actions.DASH)
 func inputLoop():
 	while true:

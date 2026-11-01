@@ -1,7 +1,6 @@
 extends Area2D
 class_name ExampleShrimpBaseBullet
 
-
 enum BulletState {
 	LIVING,
 	DIEING
@@ -64,7 +63,10 @@ func hitTest(body):
 				goDie()
 	elif body is ExampleShrimpBaseEntity:
 		if launcher.stance != body.stance:
-			var crit = randf() < launcher.critRate
+			var rate = launcher.critRate
+			if launcher is ExampleShrimpPlayer:
+				rate += launcher.lucky * 0.015
+			var crit = randf() < rate
 			var total = damage * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
 			if crit:
 				total *= 2 + max(launcher.critRate - 0.85, 0) * 2

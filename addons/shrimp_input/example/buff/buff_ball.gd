@@ -1,31 +1,17 @@
 extends RigidBody2D
 class_name ExampleShrimpBuffBall
 
-@abstract
-class Buff extends RefCounted:
-	@abstract
-	func getName() -> StringName
-	@abstract
-	func getQuality() -> Quality
-	@abstract
-	func execute(entity: ExampleShrimpPlayer) -> void
-
-enum Quality {
-	NORMAL,
-	RARE,
-	EPIC,
-	LEGENDARY
-}
-
-@export var qualityWeight: Dictionary[Quality, float] = {}
-@export var qualityColor: Dictionary[Quality, Color] = {}
-var buff: Buff
+@export var qualityLuckyOffset: Dictionary[ExampleShrimpBuff.Quality, float] = {}
+@export var qualityWeight: Dictionary[ExampleShrimpBuff.Quality, float] = {}
+@export var qualityColor: Dictionary[ExampleShrimpBuff.Quality, Color] = {}
+@export var buff: ExampleShrimpBuff
 
 @onready var texture: Sprite2D = $%Texture
 var mat: ShaderMaterial
 
 func _ready() -> void:
-	buff = gacha()
+	if !is_instance_valid(buff):
+		buff = gacha(get_tree().get_nodes_in_group("player")[0])
 	var color = qualityColor[buff.getQuality()]
 	mat = texture.material
 	mat.set_shader_parameter("line_color", color)
@@ -41,13 +27,14 @@ func _ready() -> void:
 				queue_free()
 	)
 
-func gacha() -> Buff:
+func gacha(player: ExampleShrimpPlayer) -> ExampleShrimpBuff:
 	var pool = (
 		ExampleShrimpBuffs.buffs
 			.map(func(e: GDScript): return e.new())
 			.reduce(
-				func(cur: Dictionary, next: Buff):
-					return cur.merged({next: qualityWeight[next.getQuality()]}),
+				func(cur: Dictionary, next: ExampleShrimpBuff):
+					var q = next.getQuality()
+					return cur.merged({next: qualityWeight[q] + qualityLuckyOffset[q] * player.lucky}),
 				{}
 			)
 	)

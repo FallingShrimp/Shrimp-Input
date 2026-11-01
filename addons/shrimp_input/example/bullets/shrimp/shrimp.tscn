@@ -20,8 +20,9 @@ speed = 700.0
 knockback = 500.0
 launchRecoil = 250.0
 lifeTime = 10.0
-bounce = 8.0
-reflect = 4.0
+penetrate = 0.0
+bounce = 4.0
+reflect = 5.0
 
 [node name="Animator" parent="." index="0" unique_id=2070724682]
 libraries/ = ExtResource("2_nwlo6")

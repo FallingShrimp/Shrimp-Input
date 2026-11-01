@@ -4,6 +4,7 @@ class_name ShrimpInput
 @export var clock: ShrimpClock = null
 @export var buffer: ShrimpBuffer
 var charging: Dictionary[SemanticAction, float] = {} # action->开始时间戳
+var durations: Dictionary[StringName, float] = {}
 
 func _ready() -> void:
 	if !is_instance_valid(clock):
@@ -40,7 +41,7 @@ func hold(action: SemanticAction, minTime: float) -> float:
 func charge(action: SemanticAction, maxTime: float) -> bool:
 	if !charging.has(action):
 		charging[action] = clock.currentTick()
-	var state = isPressed(action) && clock.currentTick() - charging[action] <= maxTime + ShrimpTimeManager.getInstance(self).lastDelta
+	var state = isPressed(action) && clock.currentTick() - charging[action] <= maxTime / clock.timeScale + ShrimpTimeManager.getInstance(self).lastDelta
 	if !state:
 		charging.erase(action)
 	return state
