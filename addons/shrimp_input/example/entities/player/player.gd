@@ -16,6 +16,7 @@ func _ready() -> void:
 	dashLoop()
 	charge.hide()
 	add_child(Actions.ATTACK)
+	add_to_group("player")
 	for i in 10:
 		var enemy = ENEMY.instantiate() as ExampleShrimpBaseEntity
 		enemy.position = Vector2.from_angle(randf() * TAU) * randf_range(0, 1000)
@@ -46,14 +47,17 @@ func inputLoop():
 	while true:
 		await input.clock.frame()
 		var atk = await input.presses([Actions.STAB, Actions.ATTACK])
-		if atk == Actions.STAB:
-			playSound("Dash")
-			input.buffer.consume(2)
-			shoot(DASH_BULLET, 20, linear_velocity.angle())
-		elif atk == Actions.ATTACK:
-			playSound("Attack")
-			input.buffer.consume(1)
-			shoot(SHRIMP_BULLET, 10, getMouseAngle())
+		# if atk == Actions.STAB:
+		# 	playSound("Dash")
+		# 	input.buffer.consume(2)
+		# 	shoot(DASH_BULLET, 20, linear_velocity.angle())
+		# elif atk == Actions.ATTACK:
+			# playSound("Attack")
+			# input.buffer.consume(1)
+			# shoot(SHRIMP_BULLET, 10, getMouseAngle())
+		playSound("Attack")
+		input.buffer.consume(1)
+		shoot(SHRIMP_BULLET, 10, getMouseAngle())
 		if await input.hold(Actions.ATTACK, 0.2):
 			charge.maxValue = MAX_CHARGE
 			charge.show()

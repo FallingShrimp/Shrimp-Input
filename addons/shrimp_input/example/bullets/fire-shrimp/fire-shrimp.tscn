@@ -37,8 +37,8 @@ initial_velocity_max = 800.0
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -200.0
 radial_accel_max = -100.0
-scale_min = 5.0
-scale_max = 15.0
+scale_min = 10.0
+scale_max = 25.0
 scale_curve = SubResource("CurveTexture_w4a7f")
 color_initial_ramp = SubResource("GradientTexture1D_f24gt")
 alpha_curve = SubResource("CurveTexture_eqjhu")
@@ -50,7 +50,8 @@ knockback = 750.0
 
 [node name="Particles" type="GPUParticles2D" parent="." index="1" unique_id=1915141885]
 amount = 300
-local_coords = true
+speed_scale = 3.0
+visibility_rect = Rect2(-650, -100, 700, 200)
 process_material = SubResource("ParticleProcessMaterial_xfeng")
 
 [node name="Texture" parent="." index="2" unique_id=2039264544]

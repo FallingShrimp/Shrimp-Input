@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://d03f6hc6a2dk1"]
 
 [ext_resource type="PackedScene" uid="uid://ccqlvicfg44ji" path="res://addons/shrimp_input/example/abstracts/entity/base_entity.tscn" id="1_wju12"]
+[ext_resource type="Script" uid="uid://dr4css5e0lcha" path="res://addons/shrimp_input/example/entities/enemy/enemy.gd" id="2_mp1t0"]
 
 [node name="Entity" unique_id=1010191855 instance=ExtResource("1_wju12")]
+script = ExtResource("2_mp1t0")
 health = 1000.0
 
-[node name="Texture" parent="." index="0" unique_id=605714463]
+[node name="Texture" parent="." index="1" unique_id=605714463]
 self_modulate = Color(1, 0.6879781, 0, 1)
 
-[node name="Hitbox" parent="." index="1" unique_id=1418019904]
+[node name="Hitbox" parent="." index="2" unique_id=1418019904]
 visible = false

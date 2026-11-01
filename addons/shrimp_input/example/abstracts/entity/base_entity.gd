@@ -16,7 +16,7 @@ func _ready() -> void:
 	if stance == Stance.ENEMY:
 		add_to_group("enemy")
 func _process(_delta: float) -> void:
-	healthLabel.text = str(health)
+	healthLabel.text = "%d" % health
 
 func playSound(nameX: String):
 	(sounds.get_node(nameX) as AudioStreamPlayer2D).play()

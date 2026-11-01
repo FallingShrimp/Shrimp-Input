@@ -4,4 +4,4 @@ extends ExampleShrimpBaseBullet
 
 func _ready() -> void:
 	super._ready()
-	damageLabel.text = str(damage)
+	damageLabel.text = "%d" % ceil(damage)
