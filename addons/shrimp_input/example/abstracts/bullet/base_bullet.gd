@@ -28,7 +28,7 @@ func _process(_delta: float) -> void:
 	pass
 func _physics_process(delta: float) -> void:
 	if state == BulletState.LIVING:
-		if !is_instance_valid(launcher) || timeLived() > lifeTime || damage <= 0:
+		if !is_instance_valid(launcher) || timeLived() > lifeTime || damage < 1:
 			goDie()
 		else:
 			ai(delta)

@@ -47,6 +47,9 @@ alpha_curve = SubResource("CurveTexture_eqjhu")
 script = ExtResource("2_eqjhu")
 speed = 2000.0
 knockback = 750.0
+penetrate = 0.9
+bounce = 10.0
+reflect = 5.0
 
 [node name="Particles" type="GPUParticles2D" parent="." index="1" unique_id=1915141885]
 amount = 300

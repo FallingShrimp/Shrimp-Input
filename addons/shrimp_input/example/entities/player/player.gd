@@ -4,6 +4,7 @@ const SHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/shrimp/
 const FIRESHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/fire-shrimp/fire-shrimp.tscn")
 const DASH_BULLET = preload("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
 const MAX_CHARGE = 2.0
+const MAX_REGENERATE = 100.0
 var Actions = ExampleShrimpActions
 
 @onready var input: ShrimpInput = $%ShrimpInput
@@ -16,8 +17,10 @@ func _ready() -> void:
 	charge.hide()
 	add_child(Actions.ATTACK)
 	add_to_group("player")
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	apply_central_force(getInputDirection() * 3000)
+	if health < MAX_REGENERATE:
+		health += 1 * delta
 
 func getInputDirection() -> Vector2:
 	return input.direction(
