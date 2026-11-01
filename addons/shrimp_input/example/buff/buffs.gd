@@ -103,4 +103,4 @@ class MoreScore extends ExampleShrimpBuff:
 	func getQuality() -> Quality:
 		return Quality.LEGENDARY
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		ExampleShrimpUI.addScore(ExampleShrimpUI.instance.rewardMax * 10, entity.get_tree().root)
+		ExampleShrimpUI.addScore(ExampleShrimpUI.instance.rewardMax * 2, entity.get_tree().root)
