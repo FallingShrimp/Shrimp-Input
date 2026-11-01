@@ -15,6 +15,7 @@ enum Stance {
 @export var damageFactor: float = 1
 @export var critRate: float = 0
 
+@onready var texture: Sprite2D = $%Texture
 @onready var sounds: Node2D = $%Sounds
 @onready var healthBar: ProgressBar = $%Health
 @onready var animator: AnimationPlayer = $%Animator

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0c220qfj6s1d"
-path="res://.godot/imported/kernyr.png-ae2f61edebd359b6f3ef4fb44600d283.ctex"
+uid="uid://d4mmoba4dpqfk"
+path="res://.godot/imported/jwx.png-82d70eeda9a1d0cdff6f2ad8584040e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/shrimp_input/example/entities/enemy/kernyr.png"
-dest_files=["res://.godot/imported/kernyr.png-ae2f61edebd359b6f3ef4fb44600d283.ctex"]
+source_file="res://addons/shrimp_input/example/entities/enemy/peoples/jwx.png"
+dest_files=["res://.godot/imported/jwx.png-82d70eeda9a1d0cdff6f2ad8584040e6.ctex"]
 
 [params]
 

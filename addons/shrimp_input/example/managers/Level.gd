@@ -12,7 +12,7 @@ func _physics_process(_delta: float) -> void:
 	if restEnemyToSpawn == 0 && get_tree().get_node_count_in_group("enemy") == 0:
 		level += 1
 		ExampleShrimpUI.level(level)
-		restEnemyToSpawn = floor(randi_range(4, 10) * (1 + level * 0.1))
+		restEnemyToSpawn = floor(randi_range(6, 15) * (1 + level * 0.20))
 		await clock.seconds(1)
 		for p in get_tree().get_nodes_in_group("player"):
 			if p is ExampleShrimpBaseEntity:

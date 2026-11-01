@@ -76,6 +76,7 @@ unique_name_in_owner = true
 stream = ExtResource("2_10yih")
 
 [node name="Texture" type="Sprite2D" parent="." unique_id=605714463]
+unique_name_in_owner = true
 texture = ExtResource("2_tcb8m")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1418019904]
