@@ -1,7 +1,6 @@
 extends Area2D
 class_name ExampleShrimpBaseBullet
 
-const DAMAGE = preload("res://addons/shrimp_input/example/bullets/damage/damage.tscn")
 
 enum BulletState {
 	LIVING,
@@ -11,6 +10,7 @@ enum BulletState {
 @export var damage: float = 10
 @export var speed: float = 500
 @export var knockback: float = 0
+@export var recoil: float = 0
 @export var lifeTime: float = INF
 @export var penetrate: float = 1
 @export var bounce: float = INF
@@ -61,16 +61,14 @@ func hitTest(body):
 			else:
 				goDie()
 	elif body is ExampleShrimpBaseEntity:
-		if !body.invincible && launcher.stance != body.stance:
+		if launcher.stance != body.stance:
+			var crit = randf() < launcher.critRate
 			var total = damage * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
-			body.health -= total
+			if crit:
+				total *= 2
+			body.hurt(total, crit, launcher)
 			body.apply_central_impulse((body.position - position).normalized() * knockback)
-			body.playSound("Hurt")
-			if body.health <= 0:
-				body.goDie()
-			var dmg = launcher.shoot(DAMAGE, total)
-			dmg.position = position
-			damage *= penetrate
+			launcher.apply_central_impulse((position - body.position).normalized() * recoil)
 			if reflect > 0:
 				var e = ExampleShrimpBaseEntity.closet(self, func(i: ExampleShrimpBaseEntity): return i != body)
 				if is_instance_valid(e):

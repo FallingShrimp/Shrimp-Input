@@ -120,6 +120,7 @@ _data = {
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_g8l1b"]
+resource_local_to_scene = true
 font_size = 45
 font_color = Color(1, 0, 0, 1)
 outline_size = 5

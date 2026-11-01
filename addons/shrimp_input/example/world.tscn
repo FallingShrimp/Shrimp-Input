@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://0r0nayji3n74" path="res://addons/shrimp_input/example/map/map.png" id="1_iabe6"]
 [ext_resource type="PackedScene" uid="uid://dldejq2motbqr" path="res://addons/shrimp_input/example/ui/ui.tscn" id="2_6hacf"]
 [ext_resource type="PackedScene" uid="uid://cg7nn7yisq41j" path="res://addons/shrimp_input/example/entities/player/player.tscn" id="2_iabe6"]
+[ext_resource type="Script" uid="uid://d3opmcnhhbjbp" path="res://addons/shrimp_input/statemachine/ShrimpClock.gd" id="2_j3w3d"]
+[ext_resource type="Script" uid="uid://hagw0sbpvnr" path="res://addons/shrimp_input/example/managers/Camera/Camera.gd" id="5_j3w3d"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hacf"]
 normal = Vector2(0, 1)
@@ -18,6 +20,11 @@ normal = Vector2(-1, 0)
 
 [node name="World" type="Node2D" unique_id=757863350]
 y_sort_enabled = true
+
+[node name="Clock" type="Node" parent="." unique_id=748345176]
+unique_name_in_owner = true
+script = ExtResource("2_j3w3d")
+metadata/_custom_type_script = "uid://d3opmcnhhbjbp"
 
 [node name="Level" type="Node" parent="." unique_id=1927103254]
 script = ExtResource("1_0pvs7")
@@ -89,3 +96,4 @@ shape = SubResource("WorldBoundaryShape2D_j3w3d")
 [node name="Camera" type="Camera2D" parent="Player" unique_id=1665012161]
 process_callback = 0
 position_smoothing_enabled = true
+script = ExtResource("5_j3w3d")

@@ -1,6 +1,8 @@
 extends RigidBody2D
 class_name ExampleShrimpBaseEntity
 
+const DAMAGE = preload("res://addons/shrimp_input/example/bullets/damage/damage.tscn")
+
 enum Stance {
 	PLAYER,
 	ENEMY
@@ -9,9 +11,11 @@ enum Stance {
 @export var health: float = 100
 @export var stance: Stance = Stance.ENEMY
 @export var damageFactor: float = 1
+@export var critRate: float = 0
 
 @onready var sounds: Node2D = $%Sounds
 @onready var healthBar: ProgressBar = $%Health
+@onready var animator: AnimationPlayer = $%Animator
 var invincible: bool = false
 var initialHealth: float
 
@@ -40,6 +44,19 @@ func shoot(bullet: PackedScene, damage: float, rotationX: float = 0) -> ExampleS
 	instance.rotation = rotationX
 	get_tree().root.add_child.call_deferred(instance)
 	return instance
+func hurt(total: float, crited: bool, launcher: ExampleShrimpBaseEntity):
+	if !invincible:
+		health -= total
+		var died = health <= 0
+		var dmg = launcher.shoot(DAMAGE, total) as ExampleShrimpDamageBullet
+		dmg.position = position
+		dmg.crit = crited
+		ExampleShrimpCameraManager.addShake(ExampleShrimpCircleSampler.new(5, 0.1))
+		if died:
+			goDie()
+		else:
+			playSound("Hurt")
+			animator.play("hurt")
 
 static func closet(node: Node2D, filter: Callable = func(_e): return true) -> ExampleShrimpBaseEntity:
 	var last = INF
