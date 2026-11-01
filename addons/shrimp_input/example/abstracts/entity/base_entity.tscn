@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="2_tcb8m"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nev1e"]
-friction = 0.5
+friction = 0.0
 bounce = 1.0
 
 [sub_resource type="Animation" id="Animation_10yih"]

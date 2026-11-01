@@ -13,8 +13,9 @@ func _ready() -> void:
 		"ak.png":
 			damageFactor *= 0.5
 			speed *= -0.25
+			health *= 4
 		"dext.png":
-			health *= 3
+			health *= 2
 		"jwx.png":
 			damageFactor += 0.2
 		"laism.png":
