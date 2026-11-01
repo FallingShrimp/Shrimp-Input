@@ -2,6 +2,7 @@ extends RigidBody2D
 class_name ExampleShrimpBaseEntity
 
 const DAMAGE = preload("res://addons/shrimp_input/example/bullets/damage/damage.tscn")
+const BUFFBALL = preload("res://addons/shrimp_input/example/buff/buff_ball.tscn")
 
 enum Stance {
 	PLAYER,
@@ -32,6 +33,9 @@ func die():
 
 func goDie():
 	await die()
+	var ball = BUFFBALL.instantiate() as ExampleShrimpBuffBall
+	ball.position = position
+	get_tree().root.add_child.call_deferred(ball)
 	queue_free()
 func playSound(nameX: String):
 	(sounds.get_node(nameX) as AudioStreamPlayer2D).play()

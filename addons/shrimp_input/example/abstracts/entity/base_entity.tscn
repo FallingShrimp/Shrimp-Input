@@ -50,11 +50,11 @@ radius = 70.035706
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10yih"]
 bg_color = Color(0, 0, 0, 0.70000005)
-skew = Vector2(0.4, 0)
+skew = Vector2(0.5, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aviv2"]
 bg_color = Color(1, 0, 0, 1)
-skew = Vector2(0.4, 0)
+skew = Vector2(0.5, 0)
 
 [node name="Entity" type="RigidBody2D" unique_id=1010191855]
 physics_material_override = SubResource("PhysicsMaterial_nev1e")

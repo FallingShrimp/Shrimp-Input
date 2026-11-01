@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cg7nn7yisq41j" path="res://addons/shrimp_input/example/entities/player/player.tscn" id="2_iabe6"]
 [ext_resource type="Script" uid="uid://d3opmcnhhbjbp" path="res://addons/shrimp_input/statemachine/ShrimpClock.gd" id="2_j3w3d"]
 [ext_resource type="Script" uid="uid://hagw0sbpvnr" path="res://addons/shrimp_input/example/managers/Camera/Camera.gd" id="5_j3w3d"]
+[ext_resource type="PackedScene" uid="uid://casv6cbvpt0vn" path="res://addons/shrimp_input/example/buff/buff_ball.tscn" id="7_btfoq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6hacf"]
 normal = Vector2(0, 1)
@@ -32,7 +33,7 @@ metadata/_custom_type_script = "uid://c1b333x2wgh0s"
 
 [node name="LevelCountdown" type="Timer" parent="Level" unique_id=1668588900]
 unique_name_in_owner = true
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 autostart = true
 
@@ -97,3 +98,6 @@ shape = SubResource("WorldBoundaryShape2D_j3w3d")
 process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("5_j3w3d")
+
+[node name="BuffBall" parent="." unique_id=749221857 instance=ExtResource("7_btfoq")]
+position = Vector2(-296, 14)

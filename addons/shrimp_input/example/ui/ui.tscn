@@ -2,6 +2,73 @@
 
 [ext_resource type="Script" uid="uid://d3ud7776287t4" path="res://addons/shrimp_input/example/ui/ui.gd" id="1_x0nlo"]
 
+[sub_resource type="Animation" id="Animation_nqex3"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_x0nlo"]
+resource_name = "buff"
+length = 3.0
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(1, 0, 0, 0, 0, 0.7, -0.25, 0, 0, 0, 0.7, 0, 0, 0.25, 0, 1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.25, 2.75, 3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 1, -0.25, 0, 0, 0, 1, 0, 0, 0.25, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.25, 2.75, 3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nqex3"]
+_data = {
+&"RESET": SubResource("Animation_nqex3"),
+&"buff": SubResource("Animation_x0nlo")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0nlo"]
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0, 0.7455232, 0.25888026, 0.6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_807fw"]
+font_size = 40
+outline_size = 1
+
 [sub_resource type="Animation" id="Animation_807fw"]
 length = 0.001
 tracks/0/type = "bezier"
@@ -29,7 +96,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_lp40m"]
 resource_name = "level"
-length = 3.0
+length = 2.0
 step = 0.05
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -40,7 +107,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0),
 "points": PackedFloat32Array(1e-05, 0, 0, 0.15, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1e-05, 0, 0, 0.15, 0),
-"times": PackedFloat32Array(0, 0.5, 2.5, 3)
+"times": PackedFloat32Array(0, 0.5, 1.5, 2)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -51,7 +118,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0),
 "points": PackedFloat32Array(0, 0, 0, 0.15, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0.15, 0),
-"times": PackedFloat32Array(0, 0.5, 2.5, 3)
+"times": PackedFloat32Array(0, 0.5, 1.5, 2)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_807fw"]
@@ -65,10 +132,6 @@ content_margin_top = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(1, 0, 0, 0.6)
 
-[sub_resource type="LabelSettings" id="LabelSettings_807fw"]
-font_size = 40
-outline_size = 1
-
 [node name="UI" type="Control" unique_id=32345486]
 layout_mode = 3
 anchors_preset = 15
@@ -78,9 +141,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x0nlo")
 
-[node name="Animator" type="AnimationPlayer" parent="." unique_id=749334885]
+[node name="Anchor2" type="MarginContainer" parent="." unique_id=2055736168]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+
+[node name="BuffAnimator" type="AnimationPlayer" parent="Anchor2" unique_id=1102654158]
 unique_name_in_owner = true
-libraries/ = SubResource("AnimationLibrary_807fw")
+root_node = NodePath("../BuffNotice")
+libraries/ = SubResource("AnimationLibrary_nqex3")
+
+[node name="BuffNotice" type="PanelContainer" parent="Anchor2" unique_id=2121739481]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x0nlo")
+
+[node name="Wrapper" type="HBoxContainer" parent="Anchor2/BuffNotice" unique_id=342655703]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Buff" type="Label" parent="Anchor2/BuffNotice/Wrapper" unique_id=1235728813]
+unique_name_in_owner = true
+layout_mode = 2
+text = "%BUFF%"
+label_settings = SubResource("LabelSettings_807fw")
 
 [node name="Anchor" type="Control" parent="." unique_id=1811972807]
 modulate = Color(1, 1, 1, 0)
@@ -93,7 +181,12 @@ grow_vertical = 2
 scale = Vector2(1, 1e-05)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 
-[node name="Notice" type="PanelContainer" parent="Anchor" unique_id=1062269516]
+[node name="LevelAnimator" type="AnimationPlayer" parent="Anchor" unique_id=749334885]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_807fw")
+
+[node name="LevelNotice" type="PanelContainer" parent="Anchor" unique_id=1062269516]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -105,16 +198,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lp40m")
 
-[node name="Wrapper" type="HBoxContainer" parent="Anchor/Notice" unique_id=1571918662]
+[node name="Wrapper" type="HBoxContainer" parent="Anchor/LevelNotice" unique_id=1571918662]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Tip" type="Label" parent="Anchor/Notice/Wrapper" unique_id=1745690868]
+[node name="Tip" type="Label" parent="Anchor/LevelNotice/Wrapper" unique_id=1745690868]
 layout_mode = 2
 text = "LEVEL"
 label_settings = SubResource("LabelSettings_807fw")
 
-[node name="Level" type="Label" parent="Anchor/Notice/Wrapper" unique_id=619907165]
+[node name="Level" type="Label" parent="Anchor/LevelNotice/Wrapper" unique_id=619907165]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1"
