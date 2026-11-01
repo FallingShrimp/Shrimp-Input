@@ -4,4 +4,5 @@ extends ExampleShrimpBaseBullet
 
 func _ready() -> void:
 	super._ready()
-	damageLabel.text = "%d" % ceil(damage)
+	damageLabel.text = "-%d" % ceil(damage)
+	position += Vector2.from_angle(randf() * TAU) * randf() * 20

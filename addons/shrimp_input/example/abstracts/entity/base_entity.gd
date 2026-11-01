@@ -31,7 +31,7 @@ func goDie():
 	queue_free()
 func playSound(nameX: String):
 	(sounds.get_node(nameX) as AudioStreamPlayer2D).play()
-func shoot(bullet: PackedScene, damage: float, rotationX: float = 0):
+func shoot(bullet: PackedScene, damage: float, rotationX: float = 0) -> ExampleShrimpBaseBullet:
 	var instance = bullet.instantiate() as ExampleShrimpBaseBullet
 	instance.launcher = self
 	instance.damage = damage
@@ -39,6 +39,7 @@ func shoot(bullet: PackedScene, damage: float, rotationX: float = 0):
 	instance.position = position
 	instance.rotation = rotationX
 	get_tree().root.add_child.call_deferred(instance)
+	return instance
 
 static func closet(node: Node2D, filter: Callable = func(_e): return true) -> ExampleShrimpBaseEntity:
 	var last = INF

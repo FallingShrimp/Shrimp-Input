@@ -62,16 +62,14 @@ func hitTest(body):
 				goDie()
 	elif body is ExampleShrimpBaseEntity:
 		if !body.invincible && launcher.stance != body.stance:
-			var total = damage * launcher.damageFactor
+			var total = damage * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
 			body.health -= total
 			body.apply_central_impulse((body.position - position).normalized() * knockback)
 			body.playSound("Hurt")
 			if body.health <= 0:
 				body.goDie()
-			var dmg = DAMAGE.instantiate() as ExampleShrimpBaseBullet
-			dmg.damage = total
+			var dmg = launcher.shoot(DAMAGE, total)
 			dmg.position = position
-			get_tree().root.add_child.call_deferred(dmg)
 			damage *= penetrate
 			if reflect > 0:
 				var e = ExampleShrimpBaseEntity.closet(self, func(i: ExampleShrimpBaseEntity): return i != body)
