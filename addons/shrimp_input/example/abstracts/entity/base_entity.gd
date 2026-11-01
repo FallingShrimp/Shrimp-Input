@@ -74,19 +74,20 @@ func shoot(bullet: PackedScene, damage: float, rotationX: float = 0) -> ExampleS
 	apply_central_impulse(-Vector2.from_angle(rotationX) * instance.launchRecoil)
 	return instance
 func hurt(total: float, crited: bool, by: ExampleShrimpBaseBullet):
-	if !invincible:
-		health -= total
-		var died = health <= 0
-		var dmg: ExampleShrimpDamageBullet = shoot(DAMAGE, total)
-		dmg.position = position
-		dmg.crit = crited
-		dmg.fromPlayer = stance == Stance.ENEMY
-		ExampleShrimpCameraManager.addShake(ExampleShrimpCircleSampler.new(5, 0.1))
-		if died:
-			goDie(by)
-		else:
-			playSound("Hurt")
-			animator.play("hurt")
+	if invincible || total == 0:
+		return
+	health -= total
+	var died = health <= 0
+	var dmg: ExampleShrimpDamageBullet = shoot(DAMAGE, total)
+	dmg.position = position
+	dmg.crit = crited
+	dmg.fromPlayer = stance == Stance.ENEMY
+	ExampleShrimpCameraManager.addShake(ExampleShrimpCircleSampler.new(5, 0.1))
+	if died:
+		goDie(by)
+	else:
+		playSound("Hurt")
+		animator.play("hurt")
 
 static func closet(node: Node2D, filter: Callable = func(_e): return true) -> ExampleShrimpBaseEntity:
 	var last = INF
