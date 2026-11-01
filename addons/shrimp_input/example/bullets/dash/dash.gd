@@ -1,6 +1,6 @@
 extends ExampleShrimpBaseBullet
 
-func ai(_delta: float) -> void:
+func ai(delta: float) -> void:
 	position = launcher.position
-	rotation = launcher.linear_velocity.angle()
-	damage = sqrt(launcher.linear_velocity.length())
+	rotation = lerp_angle(rotation, launcher.linear_velocity.angle(), delta * 10)
+	damage = max(1, sqrt(launcher.linear_velocity.length()))

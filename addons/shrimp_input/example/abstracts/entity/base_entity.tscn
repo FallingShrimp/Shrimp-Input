@@ -8,6 +8,9 @@
 friction = 0.5
 bounce = 1.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_nev1e"]
+radius = 70.035706
+
 [sub_resource type="LabelSettings" id="LabelSettings_10yih"]
 font_size = 30
 font_color = Color(0.7561407, 0, 1, 1)
@@ -17,9 +20,6 @@ outline_size = 5
 font_size = 30
 font_color = Color(1, 0, 0, 1)
 outline_size = 5
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_nev1e"]
-radius = 70.035706
 
 [node name="Entity" type="RigidBody2D" unique_id=1010191855]
 physics_material_override = SubResource("PhysicsMaterial_nev1e")
@@ -39,25 +39,25 @@ stream = ExtResource("2_10yih")
 [node name="Texture" type="Sprite2D" parent="." unique_id=605714463]
 texture = ExtResource("2_tcb8m")
 
-[node name="Anchor" type="Node2D" parent="Texture" unique_id=359015896]
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1418019904]
+shape = SubResource("CircleShape2D_nev1e")
 
-[node name="HealthTip" type="HBoxContainer" parent="Texture/Anchor" unique_id=1381396426]
+[node name="Anchor" type="Node2D" parent="." unique_id=359015896]
+
+[node name="HealthTip" type="HBoxContainer" parent="Anchor" unique_id=1381396426]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Tip" type="Label" parent="Texture/Anchor/HealthTip" unique_id=1574210222]
+[node name="Tip" type="Label" parent="Anchor/HealthTip" unique_id=1574210222]
 layout_mode = 2
 text = "Current HP:"
 label_settings = SubResource("LabelSettings_10yih")
 
-[node name="Health" type="Label" parent="Texture/Anchor/HealthTip" unique_id=2081981210]
+[node name="Health" type="Label" parent="Anchor/HealthTip" unique_id=2081981210]
 unique_name_in_owner = true
 layout_mode = 2
 text = "%DMG%"
 label_settings = SubResource("LabelSettings_nev1e")
-
-[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1418019904]
-shape = SubResource("CircleShape2D_nev1e")

@@ -28,9 +28,10 @@ func _process(_delta: float) -> void:
 	pass
 func _physics_process(delta: float) -> void:
 	if state == BulletState.LIVING:
-		ai(delta)
-		if timeLived() > lifeTime || damage <= 0:
+		if !is_instance_valid(launcher) || timeLived() > lifeTime || damage <= 0:
 			goDie()
+		else:
+			ai(delta)
 
 func ai(_delta: float) -> void:
 	pass
@@ -46,6 +47,7 @@ func goDie():
 	queue_free()
 func hitTest(body):
 	if state != BulletState.LIVING: return
+	if !is_instance_valid(launcher): return
 	if body is StaticBody2D:
 		if body.is_in_group("wall"):
 			if bounce > 0:
@@ -59,14 +61,15 @@ func hitTest(body):
 			else:
 				goDie()
 	elif body is ExampleShrimpBaseEntity:
-		if launcher.stance != body.stance:
-			body.health -= damage
+		if !body.invincible && launcher.stance != body.stance:
+			var total = damage * launcher.damageFactor
+			body.health -= total
 			body.apply_central_impulse((body.position - position).normalized() * knockback)
 			body.playSound("Hurt")
 			if body.health <= 0:
-				body.queue_free()
+				body.goDie()
 			var dmg = DAMAGE.instantiate() as ExampleShrimpBaseBullet
-			dmg.damage = damage
+			dmg.damage = total
 			dmg.position = position
 			get_tree().root.add_child.call_deferred(dmg)
 			damage *= penetrate

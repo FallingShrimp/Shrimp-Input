@@ -19,7 +19,7 @@ func _ready() -> void:
 	add_to_group("player")
 	for i in 10:
 		var enemy = ENEMY.instantiate() as ExampleShrimpBaseEntity
-		enemy.position = Vector2.from_angle(randf() * TAU) * randf_range(0, 1000)
+		enemy.position = Vector2.from_angle(randf() * TAU) * randf_range(800, 1500)
 		get_tree().root.add_child.call_deferred(enemy)
 func _physics_process(_delta: float) -> void:
 	apply_central_force(getInputDirection() * 3000)
@@ -41,12 +41,15 @@ func dashLoop():
 		if !dir.length():
 			dir = Vector2.from_angle(getMouseAngle())
 		apply_central_impulse(dir.normalized() * 2500)
+		invincible = true
+		await input.clock.seconds(0.2)
+		invincible = false
 		await input.clock.seconds(0.5)
 		await input.release(Actions.DASH)
 func inputLoop():
 	while true:
 		await input.clock.frame()
-		var atk = await input.presses([Actions.STAB, Actions.ATTACK])
+		await input.presses([Actions.STAB, Actions.ATTACK])
 		# if atk == Actions.STAB:
 		# 	playSound("Dash")
 		# 	input.buffer.consume(2)

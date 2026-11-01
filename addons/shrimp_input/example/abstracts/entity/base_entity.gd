@@ -8,16 +8,26 @@ enum Stance {
 
 @export var health: float = 100
 @export var stance: Stance = Stance.ENEMY
+@export var damageFactor: float = 1
 
 @onready var healthLabel: Label = $%Health
 @onready var sounds: Node2D = $%Sounds
+var invincible: bool = false
+var initialHealth: float
 
 func _ready() -> void:
+	initialHealth = health
 	if stance == Stance.ENEMY:
 		add_to_group("enemy")
 func _process(_delta: float) -> void:
 	healthLabel.text = "%d" % health
 
+func die():
+	await get_tree().process_frame
+
+func goDie():
+	await die()
+	queue_free()
 func playSound(nameX: String):
 	(sounds.get_node(nameX) as AudioStreamPlayer2D).play()
 func shoot(bullet: PackedScene, damage: float, rotationX: float = 0):
