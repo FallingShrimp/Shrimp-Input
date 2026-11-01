@@ -27,7 +27,7 @@ func shoot(bullet: PackedScene, damage: float, rotationX: float = 0):
 	instance.knockback *= damage / 10
 	instance.position = position
 	instance.rotation = rotationX
-	get_parent().add_child.call_deferred(instance)
+	get_tree().root.add_child.call_deferred(instance)
 
 static func closet(node: Node2D, filter: Callable = func(_e): return true) -> ExampleShrimpBaseEntity:
 	var last = INF
