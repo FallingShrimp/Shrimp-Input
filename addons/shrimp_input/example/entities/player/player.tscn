@@ -14,6 +14,20 @@
 [ext_resource type="AudioStream" uid="uid://xyfub7a16d8e" path="res://addons/shrimp_input/example/entities/player/sounds/collect.wav" id="11_6440c"]
 [ext_resource type="AudioStream" uid="uid://cqaogb5iab5xk" path="res://addons/shrimp_input/example/entities/player/sounds/flash.ogg" id="12_l08ey"]
 
+[sub_resource type="Curve" id="Curve_l08ey"]
+_data = [Vector2(0, 0.75), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_klb6x"]
+curve = SubResource("Curve_l08ey")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l08ey"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.42
+scale_max = 0.42
+alpha_curve = SubResource("CurveTexture_klb6x")
+
 [node name="Player" unique_id=1010191855 instance=ExtResource("1_57u0y")]
 script = ExtResource("2_5la7w")
 stance = 0
@@ -62,3 +76,11 @@ stream = ExtResource("12_l08ey")
 [node name="Texture" parent="." index="5" unique_id=605714463]
 scale = Vector2(0.42141598, 0.42141598)
 texture = ExtResource("9_ai477")
+
+[node name="DashTrail" type="GPUParticles2D" parent="Texture" index="0" unique_id=182551101]
+unique_name_in_owner = true
+z_index = -1
+amount = 10
+texture = ExtResource("9_ai477")
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_l08ey")

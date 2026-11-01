@@ -55,7 +55,7 @@ reflect = 3.0
 [node name="Particles" type="GPUParticles2D" parent="." index="1" unique_id=1915141885]
 amount = 300
 speed_scale = 3.0
-visibility_rect = Rect2(-650, -100, 700, 200)
+visibility_rect = Rect2(-5000, -5000, 10000, 10000)
 process_material = SubResource("ParticleProcessMaterial_xfeng")
 
 [node name="Texture" parent="." index="2" unique_id=2039264544]

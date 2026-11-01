@@ -30,6 +30,7 @@ libraries/ = ExtResource("2_nwlo6")
 emitting = false
 amount = 15
 texture = ExtResource("3_gj7h4")
+visibility_rect = Rect2(-350, -75, 400, 150)
 process_material = ExtResource("2_kfxkw")
 
 [node name="Texture" parent="." index="2" unique_id=2039264544]

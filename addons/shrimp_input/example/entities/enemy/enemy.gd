@@ -9,4 +9,5 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	for i in get_tree().get_nodes_in_group("player"):
 		if i is ExampleShrimpBaseEntity:
-			apply_central_force((i.position - position).normalized() * 1500)
+			if i.isLiving:
+				apply_central_force((i.position - position).normalized() * 1500)

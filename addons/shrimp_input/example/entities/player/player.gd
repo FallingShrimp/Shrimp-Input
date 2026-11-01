@@ -5,21 +5,22 @@ const SHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/shrimp/
 const FIRESHRIMP_BULLET = preload("res://addons/shrimp_input/example/bullets/fire-shrimp/fire-shrimp.tscn")
 const DASH_BULLET = preload("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
 const MAX_CHARGE = 2.0
-var Actions = ExampleShrimpActions
 
 @onready var input: ShrimpInput = $%ShrimpInput
 @onready var charge: ExampleShrimpChargeRing = $%ChargeRing
+@onready var dashTrail: GPUParticles2D = $%DashTrail
 var regeneration: float = 0
-var lucky: float = 0.1
+var lucky: float = 0.2
+var attackSpeed: float = 1
 
 func _ready() -> void:
 	super._ready()
 	inputLoop()
 	dashLoop()
 	charge.hide()
-	add_child(Actions.ATTACK)
+	add_child(Actions.ROOT_ACTION)
 	add_to_group("player")
-func _physics_process(delta: float) -> void:
+func ai(delta: float) -> void:
 	apply_central_force(getInputDirection() * 3000)
 	if health < initialHealth:
 		health += regeneration * delta
@@ -41,23 +42,23 @@ func dashLoop():
 		if !dir.length():
 			dir = Vector2.from_angle(getMouseAngle())
 		apply_central_impulse(dir.normalized() * 2500)
+		playSound("Dash")
+		for d in [shoot(DASH_BULLET, 10, dir.angle())]:
+			if d is ExampleShrimpBaseBullet:
+				d.lifeTime = 0.3
+				d.scale *= 2
+		dashTrail.emitting = true
 		invincible = true
-		await input.clock.seconds(0.2)
+		await input.clock.seconds(0.3)
 		invincible = false
+		dashTrail.emitting = false
 		await input.clock.seconds(0.5)
 		await input.release(Actions.DASH)
 func inputLoop():
 	while true:
+		input.clock.timeScale = attackSpeed
 		await input.clock.frame()
-		await input.presses([Actions.STAB, Actions.ATTACK])
-		# if atk == Actions.STAB:
-		# 	playSound("Dash")
-		# 	input.buffer.consume(2)
-		# 	shoot(DASH_BULLET, 20, linear_velocity.angle())
-		# elif atk == Actions.ATTACK:
-			# playSound("Attack")
-			# input.buffer.consume(1)
-			# shoot(SHRIMP_BULLET, 10, getMouseAngle())
+		await input.press(Actions.ATTACK)
 		playSound("Attack")
 		input.buffer.consume(1)
 		shoot(SHRIMP_BULLET, 10, getMouseAngle())

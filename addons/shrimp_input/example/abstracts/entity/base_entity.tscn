@@ -79,6 +79,7 @@ stream = ExtResource("2_10yih")
 texture = ExtResource("2_tcb8m")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1418019904]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_nev1e")
 
 [node name="Anchor" type="Node2D" parent="." unique_id=359015896]

@@ -7,8 +7,10 @@ signal unban()
 @export var actionName: StringName = ""
 @export var banned: bool = false
 
-func _init(event: StringName = "") -> void:
+func _init(event: StringName = "", parent: SemanticAction = null) -> void:
 	actionName = event
+	if is_instance_valid(parent):
+		parent.add_child(self)
 
 @abstract
 func isPressed(inputNode: ShrimpInput) -> bool
@@ -17,10 +19,12 @@ func getPosition() -> Vector2:
 
 func canPress() -> bool:
 	var parent = get_parent()
-	if is_instance_valid(parent) && parent is SemanticAction:
-		return parent.canPress() && !banned
+	if banned:
+		return false
+	elif is_instance_valid(parent) && parent is SemanticAction:
+		return parent.canPress()
 	else:
-		return !banned
+		return true
 func ban(state: bool = true):
 	banned = state
 	if !state:

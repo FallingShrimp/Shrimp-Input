@@ -3,6 +3,7 @@ class_name ExampleShrimpBaseEntity
 
 const DAMAGE = preload("res://addons/shrimp_input/example/bullets/damage/damage.tscn")
 const BUFFBALL = preload("res://addons/shrimp_input/example/buff/buff_ball.tscn")
+var Actions = ExampleShrimpActions
 
 enum Stance {
 	PLAYER,
@@ -17,10 +18,14 @@ enum Stance {
 @onready var sounds: Node2D = $%Sounds
 @onready var healthBar: ProgressBar = $%Health
 @onready var animator: AnimationPlayer = $%Animator
+@onready var hitbox: CollisionShape2D = $%Hitbox
 var invincible: bool = false
 var initialHealth: float
 var bounce: int = 0
 var reflect: int = 0
+var isLiving: bool:
+	get:
+		return health > 0
 
 func _ready() -> void:
 	initialHealth = health
@@ -29,22 +34,31 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	healthBar.max_value = initialHealth
 	healthBar.value = health
+func _physics_process(delta: float) -> void:
+	if isLiving:
+		ai(delta)
 
+func ai(_delta: float):
+	pass
 func die():
 	await get_tree().process_frame
 
 func goDie(by: ExampleShrimpBaseBullet):
 	await die()
-	if stance == Stance.ENEMY:
-		if by.launcher is ExampleShrimpPlayer:
-			var launch = by.launcher as ExampleShrimpPlayer
-			var out = floor(launch.lucky)
-			var count = out + int(randf() < launch.lucky - out)
-			for i in count:
-				var ball = BUFFBALL.instantiate() as ExampleShrimpBuffBall
-				ball.position = position
-				get_tree().root.add_child.call_deferred(ball)
-	queue_free()
+	match stance:
+		Stance.ENEMY:
+			if by.launcher is ExampleShrimpPlayer:
+				var launch = by.launcher as ExampleShrimpPlayer
+				var out = floor(launch.lucky)
+				var count = out + int(randf() < launch.lucky - out)
+				for i in count:
+					var ball = BUFFBALL.instantiate() as ExampleShrimpBuffBall
+					ball.position = position
+					get_tree().root.add_child.call_deferred(ball)
+			queue_free()
+		Stance.PLAYER:
+			hitbox.disabled = true
+			Actions.ROOT_ACTION.ban()
 func playSound(nameX: String):
 	(sounds.get_node(nameX) as AudioStreamPlayer2D).play()
 func shoot(bullet: PackedScene, damage: float, rotationX: float = 0) -> ExampleShrimpBaseBullet:
@@ -61,7 +75,7 @@ func hurt(total: float, crited: bool, by: ExampleShrimpBaseBullet):
 	if !invincible:
 		health -= total
 		var died = health <= 0
-		var dmg = by.launcher.shoot(DAMAGE, total) as ExampleShrimpDamageBullet
+		var dmg: ExampleShrimpDamageBullet = shoot(DAMAGE, total)
 		dmg.position = position
 		dmg.crit = crited
 		ExampleShrimpCameraManager.addShake(ExampleShrimpCircleSampler.new(5, 0.1))
