@@ -6,7 +6,7 @@ const ENEMY = preload("res://addons/shrimp_input/example/entities/enemy/enemy.ts
 func _ready() -> void:
 	super._ready()
 	shoot(DASH_BULLET, 30)
-func _physics_process(_delta: float) -> void:
+func ai(_delta: float) -> void:
 	for i in get_tree().get_nodes_in_group("player"):
 		if i is ExampleShrimpBaseEntity:
 			if i.isLiving:

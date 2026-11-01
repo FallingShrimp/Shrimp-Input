@@ -31,10 +31,9 @@ func _ready() -> void:
 	initialHealth = health
 	if stance == Stance.ENEMY:
 		add_to_group("enemy")
-func _process(_delta: float) -> void:
-	healthBar.max_value = initialHealth
-	healthBar.value = health
 func _physics_process(delta: float) -> void:
+	healthBar.max_value = lerpf(healthBar.max_value, initialHealth, delta * 20)
+	healthBar.value = lerpf(healthBar.value, health, delta * 20)
 	if isLiving:
 		ai(delta)
 
@@ -79,6 +78,7 @@ func hurt(total: float, crited: bool, by: ExampleShrimpBaseBullet):
 		var dmg: ExampleShrimpDamageBullet = shoot(DAMAGE, total)
 		dmg.position = position
 		dmg.crit = crited
+		dmg.fromPlayer = stance == Stance.ENEMY
 		ExampleShrimpCameraManager.addShake(ExampleShrimpCircleSampler.new(5, 0.1))
 		if died:
 			goDie(by)

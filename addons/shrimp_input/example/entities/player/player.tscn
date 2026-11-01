@@ -28,14 +28,6 @@ scale_min = 0.42
 scale_max = 0.42
 alpha_curve = SubResource("CurveTexture_klb6x")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10yih"]
-bg_color = Color(0, 0, 0, 0.70000005)
-skew = Vector2(0.5, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aviv2"]
-bg_color = Color(1, 0, 0, 1)
-skew = Vector2(0.5, 0)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klb6x"]
 bg_color = Color(0.24570811, 0.16194399, 0, 0.7019608)
 corner_radius_top_left = 1000
@@ -112,8 +104,7 @@ lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_l08ey")
 
 [node name="Health" parent="Anchor" parent_id_path=PackedInt32Array(359015896) index="0" unique_id=103602856]
-theme_override_styles/background = SubResource("StyleBoxFlat_10yih")
-theme_override_styles/fill = SubResource("StyleBoxFlat_aviv2")
+modulate = Color(1, 1, 1, 1)
 
 [node name="Anchor" type="Node2D" parent="Anchor" parent_id_path=PackedInt32Array(359015896) index="1" unique_id=549963727]
 position = Vector2(0, -13)

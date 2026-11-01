@@ -6,6 +6,7 @@ enum BulletState {
 	DIEING
 }
 
+@export var autoGoDie: bool = true
 @export var ignoreWall: bool = false
 @export var damage: float = 10
 @export var speed: float = 500
@@ -29,7 +30,7 @@ func _process(_delta: float) -> void:
 	pass
 func _physics_process(delta: float) -> void:
 	if state == BulletState.LIVING:
-		if !is_instance_valid(launcher) || timeLived() > lifeTime || damage < 1:
+		if autoGoDie && (!is_instance_valid(launcher) || timeLived() > lifeTime || damage < 1):
 			goDie()
 		else:
 			ai(delta)

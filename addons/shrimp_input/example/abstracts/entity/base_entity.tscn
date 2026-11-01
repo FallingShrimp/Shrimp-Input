@@ -49,11 +49,11 @@ _data = {
 radius = 70.035706
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10yih"]
-bg_color = Color(0, 0, 0, 0.70000005)
+bg_color = Color(0, 0, 0, 0.5)
 skew = Vector2(0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aviv2"]
-bg_color = Color(1, 0, 0, 1)
+bg_color = Color(1, 1, 1, 1)
 skew = Vector2(0.6, 0)
 
 [node name="Entity" type="RigidBody2D" unique_id=1010191855]
@@ -87,6 +87,7 @@ position = Vector2(0, -88)
 
 [node name="Health" type="ProgressBar" parent="Anchor" unique_id=103602856]
 unique_name_in_owner = true
+modulate = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(150, 15)
 anchors_preset = 15
 anchor_right = 1.0

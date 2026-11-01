@@ -126,7 +126,10 @@ font_color = Color(1, 0, 0, 1)
 outline_size = 5
 
 [node name="Bullet" unique_id=483333088 instance=ExtResource("1_g8l1b")]
+z_index = 10
 script = ExtResource("2_u8h1u")
+autoGoDie = false
+ignoreWall = true
 
 [node name="Animator" parent="." index="0" unique_id=2070724682]
 libraries/ = SubResource("AnimationLibrary_pf7ta")

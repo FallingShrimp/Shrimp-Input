@@ -30,6 +30,7 @@ class HpMax extends ExampleShrimpBuff:
 		return Quality.EPIC
 	func execute(entity: ExampleShrimpPlayer) -> void:
 		entity.initialHealth += 20
+		entity.health += 20
 class Luck extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "幸运+1"
