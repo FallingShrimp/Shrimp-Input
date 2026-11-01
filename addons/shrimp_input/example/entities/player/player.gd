@@ -10,6 +10,7 @@ var Actions = ExampleShrimpActions
 @onready var input: ShrimpInput = $%ShrimpInput
 @onready var charge: ExampleShrimpChargeRing = $%ChargeRing
 var regeneration: float = 0
+var lucky: float = 0.1
 
 func _ready() -> void:
 	super._ready()

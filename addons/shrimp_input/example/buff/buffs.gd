@@ -23,3 +23,10 @@ class Reg extends ExampleShrimpBuffBall.Buff:
 		return Quality.EPIC
 	func execute(entity: ExampleShrimpPlayer) -> void:
 		entity.regeneration += 1
+class Luck extends ExampleShrimpBuffBall.Buff:
+	func getName() -> StringName:
+		return "幸运+5%"
+	func getQuality() -> Quality:
+		return Quality.LEGENDARY
+	func execute(entity: ExampleShrimpPlayer) -> void:
+		entity.lucky += 0.05

@@ -19,6 +19,8 @@ enum Stance {
 @onready var animator: AnimationPlayer = $%Animator
 var invincible: bool = false
 var initialHealth: float
+var bounce: int = 0
+var reflect: int = 0
 
 func _ready() -> void:
 	initialHealth = health
@@ -31,11 +33,17 @@ func _process(_delta: float) -> void:
 func die():
 	await get_tree().process_frame
 
-func goDie():
+func goDie(by: ExampleShrimpBaseBullet):
 	await die()
-	var ball = BUFFBALL.instantiate() as ExampleShrimpBuffBall
-	ball.position = position
-	get_tree().root.add_child.call_deferred(ball)
+	if stance == Stance.ENEMY:
+		if by.launcher is ExampleShrimpPlayer:
+			var launch = by.launcher as ExampleShrimpPlayer
+			var out = floor(launch.lucky)
+			var count = out + int(randf() < launch.lucky - out)
+			for i in count:
+				var ball = BUFFBALL.instantiate() as ExampleShrimpBuffBall
+				ball.position = position
+				get_tree().root.add_child.call_deferred(ball)
 	queue_free()
 func playSound(nameX: String):
 	(sounds.get_node(nameX) as AudioStreamPlayer2D).play()
@@ -49,16 +57,16 @@ func shoot(bullet: PackedScene, damage: float, rotationX: float = 0) -> ExampleS
 	get_tree().root.add_child.call_deferred(instance)
 	apply_central_impulse(-Vector2.from_angle(rotationX) * instance.launchRecoil)
 	return instance
-func hurt(total: float, crited: bool, launcher: ExampleShrimpBaseEntity):
+func hurt(total: float, crited: bool, by: ExampleShrimpBaseBullet):
 	if !invincible:
 		health -= total
 		var died = health <= 0
-		var dmg = launcher.shoot(DAMAGE, total) as ExampleShrimpDamageBullet
+		var dmg = by.launcher.shoot(DAMAGE, total) as ExampleShrimpDamageBullet
 		dmg.position = position
 		dmg.crit = crited
 		ExampleShrimpCameraManager.addShake(ExampleShrimpCircleSampler.new(5, 0.1))
 		if died:
-			goDie()
+			goDie(by)
 		else:
 			playSound("Hurt")
 			animator.play("hurt")

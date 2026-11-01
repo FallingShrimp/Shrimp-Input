@@ -50,7 +50,7 @@ knockback = 750.0
 launchRecoil = 3000.0
 penetrate = 0.9
 bounce = 10.0
-reflect = 5.0
+reflect = 3.0
 
 [node name="Particles" type="GPUParticles2D" parent="." index="1" unique_id=1915141885]
 amount = 300

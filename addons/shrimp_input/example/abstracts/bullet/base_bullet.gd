@@ -7,6 +7,7 @@ enum BulletState {
 	DIEING
 }
 
+@export var ignoreWall: bool = false
 @export var damage: float = 10
 @export var speed: float = 500
 @export var knockback: float = 0
@@ -50,8 +51,8 @@ func hitTest(body):
 	if state != BulletState.LIVING: return
 	if !is_instance_valid(launcher): return
 	if body is StaticBody2D:
-		if body.is_in_group("wall"):
-			if bounce > 0:
+		if !ignoreWall && body.is_in_group("wall"):
+			if bounce + launcher.bounce > 0:
 				var e = ExampleShrimpBaseEntity.closet(self)
 				if is_instance_valid(e):
 					rotation = position.angle_to_point(e.position)
@@ -67,10 +68,10 @@ func hitTest(body):
 			var total = damage * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
 			if crit:
 				total *= 2 + max(launcher.critRate - 0.85, 0) * 2
-			body.hurt(total, crit, launcher)
+			body.hurt(total, crit, self)
 			body.apply_central_impulse((body.position - position).normalized() * knockback)
 			launcher.apply_central_impulse((position - body.position).normalized() * recoil)
-			if reflect > 0:
+			if reflect + launcher.reflect > 0:
 				var e = ExampleShrimpBaseEntity.closet(self, func(i: ExampleShrimpBaseEntity): return i != body)
 				if is_instance_valid(e):
 					rotation = position.angle_to_point(e.position)

@@ -34,12 +34,11 @@ func _ready() -> void:
 	scale *= randf_range(0.5, 2)
 	body_entered.connect(
 		func(e):
-			if e is ExampleShrimpBaseEntity:
-				if e.stance == ExampleShrimpBaseEntity.Stance.PLAYER:
-					e.playSound("Collect")
-					buff.execute(e)
-					ExampleShrimpUI.buff(buff.getName(), color)
-					queue_free()
+			if e is ExampleShrimpPlayer:
+				e.playSound("Collect")
+				buff.execute(e)
+				ExampleShrimpUI.buff(buff.getName(), color)
+				queue_free()
 	)
 
 func gacha() -> Buff:

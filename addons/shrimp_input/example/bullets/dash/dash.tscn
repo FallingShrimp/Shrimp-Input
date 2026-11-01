@@ -9,6 +9,7 @@ size = Vector2(192, 98)
 
 [node name="Bullet" unique_id=483333088 instance=ExtResource("1_1cafv")]
 script = ExtResource("2_3olmt")
+ignoreWall = true
 recoil = 500.0
 
 [node name="Texture" parent="." index="1" unique_id=2039264544]
