@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ccqlvicfg44ji" path="res://addons/shrimp_input/example/abstracts/entity/base_entity.tscn" id="1_wju12"]
 [ext_resource type="Script" uid="uid://dr4css5e0lcha" path="res://addons/shrimp_input/example/entities/enemy/enemy.gd" id="2_mp1t0"]
+[ext_resource type="Texture2D" uid="uid://b8yb8quxqgmi" path="res://addons/shrimp_input/example/entities/enemy/peoples/releaflyse/ginko_lw.jpg" id="3_cychl"]
 
 [node name="Entity" unique_id=1010191855 instance=ExtResource("1_wju12")]
 script = ExtResource("2_mp1t0")
@@ -9,4 +10,5 @@ health = 1000.0
 damageFactor = 0.2
 
 [node name="Texture" parent="." index="2" unique_id=605714463]
-scale = Vector2(0.38614526, 0.38614526)
+scale = Vector2(0.10557286, 0.10557286)
+texture = ExtResource("3_cychl")

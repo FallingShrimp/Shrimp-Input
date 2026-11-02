@@ -110,6 +110,9 @@ func _ready() -> void:
 	instance = self
 	buffBox = buffNotice.get_theme_stylebox("panel")
 	addScore(0, get_tree().root)
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		get_tree().paused = !get_tree().paused
 
 static func addScore(amount: float, where: Node):
 	var player = where.get_tree().get_nodes_in_group("player")[0] as ExampleShrimpPlayer

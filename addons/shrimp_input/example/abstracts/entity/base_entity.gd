@@ -54,7 +54,7 @@ func goDie():
 			queue_free()
 		Stance.PLAYER:
 			hitbox.disabled = true
-			Actions.ROOT_ACTION.ban()
+			Actions.ROOT.ban()
 func playSound(nameX: String):
 	(sounds.get_node(nameX) as AudioStreamPlayer2D).play()
 func shoot(bullet: PackedScene, damage: float, rotationX: float = 0) -> ExampleShrimpBaseBullet:

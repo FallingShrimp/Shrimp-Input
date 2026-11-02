@@ -1,6 +1,6 @@
 extends ExampleShrimpBaseEntity
 
-const TEXTURE_DIR = "res://addons/shrimp_input/example/entities/enemy/peoples"
+const TEXTURE_DIR = "res://addons/shrimp_input/example/entities/enemy/peoples/releaflyse"
 const DASH_BULLET = preload("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
 const ENEMY = preload("res://addons/shrimp_input/example/entities/enemy/enemy.tscn")
 var speed = 2000

@@ -22,7 +22,7 @@ func _ready() -> void:
 	inputLoop()
 	dashLoop()
 	charge.hide()
-	add_child(Actions.ROOT_ACTION)
+	add_child(Actions.ROOT)
 	add_to_group("player")
 	dashProgress.value = 1
 func ai(delta: float) -> void:
@@ -58,15 +58,17 @@ func dashLoop():
 				d.scale *= 2
 		dashProgress.value = 0
 		dashTrail.emitting = true
+		Actions.DAMAGE.ban()
 		defocus(true)
 		var hold = 0
-		while input.charge(Actions.ROOT_ACTION, DASH_INVINCIBLE):
+		while input.charge(Actions.ROOT, DASH_INVINCIBLE):
 			hold += await input.clock.frame()
 			dashProgress.value = 1 - hold / DASH_INVINCIBLE
 		defocus(false)
+		Actions.DAMAGE.ban(false)
 		dashTrail.emitting = false
 		hold = 0
-		while input.charge(Actions.ROOT_ACTION, DASH_COOLDOWN):
+		while input.charge(Actions.ROOT, DASH_COOLDOWN):
 			hold += await input.clock.frame()
 			dashProgress.value = hold / DASH_COOLDOWN
 		await input.release(Actions.DASH)
