@@ -41,6 +41,10 @@ func ai(_delta: float) -> void:
 	pass
 func onDie():
 	await ShrimpTimeManager.frame(self)
+func getBaseDamage(_entity: ExampleShrimpBaseEntity) -> float:
+	return damage
+func overrideDamage(original: float, _entity: ExampleShrimpBaseEntity) -> float:
+	return original * 1.0
 
 func timeLived() -> float:
 	return ShrimpTimeManager.current(self) - spawnWhen
@@ -70,13 +74,13 @@ func hitTest(body):
 			if launcher is ExampleShrimpPlayer:
 				rate += launcher.lucky * 0.015
 			var crit = randf() < rate
-			var totalDamage = damage * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
+			var totalDamage = getBaseDamage(body) * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
 			if crit:
 				totalDamage *= 2 + max(launcher.critRate - 0.85, 0) * 2
 			var dedmgMult = ((DEFENSE_FACTOR + (body.defense + int(body.thornsMult > 0)) * (1 + body.thornsMult)) / DEFENSE_FACTOR)
 			var defensedDamage = totalDamage / dedmgMult
 			var redmg = body.damageFactor * totalDamage * dedmgMult * (1 + body.thornsMult) ** 2
-			totalDamage = defensedDamage
+			totalDamage = overrideDamage(defensedDamage, body)
 			body.hurt(totalDamage, crit)
 			if body is ExampleShrimpPlayer:
 				launcher.hurt(redmg, false)

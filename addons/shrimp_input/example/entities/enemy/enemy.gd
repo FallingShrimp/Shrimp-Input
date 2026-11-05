@@ -9,26 +9,27 @@ func _ready() -> void:
 	shoot(DASH_BULLET, 30)
 	var skin = Array(ResourceLoader.list_directory(TEXTURE_DIR)).pick_random()
 	texture.texture = load("%s/%s" % [TEXTURE_DIR, skin])
-	match skin:
-		"ak.png":
+	var buff = randi_range(0, 5)
+	match buff:
+		0:
 			damageFactor *= 0.5
 			speed *= -0.25
 			health *= 4
 			valueMult *= 8
-		"dext.png":
+		1:
 			health *= 2
 			valueMult *= 0.1
-		"jwx.png":
+		2:
 			damageFactor *= 1.3
 			valueMult *= 1.2
-		"laism.png":
+		3:
 			speed *= 1.15
 			valueMult *= 1.05
-		"sg.png":
+		4:
 			health *= 0.4
 			valueMult *= 0.75
-		"yy.png":
-			speed = 0
+		5:
+			speed = 0.01
 			damageFactor *= 2
 			valueMult *= 2
 	super._ready()
