@@ -73,9 +73,9 @@ func hitTest(body):
 			var totalDamage = damage * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
 			if crit:
 				totalDamage *= 2 + max(launcher.critRate - 0.85, 0) * 2
-			var defensedDamage = totalDamage / ((DEFENSE_FACTOR + (body.defense + int(body.thornsMult > 0)) * (1 + body.thornsMult)) / DEFENSE_FACTOR)
-			var delta = totalDamage - defensedDamage
-			var redmg = body.damageFactor * delta * (1 + body.thornsMult) ** 2
+			var dedmgMult = ((DEFENSE_FACTOR + (body.defense + int(body.thornsMult > 0)) * (1 + body.thornsMult)) / DEFENSE_FACTOR)
+			var defensedDamage = totalDamage / dedmgMult
+			var redmg = body.damageFactor * totalDamage * dedmgMult * (1 + body.thornsMult) ** 2
 			totalDamage = defensedDamage
 			body.hurt(totalDamage, crit)
 			launcher.hurt(redmg, false)
