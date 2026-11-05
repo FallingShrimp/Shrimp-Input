@@ -1,6 +1,6 @@
 class_name ExampleShrimpBuffs
 
-const PRESET_REDMG = [Redamage, Def, HpMax, Reg]
+const PRESET_REDMG = [Redamage, Def, HpMax, Reg, Dmg]
 const PRESET_NORMAL = [Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult, Def]
 
 static var use = PRESET_REDMG
