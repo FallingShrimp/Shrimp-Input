@@ -58,14 +58,12 @@ func dashLoop():
 				d.scale *= 2
 		dashProgress.value = 0
 		dashTrail.emitting = true
-		Actions.DAMAGE.ban()
 		defocus(true)
 		var hold = 0
 		while input.charge(Actions.ROOT, DASH_INVINCIBLE):
 			hold += await input.clock.frame()
 			dashProgress.value = 1 - hold / DASH_INVINCIBLE
 		defocus(false)
-		Actions.DAMAGE.ban(false)
 		dashTrail.emitting = false
 		hold = 0
 		while input.charge(Actions.ROOT, DASH_COOLDOWN):

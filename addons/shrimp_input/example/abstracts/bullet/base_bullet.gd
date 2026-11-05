@@ -1,6 +1,8 @@
 extends Area2D
 class_name ExampleShrimpBaseBullet
 
+const DEFENSE_FACTOR = 100
+
 enum BulletState {
 	LIVING,
 	DIEING
@@ -68,11 +70,15 @@ func hitTest(body):
 			if launcher is ExampleShrimpPlayer:
 				rate += launcher.lucky * 0.015
 			var crit = randf() < rate
-			var total = damage * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
+			var totalDamage = damage * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
 			if crit:
-				total *= 2 + max(launcher.critRate - 0.85, 0) * 2
-			body.hurt(total, crit)
-			launcher.hurt(body.redamage, false)
+				totalDamage *= 2 + max(launcher.critRate - 0.85, 0) * 2
+			var defensed = totalDamage / ((DEFENSE_FACTOR + body.defense) / DEFENSE_FACTOR)
+			var redamageDefensed = totalDamage / ((DEFENSE_FACTOR + body.defense * (1 + body.thornsMult)) / DEFENSE_FACTOR)
+			var delta = defensed - redamageDefensed
+			totalDamage = redamageDefensed
+			body.hurt(totalDamage, crit)
+			launcher.hurt(delta * (1 + body.thornsMult) ** 2, false)
 			body.apply_central_impulse((body.position - position).normalized() * knockback)
 			launcher.apply_central_impulse((position - body.position).normalized() * recoil)
 			if reflect + launcher.reflect > 0:

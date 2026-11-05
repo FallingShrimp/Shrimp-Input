@@ -24,7 +24,8 @@ var invincible: bool = false
 var initialHealth: float
 var bounce: int = 0
 var reflect: int = 0
-var redamage: float = 0
+var thornsMult: float = 0
+var defense: float = 0
 var score: float = 0
 var valueMult: float = 1
 var isLiving: bool:
