@@ -78,7 +78,8 @@ func hitTest(body):
 			var redmg = body.damageFactor * totalDamage * dedmgMult * (1 + body.thornsMult) ** 2
 			totalDamage = defensedDamage
 			body.hurt(totalDamage, crit)
-			launcher.hurt(redmg, false)
+			if body is ExampleShrimpPlayer:
+				launcher.hurt(redmg, false)
 			body.apply_central_impulse((body.position - position).normalized() * knockback)
 			launcher.apply_central_impulse((position - body.position).normalized() * recoil)
 			if reflect + launcher.reflect > 0:
