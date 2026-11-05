@@ -23,7 +23,7 @@ func _ready() -> void:
 		2:
 			damageFactor *= 1.3
 			valueMult *= 1.2
-			mass *= 0.5
+			mass *= 0.75
 		3:
 			speed *= 1.15
 			valueMult *= 1.05

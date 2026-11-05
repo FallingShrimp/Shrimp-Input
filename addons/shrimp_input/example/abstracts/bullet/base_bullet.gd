@@ -79,7 +79,7 @@ func hitTest(body):
 				totalDamage *= 2 + max(launcher.critRate - 0.85, 0) * 2
 			var dedmgMult = ((DEFENSE_FACTOR + (body.defense + int(body.thornsMult > 0)) * (1 + body.thornsMult)) / DEFENSE_FACTOR)
 			var defensedDamage = totalDamage / dedmgMult
-			var redmg = body.damageFactor * totalDamage * dedmgMult * (1 + body.thornsMult) ** 2
+			var redmg = (body.damageFactor * totalDamage * (1 + body.thornsMult) ** 2) * body.thornsMult
 			totalDamage = overrideDamage(defensedDamage, body)
 			body.hurt(totalDamage, crit)
 			if body is ExampleShrimpPlayer:
