@@ -25,6 +25,7 @@ var initialHealth: float
 var bounce: int = 0
 var reflect: int = 0
 var thornsMult: float = 0
+var momentumMult: float = 1
 var defense: float = 0
 var score: float = 0
 var valueMult: float = 1
@@ -47,6 +48,8 @@ func ai(_delta: float):
 func die():
 	await get_tree().process_frame
 
+func getMomentum() -> Vector2:
+	return linear_velocity * mass * momentumMult
 func goDie():
 	await die()
 	match stance:
