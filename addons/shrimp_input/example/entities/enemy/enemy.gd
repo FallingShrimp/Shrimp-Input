@@ -6,7 +6,9 @@ const ENEMY = preload("res://addons/shrimp_input/example/entities/enemy/enemy.ts
 var speed = 2000
 
 func _ready() -> void:
-	shoot(DASH_BULLET, 30)
+	for bullet in shoot(DASH_BULLET, 30):
+		if bullet is ExampleShrimpBaseBullet:
+			bullet.scale *= Vector2(randf_range(0.75, 1.5), randf_range(0.9, 1.1))
 	var skin = Array(ResourceLoader.list_directory(TEXTURE_DIR)).pick_random()
 	texture.texture = load("%s/%s" % [TEXTURE_DIR, skin])
 	damageFactor *= randf_range(0.25, 2)
