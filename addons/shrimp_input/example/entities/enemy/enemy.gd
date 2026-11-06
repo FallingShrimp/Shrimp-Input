@@ -10,7 +10,7 @@ func _ready() -> void:
 		if bullet is ExampleShrimpBaseBullet:
 			bullet.scale *= Vector2(randf_range(0.8, 2), randf_range(0.9, 1.1))
 	texture.texture = load("%s/%s" % [TEXTURE_DIR, Array(ResourceLoader.list_directory(TEXTURE_DIR)).pick_random()])
-	damageFactor *= randf_range(0.25, 2)
+	damageFactor *= randf_range(0.5, 1.3)
 	speed *= randf_range(-0.25, 1.75)
 	health *= randf_range(0.4, 3)
 	valueMult *= randf_range(0.5, 7)
