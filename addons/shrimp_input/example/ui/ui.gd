@@ -122,8 +122,7 @@ static func addScore(amount: float, where: Node):
 	while instance.score >= instance.rewardMax:
 		instance.score -= instance.rewardMax
 		instance.scoredTimes += 1
-		for i in randi_range(1, 2):
-			ExampleShrimpBuffBall.reward(where, player.position + Vector2.from_angle(randf() * TAU) * randf_range(50, 200))
+		ExampleShrimpBuffBall.reward(where, player.position + Vector2.from_angle(randf() * TAU) * randf_range(50, 200))
 	instance.currentScoreLabel.text = "%d" % instance.score
 	instance.maxScoreLabel.text = "%d" % instance.rewardMax
 	instance.scoreProgress.max_value = instance.rewardMax
