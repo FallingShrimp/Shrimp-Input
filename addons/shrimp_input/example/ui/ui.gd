@@ -114,7 +114,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		get_tree().paused = !get_tree().paused
 func _physics_process(delta: float) -> void:
-	scoreProgress.value = lerpf(instance.score, scoreProgress.value, delta * 10)
+	scoreProgress.value = lerpf(score, scoreProgress.value, delta)
 
 static func addScore(amount: float, where: Node):
 	var player = where.get_tree().get_nodes_in_group("player")[0] as ExampleShrimpPlayer
