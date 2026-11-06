@@ -26,11 +26,13 @@ var spawnWhen: float = 0
 var spawnFacing: float = 0
 var state: BulletState = BulletState.LIVING
 var launcher: ExampleShrimpBaseEntity
+var tracker: ExampleShrimpBaseEntity = null
 
 func _ready() -> void:
 	body_entered.connect(hitTest)
 	spawnWhen = ShrimpTimeManager.current(self)
 	spawnFacing = rotation
+	lock(ExampleShrimpBaseEntity.closet(self, func(e: ExampleShrimpBaseEntity): return e.stance != launcher.stance))
 func _process(_delta: float) -> void:
 	if lockRotation:
 		rotation = spawnFacing
@@ -39,6 +41,8 @@ func _physics_process(delta: float) -> void:
 		if autoGoDie && (!is_instance_valid(launcher) || timeLived() > lifeTime || damage < 1):
 			goDie()
 		else:
+			if is_instance_valid(tracker):
+				rotation = rotate_toward(rotation, position.angle_to_point(tracker.position), deg_to_rad(launcher.trackAngle) * delta)
 			ai(delta)
 
 func ai(_delta: float) -> void:
@@ -50,6 +54,8 @@ func getBaseDamage(_entity: ExampleShrimpBaseEntity) -> float:
 func overrideDamage(original: float, _entity: ExampleShrimpBaseEntity) -> float:
 	return original * 1.0
 
+func lock(entity: ExampleShrimpBaseEntity):
+	tracker = entity
 func timeLived() -> float:
 	return ShrimpTimeManager.current(self) - spawnWhen
 func goDie():
@@ -65,6 +71,7 @@ func hitTest(body):
 			if bounce + launcher.bounce > 0:
 				var e = ExampleShrimpBaseEntity.closet(self)
 				if is_instance_valid(e):
+					lock(e)
 					rotation = position.angle_to_point(e.position)
 				else:
 					rotation += PI
@@ -93,6 +100,7 @@ func hitTest(body):
 			if reflect + launcher.reflect > 0:
 				var e = ExampleShrimpBaseEntity.closet(self, func(i: ExampleShrimpBaseEntity): return i != body)
 				if is_instance_valid(e):
+					lock(e)
 					rotation = position.angle_to_point(e.position)
 				else:
 					rotation = randf() * TAU

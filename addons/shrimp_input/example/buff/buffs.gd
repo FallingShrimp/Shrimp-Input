@@ -1,7 +1,8 @@
 class_name ExampleShrimpBuffs
 
 const PRESET_REDMG = [Redamage, Def, HpMax, Reg, Dmg]
-const PRESET_NORMAL = [Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult, Def, Momentum, Dash]
+const PRESET_TRACK = [Track]
+const PRESET_NORMAL = [Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult, Def, Momentum, Dash, Track]
 
 static var use = PRESET_NORMAL
 static var buffs = use.map(func(e: GDScript): return e.new())
@@ -105,3 +106,10 @@ class Dash extends ExampleShrimpBuff:
 		return Quality.LEGENDARY
 	func execute(entity: ExampleShrimpPlayer) -> void:
 		entity.dash += 0.15
+class Track extends ExampleShrimpBuff:
+	func getName() -> StringName:
+		return "追踪+10°"
+	func getQuality() -> Quality:
+		return Quality.RARE
+	func execute(entity: ExampleShrimpPlayer) -> void:
+		entity.trackAngle += 10
