@@ -113,6 +113,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		get_tree().paused = !get_tree().paused
+func _physics_process(delta: float) -> void:
+	scoreProgress.value = lerpf(instance.score, scoreProgress.value, delta * 10)
 
 static func addScore(amount: float, where: Node):
 	var player = where.get_tree().get_nodes_in_group("player")[0] as ExampleShrimpPlayer
@@ -125,7 +127,6 @@ static func addScore(amount: float, where: Node):
 	instance.currentScoreLabel.text = "%d" % instance.score
 	instance.maxScoreLabel.text = "%d" % instance.rewardMax
 	instance.scoreProgress.max_value = instance.rewardMax
-	instance.scoreProgress.value = instance.score
 	instance.lvLabel.text = "Lv.%d" % instance.scoredTimes
 static func buff(tip: String, color: Color):
 	color.a *= 0.6

@@ -15,11 +15,11 @@ class Dmg extends ExampleShrimpBuff:
 		entity.damageFactor += randf_range(0.05, 0.25)
 class ScoreMult extends ExampleShrimpBuff:
 	func getName() -> StringName:
-		return "分数倍率+20%"
+		return "分数倍率+8%"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(entity: ExampleShrimpPlayer) -> void:
-		entity.scoreMult += 0.25
+		entity.scoreMult += 0.08
 class Crit extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "暴击+5%"

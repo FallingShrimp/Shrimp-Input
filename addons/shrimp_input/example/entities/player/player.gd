@@ -59,7 +59,6 @@ func dashLoop():
 		for d in [shoot(DASH_BULLET, 10, dir.angle())]:
 			if d is ExampleShrimpBaseBullet:
 				d.lifeTime = invincibleTime
-				d.scale *= 2
 				d.lockRotation = true
 		dashProgress.value = 0
 		dashTrail.emitting = true
