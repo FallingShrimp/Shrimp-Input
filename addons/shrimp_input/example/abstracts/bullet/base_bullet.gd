@@ -88,8 +88,8 @@ func hitTest(body):
 			body.hurt(totalDamage, crit)
 			if body is ExampleShrimpPlayer:
 				launcher.hurt(redmg, false)
-			body.apply_central_impulse((body.position - position).normalized() * knockback)
-			launcher.apply_central_impulse((position - body.position).normalized() * recoil)
+			body.apply_central_impulse((body.position - position).normalized() * knockback * body.mass)
+			launcher.apply_central_impulse((position - body.position).normalized() * recoil * launcher.mass)
 			if reflect + launcher.reflect > 0:
 				var e = ExampleShrimpBaseEntity.closet(self, func(i: ExampleShrimpBaseEntity): return i != body)
 				if is_instance_valid(e):

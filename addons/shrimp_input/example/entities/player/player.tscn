@@ -55,22 +55,29 @@ critRate = 0.1
 script = ExtResource("4_q7jji")
 metadata/_custom_type_script = "uid://d3opmcnhhbjbp"
 
-[node name="ShrimpInput" type="Node" parent="." index="1" unique_id=474048355 node_paths=PackedStringArray("clock", "buffer")]
-unique_name_in_owner = true
-script = ExtResource("2_sqyos")
-clock = NodePath("../ShrimpClock")
-buffer = NodePath("ShrimpBuffer")
-metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
-
-[node name="ShrimpBuffer" type="Node" parent="ShrimpInput" index="0" unique_id=202595940 node_paths=PackedStringArray("clock")]
+[node name="ShrimpBuffer" type="Node" parent="." index="1" unique_id=202595940 node_paths=PackedStringArray("clock")]
 script = ExtResource("5_0l8nm")
-clock = NodePath("../../ShrimpClock")
+clock = NodePath("../ShrimpClock")
 actionLifetime = 1.0
 handleActions = Array[StringName]([&"dash", &"attack"])
 handleActions = Array[StringName]([&"dash", &"attack"])
 metadata/_custom_type_script = "uid://doy0uuccb5iml"
 
-[node name="ChargeRing" parent="." index="2" unique_id=1016301323 instance=ExtResource("3_vdjcy")]
+[node name="AttackInput" type="Node" parent="." index="2" unique_id=474048355 node_paths=PackedStringArray("clock", "buffer")]
+unique_name_in_owner = true
+script = ExtResource("2_sqyos")
+clock = NodePath("../ShrimpClock")
+buffer = NodePath("../ShrimpBuffer")
+metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
+
+[node name="DashInput" type="Node" parent="." index="3" unique_id=1208165613 node_paths=PackedStringArray("clock", "buffer")]
+unique_name_in_owner = true
+script = ExtResource("2_sqyos")
+clock = NodePath("../ShrimpClock")
+buffer = NodePath("../ShrimpBuffer")
+metadata/_custom_type_script = "uid://dmwj2kqg0ik6u"
+
+[node name="ChargeRing" parent="." index="4" unique_id=1016301323 instance=ExtResource("3_vdjcy")]
 unique_name_in_owner = true
 
 [node name="Attack" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="0" unique_id=1426386402]
@@ -91,7 +98,7 @@ stream = ExtResource("11_6440c")
 [node name="Charged" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="5" unique_id=1544222885]
 stream = ExtResource("12_l08ey")
 
-[node name="Texture" parent="." index="5" unique_id=605714463]
+[node name="Texture" parent="." index="7" unique_id=605714463]
 scale = Vector2(0.42141598, 0.42141598)
 texture = ExtResource("13_klb6x")
 

@@ -3,19 +3,21 @@ class_name ExampleShrimpPlayer
 
 const MAX_CHARGE = 2.0
 
-@onready var input: ShrimpInput = $%ShrimpInput
+@onready var attackInput: ShrimpInput = $%AttackInput
+@onready var dashInput: ShrimpInput = $%DashInput
 @onready var charge: ExampleShrimpChargeRing = $%ChargeRing
 @onready var dashTrail: GPUParticles2D = $%DashTrail
 @onready var dashProgress: ProgressBar = $%DashProgress
 var SHRIMP_BULLET = load("res://addons/shrimp_input/example/bullets/shrimp/shrimp.tscn")
 var FIRESHRIMP_BULLET = load("res://addons/shrimp_input/example/bullets/fire-shrimp/fire-shrimp.tscn")
 var DASH_BULLET = load("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
-var DASH_COOLDOWN = 0.5
-var DASH_INVINCIBLE = 0.3
+var DASH_COOLDOWN = 1
+var DASH_INVINCIBLE = 0.5
 var regeneration: float = 0
 var lucky: float = 0
 var attackSpeed: float = 1
 var scoreMult: float = 1
+var dash: float = 1
 
 func _ready() -> void:
 	super._ready()
@@ -35,7 +37,7 @@ func defocus(state: bool):
 	set_collision_layer_value(1, !state)
 	invincible = state
 func getInputDirection() -> Vector2:
-	return input.direction(
+	return attackInput.direction(
 		Actions.MOVE_UP,
 		Actions.MOVE_DOWN,
 		Actions.MOVE_LEFT,
@@ -45,53 +47,55 @@ func getMouseAngle() -> float:
 	return position.angle_to_point(Actions.ATTACK.getPosition())
 func dashLoop():
 	while true:
-		await input.clock.frame()
-		await input.press(Actions.DASH)
+		dashInput.clock.timeScale = dash
+		await dashInput.clock.frame()
+		await dashInput.press(Actions.DASH)
 		var dir = getInputDirection()
 		if !dir.length():
 			dir = Vector2.from_angle(getMouseAngle())
 		apply_central_impulse(dir.normalized() * 2500)
 		playSound("Dash")
+		var invincibleTime = DASH_COOLDOWN * DASH_INVINCIBLE * dash
 		for d in [shoot(DASH_BULLET, 10, dir.angle())]:
 			if d is ExampleShrimpBaseBullet:
-				d.lifeTime = DASH_INVINCIBLE
+				d.lifeTime = invincibleTime
 				d.scale *= 2
 				d.lockRotation = true
 		dashProgress.value = 0
 		dashTrail.emitting = true
 		defocus(true)
 		var hold = 0
-		while input.charge(Actions.ROOT, DASH_INVINCIBLE):
-			hold += await input.clock.frame()
-			dashProgress.value = 1 - hold / DASH_INVINCIBLE
+		while dashInput.charge(Actions.ROOT, invincibleTime):
+			hold += await dashInput.clock.frame()
+			dashProgress.value = 1 - hold / invincibleTime
 		defocus(false)
 		dashTrail.emitting = false
 		hold = 0
-		while input.charge(Actions.ROOT, DASH_COOLDOWN):
-			hold += await input.clock.frame()
+		while dashInput.charge(Actions.ROOT, DASH_COOLDOWN):
+			hold += await dashInput.clock.frame()
 			dashProgress.value = hold / DASH_COOLDOWN
-		await input.release(Actions.DASH)
+		await dashInput.release(Actions.DASH)
 func inputLoop():
 	while true:
-		input.clock.timeScale = attackSpeed
-		await input.clock.frame()
-		await input.press(Actions.ATTACK)
+		attackInput.clock.timeScale = attackSpeed
+		await attackInput.clock.frame()
+		await attackInput.press(Actions.ATTACK)
 		playSound("Attack")
-		input.buffer.consume(1)
+		attackInput.buffer.consume(1)
 		shoot(SHRIMP_BULLET, 10, getMouseAngle())
-		if await input.hold(Actions.ATTACK, 0.2):
+		if await attackInput.hold(Actions.ATTACK, 0.2):
 			charge.maxValue = MAX_CHARGE
 			charge.show()
 			var hold = 0
-			while input.charge(Actions.ATTACK, MAX_CHARGE):
-				hold += await input.clock.frame()
+			while attackInput.charge(Actions.ATTACK, MAX_CHARGE):
+				hold += await attackInput.clock.frame()
 				charge.value = hold
 			if hold >= MAX_CHARGE:
 				playSound("Charged")
-			await input.release(Actions.ATTACK)
+			await attackInput.release(Actions.ATTACK)
 			playSound("HeavyShot")
 			shoot(FIRESHRIMP_BULLET, 10 + hold / MAX_CHARGE * 50, getMouseAngle())
 			charge.hide()
 			charge.value = 0
-		await input.clock.seconds(0.3)
-		await input.release(Actions.ATTACK)
+		await attackInput.clock.seconds(0.3)
+		await attackInput.release(Actions.ATTACK)
