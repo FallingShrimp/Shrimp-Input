@@ -28,6 +28,22 @@ scale_min = 0.42
 scale_max = 0.42
 alpha_curve = SubResource("CurveTexture_klb6x")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vy5cd"]
+bg_color = Color(0, 0.22378641, 0.18055496, 0.7019608)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2bqp"]
+bg_color = Color(0, 0.8989752, 0.7203677, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+corner_detail = 1
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klb6x"]
 bg_color = Color(0.24570811, 0.16194399, 0, 0.7019608)
 corner_radius_top_left = 1000
@@ -117,19 +133,32 @@ modulate = Color(1, 1, 1, 1)
 [node name="Anchor" type="Node2D" parent="Anchor" parent_id_path=PackedInt32Array(359015896) index="1" unique_id=549963727]
 position = Vector2(0, -13)
 
-[node name="DashProgress" type="ProgressBar" parent="Anchor/Anchor" index="0" unique_id=1808274209]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 10)
+[node name="VBoxContainer" type="VBoxContainer" parent="Anchor/Anchor" index="0" unique_id=711548011]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -50.0
-offset_top = -6.0
+offset_top = -24.0
 offset_right = 50.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="AttackProgress" type="ProgressBar" parent="Anchor/Anchor/VBoxContainer" index="0" unique_id=595095114]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_vy5cd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y2bqp")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="DashProgress" type="ProgressBar" parent="Anchor/Anchor/VBoxContainer" index="1" unique_id=1808274209]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_klb6x")
 theme_override_styles/fill = SubResource("StyleBoxFlat_l08ey")
 max_value = 1.0

@@ -8,6 +8,7 @@ const MAX_CHARGE = 2.0
 @onready var charge: ExampleShrimpChargeRing = $%ChargeRing
 @onready var dashTrail: GPUParticles2D = $%DashTrail
 @onready var dashProgress: ProgressBar = $%DashProgress
+@onready var attackProgress: ProgressBar = $%AttackProgress
 var SHRIMP_BULLET = load("res://addons/shrimp_input/example/bullets/shrimp/shrimp.tscn")
 var FIRESHRIMP_BULLET = load("res://addons/shrimp_input/example/bullets/fire-shrimp/fire-shrimp.tscn")
 var DASH_BULLET = load("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
@@ -21,7 +22,7 @@ var dash: float = 1
 
 func _ready() -> void:
 	super._ready()
-	inputLoop()
+	attackLoop()
 	dashLoop()
 	charge.hide()
 	add_child(Actions.ROOT)
@@ -74,7 +75,7 @@ func dashLoop():
 			hold += await dashInput.clock.frame()
 			dashProgress.value = hold / DASH_COOLDOWN
 		await dashInput.release(Actions.DASH)
-func inputLoop():
+func attackLoop():
 	while true:
 		attackInput.clock.timeScale = attackSpeed
 		await attackInput.clock.frame()
@@ -82,10 +83,10 @@ func inputLoop():
 		playSound("Attack")
 		attackInput.buffer.consume(1)
 		shoot(SHRIMP_BULLET, 10, getMouseAngle())
+		var hold = 0
 		if await attackInput.hold(Actions.ATTACK, 0.2):
 			charge.maxValue = MAX_CHARGE
 			charge.show()
-			var hold = 0
 			while attackInput.charge(Actions.ATTACK, MAX_CHARGE):
 				hold += await attackInput.clock.frame()
 				charge.value = hold
@@ -96,5 +97,8 @@ func inputLoop():
 			shoot(FIRESHRIMP_BULLET, 10 + hold / MAX_CHARGE * 50, getMouseAngle())
 			charge.hide()
 			charge.value = 0
-		await attackInput.clock.seconds(0.3)
+		hold = 0
+		while attackInput.charge(Actions.ROOT, 0.3):
+			hold += await attackInput.clock.frame()
+			attackProgress.value = 1 - hold / 0.3
 		await attackInput.release(Actions.ATTACK)
