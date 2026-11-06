@@ -20,6 +20,7 @@ enum Stance {
 @onready var healthBar: ProgressBar = $%Health
 @onready var animator: AnimationPlayer = $%Animator
 @onready var hitbox: CollisionShape2D = $%Hitbox
+var dieing: bool = false
 var invincible: bool = false
 var initialHealth: float
 var bounce: int = 0
@@ -51,6 +52,8 @@ func die():
 func getMomentum() -> Vector2:
 	return linear_velocity * mass * momentumMult
 func goDie():
+	if dieing: return
+	dieing = true
 	await die()
 	match stance:
 		Stance.ENEMY:
