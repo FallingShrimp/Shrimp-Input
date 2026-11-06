@@ -19,17 +19,21 @@ enum BulletState {
 @export var penetrate: float = 1
 @export var bounce: float = INF
 @export var reflect: float = INF
+@export var lockRotation: bool = false
 
 @onready var animator: AnimationPlayer = $%Animator
 var spawnWhen: float = 0
+var spawnFacing: float = 0
 var state: BulletState = BulletState.LIVING
 var launcher: ExampleShrimpBaseEntity
 
 func _ready() -> void:
 	body_entered.connect(hitTest)
 	spawnWhen = ShrimpTimeManager.current(self)
+	spawnFacing = rotation
 func _process(_delta: float) -> void:
-	pass
+	if lockRotation:
+		rotation = spawnFacing
 func _physics_process(delta: float) -> void:
 	if state == BulletState.LIVING:
 		if autoGoDie && (!is_instance_valid(launcher) || timeLived() > lifeTime || damage < 1):
