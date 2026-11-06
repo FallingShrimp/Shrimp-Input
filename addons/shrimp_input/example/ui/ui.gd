@@ -104,7 +104,7 @@ var score: float = 0
 var scoredTimes: int = 0
 var rewardMax: float:
 	get:
-		return 200 + scoredTimes * 300
+		return 500 + scoredTimes * 800
 
 func _ready() -> void:
 	instance = self
