@@ -36,7 +36,7 @@ enum Stats {
 }
 
 static var stats: Dictionary[Stats, Stat] = {
-	Stats.MOVEMENT_SPEED: Stat.new(DataType.FLOAT, 1, "移动速度"),
+	Stats.MOVEMENT_SPEED: Stat.new(DataType.PERCENT, 1, "移动速度"),
 	Stats.HEALTH_MAX: Stat.new(DataType.FLOAT, 100, "生命上限"),
 	Stats.DAMAGE_MULT: Stat.new(DataType.PERCENT, 1, "伤害"),
 	Stats.ATTACK_SPEED: Stat.new(DataType.PERCENT, 1, "攻击速度"),

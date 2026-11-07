@@ -20,86 +20,87 @@ class ScoreMult extends ExampleShrimpBuff:
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.SCORE_MULT: 0.12}
+		return {StatsDB.Stats.SCORE_MULT: randf_range(0.1, 0.3)}
 class Crit extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "会心一击！"
 	func getQuality() -> Quality:
 		return Quality.RARE
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.CRIT: 0.03}
+		return {StatsDB.Stats.CRIT: randf_range(0.01, 0.05)}
 class Reg extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "树妖的祝福"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.REGENERATION: 2}
+		return {StatsDB.Stats.REGENERATION: randf_range(0.5, 4)}
 class HpMax extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "树妖的祝福"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		entity.health += 30
-		return {StatsDB.Stats.HEALTH_MAX: 30}
+		var value = randf_range(10, 60)
+		entity.health += value
+		return {StatsDB.Stats.HEALTH_MAX: value}
 class Luck extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "狗屎运"
 	func getQuality() -> Quality:
 		return Quality.RARE
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.LUCKY: 1}
+		return {StatsDB.Stats.LUCKY: randf_range(1, 4)}
 class Heal extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "自然的回应"
 	func getQuality() -> Quality:
 		return Quality.LEGENDARY
 	func execute(entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		entity.hurt(-30, false)
-		return {}
+		entity.hurt(-randf_range(15, 50), false)
+		return {StatsDB.Stats.REGENERATION: 0.5}
 class AtkSpd extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "超高速！！！"
 	func getQuality() -> Quality:
 		return Quality.RARE
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.ATTACK_SPEED: 0.15}
+		return {StatsDB.Stats.ATTACK_SPEED: randf_range(0.09, 0.3)}
 class Redamage extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "披荆斩棘"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.THORNS_MULT: 0.2}
+		return {StatsDB.Stats.THORNS_MULT: randf_range(0.1, 0.35)}
 class Bounce extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "动量守恒！"
 	func getQuality() -> Quality:
 		return Quality.RARE
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.BOUNCE: 2}
+		return {StatsDB.Stats.BOUNCE: randi_range(1, 3)}
 class Reflect extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "动量守恒！"
 	func getQuality() -> Quality:
 		return Quality.RARE
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.REFLECT: 2}
+		return {StatsDB.Stats.REFLECT: randi_range(1, 3)}
 class Def extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "粉身碎骨"
 	func getQuality() -> Quality:
 		return Quality.NORMAL
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.DEFENSE: 9}
+		return {StatsDB.Stats.DEFENSE: randf_range(5, 20)}
 class Momentum extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "无敌冲撞"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.MOMENTUM_MULT: 0.2}
+		return {StatsDB.Stats.MOMENTUM_MULT: randf_range(0.15, 0.4)}
 class Dash extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "健步如飞"
@@ -107,8 +108,8 @@ class Dash extends ExampleShrimpBuff:
 		return Quality.LEGENDARY
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
 		return {
-			StatsDB.Stats.DASH: 0.15,
-			StatsDB.Stats.MOVEMENT_SPEED: 0.05,
+			StatsDB.Stats.DASH: randf_range(0.2, 0.4),
+			StatsDB.Stats.MOVEMENT_SPEED: randf_range(0.03, 0.1),
 		}
 class Track extends ExampleShrimpBuff:
 	func getName() -> StringName:
@@ -116,4 +117,4 @@ class Track extends ExampleShrimpBuff:
 	func getQuality() -> Quality:
 		return Quality.RARE
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.TRACK: deg_to_rad(10)}
+		return {StatsDB.Stats.TRACK: deg_to_rad(randf_range(5, 18))}
