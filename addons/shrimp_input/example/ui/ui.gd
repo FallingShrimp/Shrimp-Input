@@ -101,6 +101,9 @@ static var instance: ExampleShrimpUI
 @onready var maxScoreLabel: Label = $%MaxScore
 @onready var scoreProgress: ProgressBar = $%ScoreProgress
 @onready var lvLabel: Label = $%Lv
+@onready var waveProgress: ProgressBar = $%WaveProgress
+@onready var wavePercent: Label = $%WavePercent
+var progress: float = 0
 var score: float = 0
 var scoredTimes: int = 0
 var rewardMax: float:
@@ -116,6 +119,8 @@ func _process(_delta: float) -> void:
 		get_tree().paused = !get_tree().paused
 func _physics_process(_delta: float) -> void:
 	scoreProgress.value = lerpf(scoreProgress.value, score, 0.3)
+	waveProgress.value = lerpf(waveProgress.value, progress, 0.3)
+	wavePercent.text = "%.1f%%" % (progress * 100)
 
 static func addScore(amount: float, where: Node):
 	var player = where.get_tree().get_nodes_in_group("player")[0] as ExampleShrimpPlayer

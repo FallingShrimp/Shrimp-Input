@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dcxa3sbthobkb"]
+
+[ext_resource type="PackedScene" uid="uid://ccqlvicfg44ji" path="res://addons/shrimp_input/example/abstracts/entity/base_entity.tscn" id="1_khsgp"]
+[ext_resource type="Script" uid="uid://yc0n61ft7vmm" path="res://addons/shrimp_input/example/entities/boss/boss.gd" id="2_cy7pc"]
+[ext_resource type="Texture2D" uid="uid://b4m2e6ahasccq" path="res://addons/shrimp_input/example/entities/boss/boss.jpg" id="2_et2vr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cy7pc"]
+radius = 108.01852
+
+[node name="Entity" unique_id=1010191855 instance=ExtResource("1_khsgp")]
+script = ExtResource("2_cy7pc")
+
+[node name="Texture" parent="." index="2" unique_id=605714463]
+scale = Vector2(0.17138483, 0.17138483)
+texture = ExtResource("2_et2vr")
+
+[node name="Hitbox" parent="." index="3" unique_id=1418019904]
+shape = SubResource("CircleShape2D_cy7pc")
+
+[node name="Anchor" parent="." index="4" unique_id=359015896]
+position = Vector2(0, -127)

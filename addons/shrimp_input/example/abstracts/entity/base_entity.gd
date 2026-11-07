@@ -14,7 +14,6 @@ enum Stance {
 @export var health: float = 100
 @export var stance: Stance = Stance.ENEMY
 @export var damageFactor: float = 1
-@export var critRate: float = 0
 @export var statsOverride: Dictionary[StatsDB.Stats, float] = {}
 
 @onready var texture: Sprite2D = $%Texture
@@ -38,6 +37,9 @@ var score: float = 0
 var isLiving: bool:
 	get:
 		return health > 0
+var healthPercent: float:
+	get:
+		return health / getStat(StatsDB.Stats.HEALTH_MAX)
 
 func _ready() -> void:
 	internalStats = StatsDB.create().merged(statsOverride, true)

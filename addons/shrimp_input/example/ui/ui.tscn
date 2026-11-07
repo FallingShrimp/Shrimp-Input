@@ -167,7 +167,7 @@ outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqex3"]
-bg_color = Color(0, 0.20627734, 0.3991601, 0.7019608)
+bg_color = Color(0, 0.16184393, 0.31147325, 0.7019608)
 corner_radius_top_left = 1000
 corner_radius_top_right = 1000
 corner_radius_bottom_right = 1000
@@ -175,6 +175,20 @@ corner_radius_bottom_left = 1000
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6daqi"]
 bg_color = Color(0, 0.5196078, 1, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o30de"]
+bg_color = Color(0.2939359, 0.24026063, 0, 0.7019608)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvddb"]
+bg_color = Color(1, 0.8653064, 0, 1)
 corner_radius_top_left = 1000
 corner_radius_top_right = 1000
 corner_radius_bottom_right = 1000
@@ -342,44 +356,74 @@ size_flags_horizontal = 8
 text = "—— 《传送门》"
 label_settings = SubResource("LabelSettings_o30de")
 
-[node name="Score" type="HBoxContainer" parent="WaveTip/Quotes" unique_id=680132382]
+[node name="Progresses" type="VBoxContainer" parent="WaveTip/Quotes" unique_id=1990679898]
+layout_mode = 2
+
+[node name="Score" type="HBoxContainer" parent="WaveTip/Quotes/Progresses" unique_id=680132382]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Tip" type="HBoxContainer" parent="WaveTip/Quotes/Score" unique_id=2120926262]
+[node name="Tip" type="HBoxContainer" parent="WaveTip/Quotes/Progresses/Score" unique_id=2120926262]
 layout_mode = 2
 alignment = 1
 
-[node name="CurrentScore" type="Label" parent="WaveTip/Quotes/Score/Tip" unique_id=857478175]
+[node name="CurrentScore" type="Label" parent="WaveTip/Quotes/Progresses/Score/Tip" unique_id=857478175]
 unique_name_in_owner = true
 layout_mode = 2
 text = "50"
 label_settings = SubResource("LabelSettings_hvddb")
 
-[node name="Sep" type="Label" parent="WaveTip/Quotes/Score/Tip" unique_id=111610246]
+[node name="Sep" type="Label" parent="WaveTip/Quotes/Progresses/Score/Tip" unique_id=111610246]
 layout_mode = 2
 text = "/"
 label_settings = SubResource("LabelSettings_hvddb")
 
-[node name="MaxScore" type="Label" parent="WaveTip/Quotes/Score/Tip" unique_id=649617006]
+[node name="MaxScore" type="Label" parent="WaveTip/Quotes/Progresses/Score/Tip" unique_id=649617006]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100"
 label_settings = SubResource("LabelSettings_hvddb")
 
-[node name="ScoreProgress" type="ProgressBar" parent="WaveTip/Quotes/Score" unique_id=1180498170]
+[node name="ScoreProgress" type="ProgressBar" parent="WaveTip/Quotes/Progresses/Score" unique_id=1180498170]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(500, 10)
+custom_minimum_size = Vector2(200, 10)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_nqex3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6daqi")
 value = 50.0
 show_percentage = false
 
-[node name="Lv" type="Label" parent="WaveTip/Quotes/Score" unique_id=462442589]
+[node name="Lv" type="Label" parent="WaveTip/Quotes/Progresses/Score" unique_id=462442589]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Lv.0"
+label_settings = SubResource("LabelSettings_hvddb")
+
+[node name="Wave" type="HBoxContainer" parent="WaveTip/Quotes/Progresses" unique_id=216619285]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Tip" type="Label" parent="WaveTip/Quotes/Progresses/Wave" unique_id=1720986674]
+layout_mode = 2
+text = "波次"
+label_settings = SubResource("LabelSettings_hvddb")
+
+[node name="WaveProgress" type="ProgressBar" parent="WaveTip/Quotes/Progresses/Wave" unique_id=385955353]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 10)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_o30de")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hvddb")
+max_value = 1.0
+show_percentage = false
+
+[node name="WavePercent" type="Label" parent="WaveTip/Quotes/Progresses/Wave" unique_id=998696464]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0%"
 label_settings = SubResource("LabelSettings_hvddb")
