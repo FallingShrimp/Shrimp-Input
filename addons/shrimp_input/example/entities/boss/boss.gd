@@ -10,6 +10,7 @@ func _ready() -> void:
 	for bullet in [shoot(DASH_BULLET, 30)]:
 		if bullet is ExampleShrimpBaseBullet:
 			bullet.scale *= 2
+	add_to_group("boss")
 
 func ai(_delta: float) -> void:
 	for i in get_tree().get_nodes_in_group("player"):

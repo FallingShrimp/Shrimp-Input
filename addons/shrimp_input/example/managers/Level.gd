@@ -27,8 +27,14 @@ func _physics_process(_delta: float) -> void:
 			totalEnemy = 1
 			restEnemyToSpawn = 1
 			spawn(BOSS, true)
+			await clock.seconds(1)
+			while get_tree().get_node_count_in_group("boss"):
+				await clock.seconds(2.5)
+				totalEnemy += 1
+				restEnemyToSpawn += 1
+				spawn(ENEMY, false)
 		else:
-			totalEnemy = floor(randi_range(10, 25) * (1 + level * 0.1))
+			totalEnemy = floor(randi_range(5, 15) * (1 + level * 0.1))
 			restEnemyToSpawn = totalEnemy
 			for i in restEnemyToSpawn:
 				await clock.seconds(1 / (1 + level * 0.15))
@@ -38,9 +44,9 @@ func spawn(scn: PackedScene, isBoss: bool):
 	var enemy = scn.instantiate() as ExampleShrimpBaseEntity
 	enemy.position = Vector2.from_angle(randf() * TAU) * 2000
 	if isBoss:
-		enemy.health = randf_range(100, 200) * level
-		enemy.damageFactor += 0.04 * level
-		enemy.score = 2000 + 1000 * level
+		enemy.health = randf_range(300, 500) * level
+		enemy.damageFactor += 0.03 * level
+		enemy.score = 1000 + 500 * level
 	else:
 		enemy.health = randf_range(25, 40) * level
 		enemy.damageFactor += 0.02 * level
