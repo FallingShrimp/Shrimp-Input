@@ -22,23 +22,24 @@ enum Stance {
 @onready var animator: AnimationPlayer = $%Animator
 @onready var hitbox: CollisionShape2D = $%Hitbox
 var effects: Array[ExampleShrimpBaseEffect] = []
-var providedStats: Dictionary:
-	get:
-		return (
-			effects
-				.map(func(e: ExampleShrimpBaseEffect): return e.provideStats())
-				.reduce(func(result: Dictionary, new: Dictionary): return result.merged(new, true), {})
-		)
 var dieing: bool = false
 var invincible: bool = false
-var stats: Dictionary[StatsDB.Stats, float]
+var internalStats: Dictionary[StatsDB.Stats, float]
+var stats: Dictionary:
+	get:
+		var result = internalStats.duplicate()
+		for effect in effects:
+			var modifiers: Dictionary[StatsDB.Stats, ValueModifier] = effect.provideStats()
+			for key in modifiers:
+				result[key] = modifiers[key].modify(result[key])
+		return result
 var score: float = 0
 var isLiving: bool:
 	get:
 		return health > 0
 
 func _ready() -> void:
-	stats = StatsDB.create().merged(statsOverride, true)
+	internalStats = StatsDB.create().merged(statsOverride, true)
 	setStat(StatsDB.Stats.HEALTH_MAX, health)
 	if stance == Stance.ENEMY:
 		add_to_group("enemy")
@@ -55,10 +56,28 @@ func ai(_delta: float):
 func die():
 	await get_tree().process_frame
 
-func getStat(key: StatsDB.Stats):
-	return stats.merged(providedStats, true).get(key, 0)
+func attachEffect(effect: ExampleShrimpBaseEffect):
+	var pos = effects.map(func(e: Object): return e.get_script()).find(effect.get_script())
+	if pos >= 0:
+		var e: ExampleShrimpBaseEffect = effects[pos]
+		e.layer += 1
+		e.attached(self)
+	else:
+		effects.append(effect)
+		effect.attached(self)
+func consumeEffect(effect: ExampleShrimpBaseEffect):
+	var pos = effects.map(func(e: Object): return e.get_script()).find(effect.get_script())
+	if pos >= 0:
+		var e: ExampleShrimpBaseEffect = effects[pos]
+		e.layer -= 1
+		e.consumed(self)
+		if e.layer <= 0:
+			effects.erase(e)
+			e.detached(self)
+func getStat(key: StatsDB.Stats) -> float:
+	return stats.get(key, 0)
 func setStat(key: StatsDB.Stats, value: float):
-	stats.set(key, value)
+	internalStats.set(key, value)
 func getMomentum() -> Vector2:
 	return linear_velocity * mass * getStat(StatsDB.Stats.MOMENTUM_MULT)
 func goDie():
