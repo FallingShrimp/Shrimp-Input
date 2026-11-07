@@ -4,7 +4,7 @@ const PRESET_REDMG = [Redamage, Def, HpMax, Reg, Dmg]
 const PRESET_BULLET = [Track, Multishot]
 const PRESET_NORMAL = [Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult, Def, Momentum, Dash, Track, Multishot]
 
-static var use = PRESET_BULLET
+static var use = PRESET_NORMAL
 static var buffs = use.map(func(e: GDScript): return e.new())
 
 class Dmg extends ExampleShrimpBuff:

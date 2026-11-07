@@ -1,7 +1,7 @@
 extends RigidBody2D
 class_name ExampleShrimpBaseEntity
 
-const MULTISHOT_MAXANGLE = 40
+const MULTISHOT_MAXANGLE = 60
 const MULTISHOT_PERANGLE = 10
 const PLAYER_SPEED = 3000
 const DAMAGE = preload("res://addons/shrimp_input/example/bullets/damage/damage.tscn")
@@ -111,9 +111,11 @@ func shoot(bullet: PackedScene, damage: float, rotationX: float = 0) -> Array[Ex
 	var count = 1 + getStat(StatsDB.Stats.MULTISHOT)
 	var totalAngle = deg_to_rad(min(MULTISHOT_MAXANGLE, (count - 1) * MULTISHOT_PERANGLE))
 	var split = totalAngle / (count - 1)
+	if count == 1:
+		split = 0
 	var recoil: float = 0
 	var result: Array[ExampleShrimpBaseBullet] = []
-	for i in range(count):
+	for i in count:
 		var instance = bullet.instantiate() as ExampleShrimpBaseBullet
 		instance.launcher = self
 		instance.damage = damage
@@ -121,8 +123,13 @@ func shoot(bullet: PackedScene, damage: float, rotationX: float = 0) -> Array[Ex
 		instance.position = position
 		instance.rotation = rotationX - totalAngle / 2 + i * split
 		recoil = instance.launchRecoil
-		get_tree().root.add_child.call_deferred(instance)
 		result.append(instance)
+		(
+			func():
+				for j in i:
+					await get_tree().process_frame
+				get_tree().root.add_child.call_deferred(instance)
+		).call()
 	apply_central_impulse(-Vector2.from_angle(rotationX) * recoil)
 	return result
 func hurt(total: float, crited: bool):
