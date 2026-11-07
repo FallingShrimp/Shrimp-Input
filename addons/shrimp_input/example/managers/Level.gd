@@ -1,7 +1,7 @@
 extends Node
 class_name ExampleShrimpLevelManager
 
-const BOSSWAVE = 2
+const BOSSWAVE = 5
 const ENEMY = preload("res://addons/shrimp_input/example/entities/enemy/enemy.tscn")
 const BOSS = preload("res://addons/shrimp_input/example/entities/boss/boss.tscn")
 
