@@ -31,27 +31,19 @@ var providedStats: Dictionary:
 		)
 var dieing: bool = false
 var invincible: bool = false
-var initialHealth: float
 var stats: Dictionary[StatsDB.Stats, float]
-var bounce: int = 0
-var reflect: int = 0
-var trackAngle: float = 0
-var thornsMult: float = 0
-var momentumMult: float = 1
-var defense: float = 0
 var score: float = 0
-var valueMult: float = 1
 var isLiving: bool:
 	get:
 		return health > 0
 
 func _ready() -> void:
 	stats = StatsDB.create().merged(statsOverride, true)
-	initialHealth = health
+	setStat(StatsDB.Stats.HEALTH_MAX, health)
 	if stance == Stance.ENEMY:
 		add_to_group("enemy")
 func _physics_process(delta: float) -> void:
-	healthBar.max_value = lerpf(healthBar.max_value, initialHealth, delta * 20)
+	healthBar.max_value = lerpf(healthBar.max_value, getStat(StatsDB.Stats.HEALTH_MAX), delta * 20)
 	healthBar.value = lerpf(healthBar.value, health, delta * 20)
 	if isLiving:
 		ai(delta)
@@ -66,14 +58,14 @@ func getStat(key: StatsDB.Stats):
 func setStat(key: StatsDB.Stats, value: float):
 	stats.set(key, value)
 func getMomentum() -> Vector2:
-	return linear_velocity * mass * momentumMult
+	return linear_velocity * mass * getStat(StatsDB.Stats.MOMENTUM_MULT)
 func goDie():
 	if dieing: return
 	dieing = true
 	await die()
 	match stance:
 		Stance.ENEMY:
-			ExampleShrimpUI.addScore(score * valueMult, get_tree().root)
+			ExampleShrimpUI.addScore(score * getStat(StatsDB.Stats.SCORE_MULT), get_tree().root)
 			queue_free()
 		Stance.PLAYER:
 			hitbox.disabled = true

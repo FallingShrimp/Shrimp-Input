@@ -13,7 +13,7 @@ func _ready() -> void:
 	damageFactor *= randf_range(0.5, 1.3)
 	speed *= randf_range(-0.25, 1.75)
 	health *= randf_range(0.4, 3)
-	valueMult *= randf_range(0.5, 7)
+	setStat(StatsDB.Stats.SCORE_MULT, getStat(StatsDB.Stats.SCORE_MULT) * randf_range(0.5, 2))
 	mass *= randf_range(0.75, 1.25)
 	super._ready()
 func ai(_delta: float) -> void:

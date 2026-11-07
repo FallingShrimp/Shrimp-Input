@@ -25,7 +25,7 @@ func _ready() -> void:
 	dashProgress.value = 1
 func ai(delta: float) -> void:
 	apply_central_force(getInputDirection() * 3000)
-	if health < initialHealth:
+	if health < getStat(StatsDB.Stats.HEALTH_MAX):
 		health += getStat(StatsDB.Stats.REGENERATION) * delta
 
 func defocus(state: bool):

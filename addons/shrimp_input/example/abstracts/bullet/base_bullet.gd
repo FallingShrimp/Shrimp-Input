@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 			goDie()
 		else:
 			if is_instance_valid(tracker):
-				rotation = rotate_toward(rotation, position.angle_to_point(tracker.position), deg_to_rad(launcher.trackAngle) * delta)
+				rotation = rotate_toward(rotation, position.angle_to_point(tracker.position), launcher.getStat(StatsDB.Stats.TRACK) * delta)
 			ai(delta)
 
 func ai(_delta: float) -> void:
@@ -68,7 +68,7 @@ func hitTest(body):
 	if !is_instance_valid(launcher): return
 	if body is StaticBody2D:
 		if !ignoreWall && body.is_in_group("wall"):
-			if bounce + launcher.bounce > 0:
+			if bounce + launcher.getStat(StatsDB.Stats.BOUNCE) > 0:
 				var e = ExampleShrimpBaseEntity.closet(self)
 				if is_instance_valid(e):
 					lock(e)
@@ -85,19 +85,19 @@ func hitTest(body):
 			if launcher is ExampleShrimpPlayer:
 				rate += launcher.getStat(StatsDB.Stats.LUCKY) * 0.015
 			var crit = randf() < rate
-			var totalDamage = getBaseDamage(body) * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
+			var totalDamage = getBaseDamage(body) * launcher.damageFactor * launcher.getStat(StatsDB.Stats.DAMAGE_MULT) * (1 + randf_range(-1, 1) * 0.2)
 			if crit:
 				totalDamage *= 2 + max(launcher.critRate - 0.85, 0) * 2
-			var dedmgMult = ((DEFENSE_FACTOR + (body.defense + int(body.thornsMult > 0)) * (1 + body.thornsMult)) / DEFENSE_FACTOR)
+			var dedmgMult = ((DEFENSE_FACTOR + (body.getStat(StatsDB.Stats.DEFENSE) + int(body.getStat(StatsDB.Stats.THORNS_MULT) > 0)) * (1 + body.getStat(StatsDB.Stats.THORNS_MULT))) / DEFENSE_FACTOR)
 			var defensedDamage = totalDamage / dedmgMult
 			totalDamage = overrideDamage(defensedDamage, body)
-			var redmg = body.damageFactor * totalDamage * dedmgMult * body.thornsMult
+			var redmg = body.damageFactor * totalDamage * dedmgMult * body.getStat(StatsDB.Stats.THORNS_MULT)
 			body.hurt(totalDamage, crit)
 			if body is ExampleShrimpPlayer:
 				launcher.hurt(redmg, false)
 			body.apply_central_impulse((body.position - position).normalized() * knockback * body.mass)
 			launcher.apply_central_impulse((position - body.position).normalized() * recoil * launcher.mass)
-			if reflect + launcher.reflect > 0:
+			if reflect + launcher.getStat(StatsDB.Stats.REFLECT) > 0:
 				var e = ExampleShrimpBaseEntity.closet(self, func(i: ExampleShrimpBaseEntity): return i != body)
 				if is_instance_valid(e):
 					lock(e)
