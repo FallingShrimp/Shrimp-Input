@@ -58,7 +58,8 @@ func ai(_delta: float):
 func die():
 	await get_tree().process_frame
 
-func attachEffect(eff: GDScript):
+func attachEffect(eff: GDScript, layer: int = 1):
+	if layer <= 0: return
 	var pos = effects.map(func(e: Object): return e.get_script()).find(eff)
 	if pos >= 0:
 		var e: ExampleShrimpBaseEffect = effects[pos]
@@ -69,6 +70,7 @@ func attachEffect(eff: GDScript):
 		add_child(e)
 		effects.append(e)
 		e.attached(self)
+	attachEffect(eff, layer - 1)
 func consumeEffect(eff: GDScript):
 	var pos = effects.map(func(e: Object): return e.get_script()).find(eff)
 	if pos >= 0:

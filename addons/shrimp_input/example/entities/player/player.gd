@@ -81,7 +81,7 @@ func attackLoop():
 				shoot(SHRIMP_BULLET, 10, getMouseAngle())
 			Actions.HEAVYATTACK:
 				playSound("ChargeStart")
-				shoot(FROZENSHRIMP_BULLET, 5, getMouseAngle())
+				shoot(FROZENSHRIMP_BULLET, 0, getMouseAngle())
 				if await attackInput.hold(Actions.HEAVYATTACK, 0.2):
 					charge.maxValue = MAX_CHARGE
 					charge.show()
