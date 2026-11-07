@@ -6,10 +6,10 @@ const ENEMY = preload("res://addons/shrimp_input/example/entities/enemy/enemy.ts
 
 func _ready() -> void:
 	super._ready()
-	setStat(StatsDB.Stats.MOVEMENT_SPEED, 0.75)
+	setStat(StatsDB.Stats.MOVEMENT_SPEED, 0.85)
 	for bullet in [shoot(DASH_BULLET, 30)]:
 		if bullet is ExampleShrimpBaseBullet:
-			bullet.scale *= Vector2(randf_range(0.8, 2), randf_range(0.9, 1.1))
+			bullet.scale *= 2
 
 func ai(_delta: float) -> void:
 	for i in get_tree().get_nodes_in_group("player"):
