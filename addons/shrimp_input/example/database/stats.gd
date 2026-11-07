@@ -32,7 +32,8 @@ enum Stats {
 	LUCKY,
 	SCORE_MULT,
 	DASH,
-	CRIT
+	CRIT,
+	VULNERABILITY
 }
 
 static var stats: Dictionary[Stats, Stat] = {
@@ -50,7 +51,8 @@ static var stats: Dictionary[Stats, Stat] = {
 	Stats.LUCKY: Stat.new(DataType.FLOAT, 0, "幸运"),
 	Stats.SCORE_MULT: Stat.new(DataType.PERCENT, 1, "得分倍率"),
 	Stats.DASH: Stat.new(DataType.PERCENT, 1, "闪避"),
-	Stats.CRIT: Stat.new(DataType.PERCENT, 0, "暴击")
+	Stats.CRIT: Stat.new(DataType.PERCENT, 0, "暴击"),
+	Stats.VULNERABILITY: Stat.new(DataType.PERCENT, 0, "易伤")
 }
 
 static func create() -> Dictionary[Stats, float]:

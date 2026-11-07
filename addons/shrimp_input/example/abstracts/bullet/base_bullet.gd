@@ -87,7 +87,7 @@ func hitTest(body):
 			if launcher is ExampleShrimpPlayer:
 				rate += launcher.getStat(StatsDB.Stats.LUCKY) * 0.015
 			var crit = randf() < rate
-			var totalDamage = getBaseDamage(body) * launcher.damageFactor * launcher.getStat(StatsDB.Stats.DAMAGE_MULT) * (1 + randf_range(-1, 1) * 0.2)
+			var totalDamage = getBaseDamage(body) * launcher.damageFactor * (1 + body.getStat(StatsDB.Stats.VULNERABILITY)) * launcher.getStat(StatsDB.Stats.DAMAGE_MULT) * (1 + randf_range(-1, 1) * 0.2)
 			if crit:
 				totalDamage *= 2 + max(launcher.critRate - 0.85, 0) * 2
 			var dedmgMult = ((DEFENSE_FACTOR + (body.getStat(StatsDB.Stats.DEFENSE) + int(body.getStat(StatsDB.Stats.THORNS_MULT) > 0)) * (1 + body.getStat(StatsDB.Stats.THORNS_MULT))) / DEFENSE_FACTOR)
