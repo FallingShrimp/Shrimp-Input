@@ -13,9 +13,8 @@ func _physics_process(_delta: float) -> void:
 		level += 1
 		ExampleShrimpUI.level(level)
 		restEnemyToSpawn = floor(randi_range(20, 50) * (1 + level * 0.15))
-		await clock.seconds(1)
 		for i in restEnemyToSpawn:
-			await clock.seconds(1)
+			await clock.seconds(1 / (1 + level * 0.15))
 			var enemy = ENEMY.instantiate() as ExampleShrimpBaseEntity
 			enemy.health = randf_range(25, 40) * level
 			enemy.position = Vector2.from_angle(randf() * TAU) * 2000
