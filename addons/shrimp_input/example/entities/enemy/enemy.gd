@@ -9,7 +9,7 @@ func _ready() -> void:
 	damageFactor *= randf_range(0.5, 1.3)
 	mass *= randf_range(0.75, 1.25)
 	super._ready()
-	for bullet in [shoot(DASH_BULLET, 30)]:
+	for bullet in shoot(DASH_BULLET, 30):
 		if bullet is ExampleShrimpBaseBullet:
 			bullet.scale *= Vector2(randf_range(0.8, 2), randf_range(0.9, 1.1))
 	texture.texture = load("%s/%s" % [TEXTURE_DIR, Array(ResourceLoader.list_directory(TEXTURE_DIR)).pick_random()])

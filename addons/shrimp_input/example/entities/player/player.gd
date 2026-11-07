@@ -52,7 +52,7 @@ func dashLoop():
 		apply_central_impulse(dir.normalized() * 2500)
 		playSound("Dash")
 		var invincibleTime = DASH_COOLDOWN * DASH_INVINCIBLE * getStat(StatsDB.Stats.DASH)
-		for d in [shoot(DASH_BULLET, 10, dir.angle())]:
+		for d in shoot(DASH_BULLET, 10, dir.angle()):
 			if d is ExampleShrimpBaseBullet:
 				d.lifeTime = invincibleTime
 				d.lockRotation = true

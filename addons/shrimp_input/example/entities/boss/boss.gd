@@ -7,7 +7,7 @@ const ENEMY = preload("res://addons/shrimp_input/example/entities/enemy/enemy.ts
 func _ready() -> void:
 	super._ready()
 	setStat(StatsDB.Stats.MOVEMENT_SPEED, 0.85)
-	for bullet in [shoot(DASH_BULLET, 30)]:
+	for bullet in shoot(DASH_BULLET, 30):
 		if bullet is ExampleShrimpBaseBullet:
 			bullet.scale *= 2
 	add_to_group("boss")

@@ -1,10 +1,10 @@
 class_name ExampleShrimpBuffs
 
 const PRESET_REDMG = [Redamage, Def, HpMax, Reg, Dmg]
-const PRESET_TRACK = [Track]
-const PRESET_NORMAL = [Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult, Def, Momentum, Dash, Track]
+const PRESET_BULLET = [Track, Multishot]
+const PRESET_NORMAL = [Crit, Dmg, Reg, Luck, AtkSpd, Heal, HpMax, Bounce, Reflect, Redamage, ScoreMult, Def, Momentum, Dash, Track, Multishot]
 
-static var use = PRESET_NORMAL
+static var use = PRESET_BULLET
 static var buffs = use.map(func(e: GDScript): return e.new())
 
 class Dmg extends ExampleShrimpBuff:
@@ -118,3 +118,10 @@ class Track extends ExampleShrimpBuff:
 		return Quality.RARE
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
 		return {StatsDB.Stats.TRACK: deg_to_rad(randf_range(5, 18))}
+class Multishot extends ExampleShrimpBuff:
+	func getName() -> StringName:
+		return "枪林弹雨"
+	func getQuality() -> Quality:
+		return Quality.EPIC
+	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
+		return {StatsDB.Stats.MULTISHOT: randi_range(1, 3)}
