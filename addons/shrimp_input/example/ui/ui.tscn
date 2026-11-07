@@ -66,11 +66,17 @@ content_margin_top = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(0, 0.74509805, 0.25882354, 0.6)
 
+[sub_resource type="LabelSettings" id="LabelSettings_yfsxj"]
+resource_local_to_scene = true
+font_size = 45
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_807fw"]
 resource_local_to_scene = true
 font_size = 40
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
+outline_size = 8
+outline_color = Color(0.2676298, 0.2676298, 0.2676298, 1)
 
 [sub_resource type="Animation" id="Animation_807fw"]
 length = 0.001
@@ -203,13 +209,24 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_x0nlo")
 
-[node name="Wrapper" type="HBoxContainer" parent="Anchor2/BuffNotice" unique_id=342655703]
+[node name="Wrapper" type="VBoxContainer" parent="Anchor2/BuffNotice" unique_id=1954172756]
 layout_mode = 2
 size_flags_horizontal = 4
+alignment = 1
 
-[node name="Buff" type="Label" parent="Anchor2/BuffNotice/Wrapper" unique_id=1235728813]
+[node name="Title" type="Label" parent="Anchor2/BuffNotice/Wrapper" unique_id=1235728813]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "%TITLE%"
+label_settings = SubResource("LabelSettings_yfsxj")
+
+[node name="Buff" type="Label" parent="Anchor2/BuffNotice/Wrapper" unique_id=1386465077]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 text = "%BUFF%"
 label_settings = SubResource("LabelSettings_807fw")
 

@@ -14,4 +14,4 @@ func getName() -> StringName
 @abstract
 func getQuality() -> Quality
 @abstract
-func execute(entity: ExampleShrimpPlayer) -> void
+func execute(entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]

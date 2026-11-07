@@ -90,6 +90,7 @@ static var instance: ExampleShrimpUI
 @onready var levelAnimator: AnimationPlayer = $%LevelAnimator
 @onready var levelLabel: Label = $%Level
 @onready var buffAnimator: AnimationPlayer = $%BuffAnimator
+@onready var titleLabel: Label = $%Title
 @onready var buffLabel: Label = $%Buff
 @onready var buffNotice: Control = $%BuffNotice
 @onready var waveTip: Label = $%Wave
@@ -127,10 +128,11 @@ static func addScore(amount: float, where: Node):
 	instance.maxScoreLabel.text = "%d" % instance.rewardMax
 	instance.scoreProgress.max_value = instance.rewardMax
 	instance.lvLabel.text = "Lv.%d" % instance.scoredTimes
-static func buff(tip: String, color: Color):
+static func buff(title: StringName, content: String, color: Color):
 	color.a *= 0.6
 	instance.buffBox.bg_color = color
-	instance.buffLabel.text = tip
+	instance.titleLabel.text = title
+	instance.buffLabel.text = content
 	instance.buffAnimator.stop()
 	instance.buffAnimator.play("buff")
 static func level(count: int):

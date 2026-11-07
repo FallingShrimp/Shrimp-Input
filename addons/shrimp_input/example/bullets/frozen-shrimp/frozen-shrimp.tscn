@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://oy3cq4noqsb8"]
+
+[ext_resource type="PackedScene" uid="uid://bt4xclj7ja1od" path="res://addons/shrimp_input/example/abstracts/bullet/base_bullet.tscn" id="1_67i5s"]
+[ext_resource type="Shader" uid="uid://53nd2yesr42" path="res://addons/shrimp_input/example/bullets/frozen-shrimp/mixed_modulate.gdshader" id="2_4rjk6"]
+[ext_resource type="Texture2D" uid="uid://do6qddxx5t4g8" path="res://addons/shrimp_input/example/bullets/shrimp/shrimp.png" id="3_4voct"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cqp6f"]
+shader = ExtResource("2_4rjk6")
+shader_parameter/color = Color(0, 0.306108, 1, 1)
+shader_parameter/weight = 0.67999998480064
+
+[sub_resource type="Curve" id="Curve_4rjk6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 0.7), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4voct"]
+curve = SubResource("Curve_4rjk6")
+
+[sub_resource type="Curve" id="Curve_cqp6f"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3r86n"]
+curve = SubResource("Curve_cqp6f")
+
+[sub_resource type="Curve" id="Curve_r5mkk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tmtag"]
+curve = SubResource("Curve_r5mkk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6018i"]
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+angle_curve = SubResource("CurveTexture_3r86n")
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.65
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_tmtag")
+alpha_curve = SubResource("CurveTexture_4voct")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3r86n"]
+radius = 58.00862
+
+[node name="Bullet" unique_id=483333088 instance=ExtResource("1_67i5s")]
+
+[node name="Texture" parent="." index="1" unique_id=2039264544]
+material = SubResource("ShaderMaterial_cqp6f")
+scale = Vector2(0.21598604, 0.21598604)
+texture = ExtResource("3_4voct")
+
+[node name="Trail" type="GPUParticles2D" parent="Texture" index="0" unique_id=1595222829]
+z_index = -1
+material = SubResource("ShaderMaterial_cqp6f")
+position = Vector2(-23.149645, -9.259858)
+texture = ExtResource("3_4voct")
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_6018i")
+
+[node name="Hitbox" parent="." index="2" unique_id=540549799]
+shape = SubResource("CircleShape2D_3r86n")

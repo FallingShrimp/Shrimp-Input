@@ -14,15 +14,25 @@ enum Stance {
 @export var stance: Stance = Stance.ENEMY
 @export var damageFactor: float = 1
 @export var critRate: float = 0
+@export var statsOverride: Dictionary[StatsDB.Stats, float] = {}
 
 @onready var texture: Sprite2D = $%Texture
 @onready var sounds: Node2D = $%Sounds
 @onready var healthBar: ProgressBar = $%Health
 @onready var animator: AnimationPlayer = $%Animator
 @onready var hitbox: CollisionShape2D = $%Hitbox
+var effects: Array[ExampleShrimpBaseEffect] = []
+var providedStats: Dictionary:
+	get:
+		return (
+			effects
+				.map(func(e: ExampleShrimpBaseEffect): return e.provideStats())
+				.reduce(func(result: Dictionary, new: Dictionary): return result.merged(new, true), {})
+		)
 var dieing: bool = false
 var invincible: bool = false
 var initialHealth: float
+var stats: Dictionary[StatsDB.Stats, float]
 var bounce: int = 0
 var reflect: int = 0
 var trackAngle: float = 0
@@ -36,6 +46,7 @@ var isLiving: bool:
 		return health > 0
 
 func _ready() -> void:
+	stats = StatsDB.create().merged(statsOverride, true)
 	initialHealth = health
 	if stance == Stance.ENEMY:
 		add_to_group("enemy")
@@ -50,6 +61,10 @@ func ai(_delta: float):
 func die():
 	await get_tree().process_frame
 
+func getStat(key: StatsDB.Stats):
+	return stats.merged(providedStats, true).get(key, 0)
+func setStat(key: StatsDB.Stats, value: float):
+	stats.set(key, value)
 func getMomentum() -> Vector2:
 	return linear_velocity * mass * momentumMult
 func goDie():

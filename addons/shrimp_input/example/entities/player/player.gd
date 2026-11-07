@@ -79,26 +79,27 @@ func attackLoop():
 	while true:
 		attackInput.clock.timeScale = attackSpeed
 		await attackInput.clock.frame()
-		await attackInput.press(Actions.ATTACK)
-		playSound("Attack")
-		attackInput.buffer.consume(1)
-		shoot(SHRIMP_BULLET, 10, getMouseAngle())
 		var hold = 0
-		if await attackInput.hold(Actions.ATTACK, 0.2):
-			charge.maxValue = MAX_CHARGE
-			charge.show()
-			while attackInput.charge(Actions.ATTACK, MAX_CHARGE):
-				hold += await attackInput.clock.frame()
-				charge.value = hold
-			if hold >= MAX_CHARGE:
-				playSound("Charged")
-			await attackInput.release(Actions.ATTACK)
-			playSound("HeavyShot")
-			shoot(FIRESHRIMP_BULLET, 10 + hold / MAX_CHARGE * 50, getMouseAngle())
-			charge.hide()
-			charge.value = 0
+		match await attackInput.presses([Actions.HEAVYATTACK, Actions.ATTACK]):
+			Actions.ATTACK:
+				playSound("Attack")
+				attackInput.buffer.consume(1)
+				shoot(SHRIMP_BULLET, 10, getMouseAngle())
+			Actions.HEAVYATTACK:
+				if await attackInput.hold(Actions.HEAVYATTACK, 0.2):
+					charge.maxValue = MAX_CHARGE
+					charge.show()
+					while attackInput.charge(Actions.HEAVYATTACK, MAX_CHARGE):
+						hold += await attackInput.clock.frame()
+						charge.value = hold
+					if hold >= MAX_CHARGE:
+						playSound("Charged")
+					await attackInput.release(Actions.HEAVYATTACK)
+					playSound("HeavyShot")
+					shoot(FIRESHRIMP_BULLET, 10 + hold / MAX_CHARGE * 50, getMouseAngle())
+					charge.hide()
+					charge.value = 0
 		hold = 0
 		while attackInput.charge(Actions.ROOT, 0.3):
 			hold += await attackInput.clock.frame()
 			attackProgress.value = 1 - hold / 0.3
-		await attackInput.release(Actions.ATTACK)

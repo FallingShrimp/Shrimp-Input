@@ -24,8 +24,12 @@ func _ready() -> void:
 		func(e):
 			if e is ExampleShrimpPlayer:
 				e.playSound("Collect")
-				buff.execute(e)
-				ExampleShrimpUI.buff(buff.getName(), color)
+				var tip = []
+				var stats = buff.execute(e)
+				for key in stats:
+					e.setStat(key, e.getStat(key) + stats[key])
+					tip.append("%s+%s" % [StatsDB.stats[key].name, StatsDB.format(stats[key], StatsDB.stats[key].dataType)])
+				ExampleShrimpUI.buff(buff.getName(), "\n".join(tip), color)
 				queue_free()
 	)
 
