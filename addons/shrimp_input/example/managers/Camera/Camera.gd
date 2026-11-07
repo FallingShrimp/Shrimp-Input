@@ -16,6 +16,14 @@ func _physics_process(delta: float) -> void:
 		if clock.currentTick() - shaker.spawnWhen <= shaker.duration:
 			result.append(shaker)
 	shakers = result
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			match event.button_index:
+				MOUSE_BUTTON_WHEEL_UP:
+					zoom *= 1.1
+				MOUSE_BUTTON_WHEEL_DOWN:
+					zoom *= 0.9
 
 static func addShake(shaker: ExampleShrimpBaseShaker):
 	shaker.spawnWhen = instance.clock.currentTick()

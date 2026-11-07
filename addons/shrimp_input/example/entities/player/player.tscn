@@ -125,6 +125,7 @@ texture = ExtResource("14_vy5cd")
 [node name="DashTrail" type="GPUParticles2D" parent="Texture" index="0" unique_id=182551101]
 unique_name_in_owner = true
 z_index = -1
+emitting = false
 amount = 10
 texture = ExtResource("15_vy5cd")
 lifetime = 0.3
