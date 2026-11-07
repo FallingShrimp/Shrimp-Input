@@ -4,6 +4,7 @@ var timer: Timer
 
 func _ready() -> void:
 	timer = Timer.new()
+	timer.wait_time = 0.3
 	add_child(timer)
 	timer.start()
 
@@ -17,4 +18,4 @@ func attached(entity: ExampleShrimpBaseEntity):
 func detached(entity: ExampleShrimpBaseEntity):
 	entity.texture.modulate /= Color.RED
 func update(_entity: ExampleShrimpBaseEntity, _delta: float):
-	timer.wait_time = 0.3 / (1 + 0.25 * layer)
+	timer.wait_time = 0.3 / (1 + 0.05 * layer)
