@@ -23,10 +23,9 @@ func _ready() -> void:
 	add_child(Actions.ROOT)
 	add_to_group("player")
 	dashProgress.value = 1
-func ai(delta: float) -> void:
-	apply_central_force(getInputDirection() * 3000)
-	if health < getStat(StatsDB.Stats.HEALTH_MAX):
-		health += getStat(StatsDB.Stats.REGENERATION) * delta
+	attackProgress.value = 0
+func ai(_delta: float) -> void:
+	apply_central_force(getInputDirection() * 3000 * getStat(StatsDB.Stats.MOVEMENT_SPEED))
 
 func defocus(state: bool):
 	set_collision_mask_value(1, !state)

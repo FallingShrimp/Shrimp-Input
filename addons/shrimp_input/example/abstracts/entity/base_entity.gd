@@ -47,6 +47,8 @@ func _physics_process(delta: float) -> void:
 	healthBar.value = lerpf(healthBar.value, health, delta * 20)
 	if isLiving:
 		ai(delta)
+		if health < getStat(StatsDB.Stats.HEALTH_MAX):
+			health += getStat(StatsDB.Stats.REGENERATION) * delta
 
 func ai(_delta: float):
 	pass

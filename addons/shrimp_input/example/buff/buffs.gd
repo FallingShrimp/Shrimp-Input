@@ -13,14 +13,14 @@ class Dmg extends ExampleShrimpBuff:
 	func getQuality() -> Quality:
 		return Quality.NORMAL
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.DAMAGE_MULT: randf_range(0.08, 0.25)}
+		return {StatsDB.Stats.DAMAGE_MULT: randf_range(0.12, 0.30)}
 class ScoreMult extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "惹人爱"
 	func getQuality() -> Quality:
 		return Quality.EPIC
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.SCORE_MULT: 0.08}
+		return {StatsDB.Stats.SCORE_MULT: 0.12}
 class Crit extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "会心一击！"
@@ -106,7 +106,10 @@ class Dash extends ExampleShrimpBuff:
 	func getQuality() -> Quality:
 		return Quality.LEGENDARY
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.DASH: 0.15}
+		return {
+			StatsDB.Stats.DASH: 0.15,
+			StatsDB.Stats.MOVEMENT_SPEED: 0.05,
+		}
 class Track extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "精准制敌"
