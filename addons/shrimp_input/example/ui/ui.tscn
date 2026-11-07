@@ -105,7 +105,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_lp40m"]
 resource_name = "level"
-length = 2.0
+length = 3.0
 step = 0.05
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -116,7 +116,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0),
 "points": PackedFloat32Array(1e-05, 0, 0, 0.15, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1e-05, 0, 0, 0.15, 0),
-"times": PackedFloat32Array(0, 0.5, 1.5, 2)
+"times": PackedFloat32Array(0, 0.5, 2.5, 3)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -127,7 +127,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0),
 "points": PackedFloat32Array(0, 0, 0, 0.15, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0.15, 0),
-"times": PackedFloat32Array(0, 0.5, 1.5, 2)
+"times": PackedFloat32Array(0, 0.5, 2.5, 3)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_807fw"]
@@ -140,6 +140,12 @@ _data = {
 content_margin_top = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(1, 0, 0, 0.6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uydfu"]
+resource_local_to_scene = true
+font_size = 18
+outline_size = 8
+outline_color = Color(0.2676298, 0.2676298, 0.2676298, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_x0nlo"]
 font_size = 30
@@ -272,25 +278,38 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lp40m")
 
-[node name="Wrapper" type="HBoxContainer" parent="Anchor/LevelNotice" unique_id=1571918662]
+[node name="Wrapper" type="VBoxContainer" parent="Anchor/LevelNotice" unique_id=457478753]
+layout_mode = 2
+
+[node name="Wrapper" type="HBoxContainer" parent="Anchor/LevelNotice/Wrapper" unique_id=1571918662]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Tip" type="Label" parent="Anchor/LevelNotice/Wrapper" unique_id=1745690868]
+[node name="Tip" type="Label" parent="Anchor/LevelNotice/Wrapper/Wrapper" unique_id=1745690868]
 layout_mode = 2
 text = "第"
 label_settings = SubResource("LabelSettings_807fw")
 
-[node name="Level" type="Label" parent="Anchor/LevelNotice/Wrapper" unique_id=619907165]
+[node name="Level" type="Label" parent="Anchor/LevelNotice/Wrapper/Wrapper" unique_id=619907165]
 unique_name_in_owner = true
 layout_mode = 2
-text = "1"
+text = "%NEXT%"
 label_settings = SubResource("LabelSettings_807fw")
 
-[node name="Tip2" type="Label" parent="Anchor/LevelNotice/Wrapper" unique_id=468034651]
+[node name="Tip2" type="Label" parent="Anchor/LevelNotice/Wrapper/Wrapper" unique_id=468034651]
 layout_mode = 2
 text = "波即将开始！"
 label_settings = SubResource("LabelSettings_807fw")
+
+[node name="Wrapper2" type="HBoxContainer" parent="Anchor/LevelNotice/Wrapper" unique_id=1523712106]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Boss" type="Label" parent="Anchor/LevelNotice/Wrapper/Wrapper2" unique_id=283344564]
+unique_name_in_owner = true
+layout_mode = 2
+text = "%BOSS%"
+label_settings = SubResource("LabelSettings_uydfu")
 
 [node name="WaveTip" type="VBoxContainer" parent="." unique_id=1815897257]
 layout_mode = 1
@@ -409,7 +428,7 @@ alignment = 1
 
 [node name="Tip" type="Label" parent="WaveTip/Quotes/Progresses/Wave" unique_id=1720986674]
 layout_mode = 2
-text = "波次"
+text = "剩余敌人"
 label_settings = SubResource("LabelSettings_hvddb")
 
 [node name="WaveProgress" type="ProgressBar" parent="WaveTip/Quotes/Progresses/Wave" unique_id=385955353]

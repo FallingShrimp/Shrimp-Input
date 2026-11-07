@@ -89,6 +89,7 @@ static var instance: ExampleShrimpUI
 
 @onready var levelAnimator: AnimationPlayer = $%LevelAnimator
 @onready var levelLabel: Label = $%Level
+@onready var bossLabel: Label = $%Boss
 @onready var buffAnimator: AnimationPlayer = $%BuffAnimator
 @onready var titleLabel: Label = $%Title
 @onready var buffLabel: Label = $%Buff
@@ -140,10 +141,14 @@ static func buff(title: StringName, content: String, color: Color):
 	instance.buffLabel.text = content
 	instance.buffAnimator.stop()
 	instance.buffAnimator.play("buff")
-static func level(count: int):
+static func level(count: int, boss: int):
 	var quote = quotes.pick_random()
 	instance.quoteLabel.text = quote.quote
 	instance.authorLabel.text = "—— %s" % quote.author
 	instance.waveTip.text = str(count)
 	instance.levelLabel.text = str(count)
 	instance.levelAnimator.play("level")
+	if boss == ExampleShrimpLevelManager.BOSSWAVE:
+		instance.bossLabel.text = "Boss即将来袭"
+	else:
+		instance.bossLabel.text = "Boss将在 %d 波后到来" % boss

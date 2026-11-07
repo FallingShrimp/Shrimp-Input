@@ -22,14 +22,14 @@ func _physics_process(_delta: float) -> void:
 	ExampleShrimpUI.instance.progress = 1.0 * (restEnemyToSpawn + enemies.reduce(func(a, b): return a + b, 0)) / totalEnemy
 	if restEnemyToSpawn <= 0 && enemyCount == 0:
 		level += 1
-		ExampleShrimpUI.level(level)
+		ExampleShrimpUI.level(level, BOSSWAVE - level % BOSSWAVE)
 		if level % BOSSWAVE == 0:
 			totalEnemy = 1
 			restEnemyToSpawn = 1
 			spawn(BOSS, true)
 			await clock.seconds(1)
 			while get_tree().get_node_count_in_group("boss"):
-				await clock.seconds(2.5)
+				await clock.seconds(3)
 				totalEnemy += 1
 				restEnemyToSpawn += 1
 				spawn(ENEMY, false)
