@@ -42,12 +42,13 @@ func _physics_process(_delta: float) -> void:
 
 func spawn(scn: PackedScene, isBoss: bool):
 	var enemy = scn.instantiate() as ExampleShrimpBaseEntity
-	enemy.position = Vector2.from_angle(randf() * TAU) * 2000
 	if isBoss:
+		enemy.position = Vector2.ZERO
 		enemy.health = randf_range(300, 500) * level
 		enemy.damageFactor += 0.03 * level
 		enemy.score = 1000 + 500 * level
 	else:
+		enemy.position = Vector2.from_angle(randf() * TAU) * 2000
 		enemy.health = randf_range(25, 40) * level
 		enemy.damageFactor += 0.02 * level
 		enemy.score = 100 + 25 * level

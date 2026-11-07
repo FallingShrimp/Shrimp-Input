@@ -13,8 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://xyfub7a16d8e" path="res://addons/shrimp_input/example/entities/player/sounds/collect.wav" id="11_6440c"]
 [ext_resource type="AudioStream" uid="uid://s8mo8rl4xbq4" path="res://addons/shrimp_input/example/entities/player/sounds/charge-start.wav" id="11_klb6x"]
 [ext_resource type="AudioStream" uid="uid://cqaogb5iab5xk" path="res://addons/shrimp_input/example/entities/player/sounds/charge-end.ogg" id="12_l08ey"]
-[ext_resource type="Texture2D" uid="uid://d0c220qfj6s1d" path="res://addons/shrimp_input/example/entities/player/kernyr.png" id="13_klb6x"]
 [ext_resource type="Texture2D" uid="uid://f7sxbh6gx0c7" path="res://addons/shrimp_input/example/entities/enemy/peoples/releaflyse/guozi.jpg" id="14_vy5cd"]
+[ext_resource type="Texture2D" uid="uid://b4m2e6ahasccq" path="res://addons/shrimp_input/example/entities/boss/boss.jpg" id="15_vy5cd"]
 
 [sub_resource type="Curve" id="Curve_l08ey"]
 _data = [Vector2(0, 0.75), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -26,8 +26,8 @@ curve = SubResource("Curve_l08ey")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l08ey"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-scale_min = 0.42
-scale_max = 0.42
+scale_min = 0.12
+scale_max = 0.12
 alpha_curve = SubResource("CurveTexture_klb6x")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vy5cd"]
@@ -119,15 +119,14 @@ stream = ExtResource("8_ai477")
 stream = ExtResource("11_6440c")
 
 [node name="Texture" parent="." index="7" unique_id=605714463]
-scale = Vector2(0.107663274, 0.107663274)
+scale = Vector2(0.12001296, 0.12001296)
 texture = ExtResource("14_vy5cd")
 
 [node name="DashTrail" type="GPUParticles2D" parent="Texture" index="0" unique_id=182551101]
 unique_name_in_owner = true
 z_index = -1
-emitting = false
 amount = 10
-texture = ExtResource("13_klb6x")
+texture = ExtResource("15_vy5cd")
 lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_l08ey")
 
