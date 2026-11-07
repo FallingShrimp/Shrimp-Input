@@ -4,7 +4,7 @@ var timer: Timer
 
 func _ready() -> void:
 	timer = Timer.new()
-	timer.wait_time = 1
+	timer.wait_time = 0.5
 	add_child(timer)
 	timer.start()
 
@@ -12,7 +12,7 @@ func attached(entity: ExampleShrimpBaseEntity):
 	entity.texture.modulate *= Color.BLUE
 	timer.timeout.connect(
 		func():
-			entity.hurt(2 * layer, false)
+			entity.hurt(0.5 * layer, false)
 			entity.consumeEffect(get_script())
 	)
 func detached(entity: ExampleShrimpBaseEntity):
