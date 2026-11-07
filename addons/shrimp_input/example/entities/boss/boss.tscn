@@ -5,17 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://dg1l535mrog1v" path="res://addons/shrimp_input/example/entities/boss/boss2.jpg" id="3_cy7pc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cy7pc"]
-radius = 108.01852
+radius = 160.11246
 
 [node name="Entity" unique_id=1010191855 instance=ExtResource("1_khsgp")]
 script = ExtResource("2_cy7pc")
 
 [node name="Texture" parent="." index="2" unique_id=605714463]
-scale = Vector2(0.37906992, 0.37906992)
+scale = Vector2(0.5679136, 0.5679136)
 texture = ExtResource("3_cy7pc")
 
 [node name="Hitbox" parent="." index="3" unique_id=1418019904]
 shape = SubResource("CircleShape2D_cy7pc")
 
 [node name="Anchor" parent="." index="4" unique_id=359015896]
-position = Vector2(0, -127)
+position = Vector2(0, -195)
+
+[node name="Health" parent="Anchor" index="0" unique_id=103602856]
+custom_minimum_size = Vector2(450, 25)

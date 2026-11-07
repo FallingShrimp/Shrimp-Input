@@ -122,6 +122,6 @@ class Multishot extends ExampleShrimpBuff:
 	func getName() -> StringName:
 		return "枪林弹雨"
 	func getQuality() -> Quality:
-		return Quality.EPIC
+		return Quality.LEGENDARY
 	func execute(_entity: ExampleShrimpPlayer) -> Dictionary[StatsDB.Stats, float]:
-		return {StatsDB.Stats.MULTISHOT: randi_range(1, 3)}
+		return {StatsDB.Stats.MULTISHOT: 1}
