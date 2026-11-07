@@ -5,6 +5,8 @@ var layer: int = 1
 
 func attached(entity: ExampleShrimpBaseEntity):
 	return entity
+func layered(entity: ExampleShrimpBaseEntity):
+	return entity
 func consumed(entity: ExampleShrimpBaseEntity):
 	return entity
 func detached(entity: ExampleShrimpBaseEntity):

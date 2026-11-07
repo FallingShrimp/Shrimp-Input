@@ -26,7 +26,7 @@ func _ready() -> void:
 	dashProgress.value = 1
 	attackProgress.value = 0
 func ai(_delta: float) -> void:
-	apply_central_force(getInputDirection() * 3000 * getStat(StatsDB.Stats.MOVEMENT_SPEED))
+	accelerate(getInputDirection())
 
 func defocus(state: bool):
 	set_collision_mask_value(1, !state)
@@ -81,7 +81,7 @@ func attackLoop():
 				shoot(SHRIMP_BULLET, 10, getMouseAngle())
 			Actions.HEAVYATTACK:
 				playSound("ChargeStart")
-				shoot(FROZENSHRIMP_BULLET, 0, getMouseAngle())
+				shoot(FROZENSHRIMP_BULLET, 1, getMouseAngle())
 				if await attackInput.hold(Actions.HEAVYATTACK, 0.2):
 					charge.maxValue = MAX_CHARGE
 					charge.show()

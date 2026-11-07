@@ -9,15 +9,15 @@ func _ready() -> void:
 	timer.start()
 
 func attached(entity: ExampleShrimpBaseEntity):
-	entity.modulate *= Color.BLUE
+	entity.texture.modulate *= Color.BLUE
 	timer.timeout.connect(
 		func():
 			entity.hurt(3 * layer, false)
 			entity.consumeEffect(get_script())
 	)
 func detached(entity: ExampleShrimpBaseEntity):
-	entity.modulate /= Color.BLUE
+	entity.texture.modulate /= Color.BLUE
 func provideStats() -> Dictionary[StatsDB.Stats, ValueModifier]:
 	return {
-		StatsDB.Stats.MOVEMENT_SPEED: ValueModifier.new(ValueModifier.Operation.MULTIPLY, 0.1)
+		StatsDB.Stats.MOVEMENT_SPEED: ValueModifier.new(ValueModifier.Operation.MULTIPLY, 1 / (1 + 0.25 * layer))
 	}

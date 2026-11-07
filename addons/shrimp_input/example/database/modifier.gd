@@ -16,7 +16,14 @@ func _init(operationX: Operation, valueX: float) -> void:
 	value = valueX
 
 func modify(base: float) -> float:
-	var result = base
+	var result: float = base
+	match operation:
+		Operation.ADD:
+			result += value
+		Operation.MULTIPLY:
+			result *= value
+		Operation.EXP:
+			result **= value
 	if is_instance_valid(next):
 		return next.modify(result)
 	else:

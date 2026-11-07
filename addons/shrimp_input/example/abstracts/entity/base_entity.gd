@@ -1,6 +1,7 @@
 extends RigidBody2D
 class_name ExampleShrimpBaseEntity
 
+const PLAYER_SPEED = 3000
 const DAMAGE = preload("res://addons/shrimp_input/example/bullets/damage/damage.tscn")
 const BUFFBALL = preload("res://addons/shrimp_input/example/buff/buff_ball.tscn")
 var Actions = ExampleShrimpActions
@@ -58,13 +59,15 @@ func ai(_delta: float):
 func die():
 	await get_tree().process_frame
 
+func accelerate(direction: Vector2):
+	apply_central_force(direction.normalized() * PLAYER_SPEED * getStat(StatsDB.Stats.MOVEMENT_SPEED))
 func attachEffect(eff: GDScript, layer: int = 1):
 	if layer <= 0: return
 	var pos = effects.map(func(e: Object): return e.get_script()).find(eff)
 	if pos >= 0:
 		var e: ExampleShrimpBaseEffect = effects[pos]
 		e.layer += 1
-		e.attached(self)
+		e.layered(self)
 	else:
 		var e = eff.new()
 		add_child(e)
