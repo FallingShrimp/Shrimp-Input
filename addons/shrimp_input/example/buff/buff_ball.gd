@@ -40,7 +40,7 @@ func gacha(player: ExampleShrimpPlayer) -> ExampleShrimpBuff:
 			.reduce(
 				func(cur: Dictionary, next: ExampleShrimpBuff):
 					var q = next.getQuality()
-					return cur.merged({next: max(1, qualityWeight[q] + qualityLuckyOffset[q] * player.lucky)}),
+					return cur.merged({next: max(1, qualityWeight[q] + qualityLuckyOffset[q] * player.getStat(StatsDB.Stats.LUCKY))}),
 				{}
 			)
 	)

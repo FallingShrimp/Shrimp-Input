@@ -83,7 +83,7 @@ func hitTest(body):
 		if launcher.stance != body.stance:
 			var rate = launcher.critRate
 			if launcher is ExampleShrimpPlayer:
-				rate += launcher.lucky * 0.015
+				rate += launcher.getStat(StatsDB.Stats.LUCKY) * 0.015
 			var crit = randf() < rate
 			var totalDamage = getBaseDamage(body) * launcher.damageFactor * (1 + randf_range(-1, 1) * 0.2)
 			if crit:

@@ -14,11 +14,6 @@ var FIRESHRIMP_BULLET = load("res://addons/shrimp_input/example/bullets/fire-shr
 var DASH_BULLET = load("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
 var DASH_COOLDOWN = 1
 var DASH_INVINCIBLE = 0.5
-var regeneration: float = 0
-var lucky: float = 0
-var attackSpeed: float = 1
-var scoreMult: float = 1
-var dash: float = 1
 
 func _ready() -> void:
 	super._ready()
@@ -31,7 +26,7 @@ func _ready() -> void:
 func ai(delta: float) -> void:
 	apply_central_force(getInputDirection() * 3000)
 	if health < initialHealth:
-		health += regeneration * delta
+		health += getStat(StatsDB.Stats.REGENERATION) * delta
 
 func defocus(state: bool):
 	set_collision_mask_value(1, !state)
@@ -48,7 +43,7 @@ func getMouseAngle() -> float:
 	return position.angle_to_point(Actions.ATTACK.getPosition())
 func dashLoop():
 	while true:
-		dashInput.clock.timeScale = dash
+		dashInput.clock.timeScale = getStat(StatsDB.Stats.DASH)
 		await dashInput.clock.frame()
 		await dashInput.press(Actions.DASH)
 		var dir = getInputDirection()
@@ -56,7 +51,7 @@ func dashLoop():
 			dir = Vector2.from_angle(getMouseAngle())
 		apply_central_impulse(dir.normalized() * 2500)
 		playSound("Dash")
-		var invincibleTime = DASH_COOLDOWN * DASH_INVINCIBLE * dash
+		var invincibleTime = DASH_COOLDOWN * DASH_INVINCIBLE * getStat(StatsDB.Stats.DASH)
 		for d in [shoot(DASH_BULLET, 10, dir.angle())]:
 			if d is ExampleShrimpBaseBullet:
 				d.lifeTime = invincibleTime
@@ -77,7 +72,7 @@ func dashLoop():
 		await dashInput.release(Actions.DASH)
 func attackLoop():
 	while true:
-		attackInput.clock.timeScale = attackSpeed
+		attackInput.clock.timeScale = getStat(StatsDB.Stats.ATTACK_SPEED)
 		await attackInput.clock.frame()
 		var hold = 0
 		match await attackInput.presses([Actions.HEAVYATTACK, Actions.ATTACK]):

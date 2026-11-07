@@ -119,7 +119,7 @@ func _physics_process(_delta: float) -> void:
 
 static func addScore(amount: float, where: Node):
 	var player = where.get_tree().get_nodes_in_group("player")[0] as ExampleShrimpPlayer
-	instance.score += amount * (1 + player.lucky * 0.04) * player.scoreMult
+	instance.score += amount * (1 + player.getStat(StatsDB.Stats.LUCKY) * 0.04) * player.getStat(StatsDB.Stats.SCORE_MULT)
 	while instance.score >= instance.rewardMax:
 		instance.score -= instance.rewardMax
 		instance.scoredTimes += 1
