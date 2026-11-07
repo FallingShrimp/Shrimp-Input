@@ -53,6 +53,8 @@ func getBaseDamage(_entity: ExampleShrimpBaseEntity) -> float:
 	return damage
 func overrideDamage(original: float, _entity: ExampleShrimpBaseEntity) -> float:
 	return original * 1.0
+func hit(entity: ExampleShrimpBaseEntity):
+	return entity
 
 func lock(entity: ExampleShrimpBaseEntity):
 	tracker = entity
@@ -97,6 +99,7 @@ func hitTest(body):
 				launcher.hurt(redmg, false)
 			body.apply_central_impulse((body.position - position).normalized() * knockback * body.mass)
 			launcher.apply_central_impulse((position - body.position).normalized() * recoil * launcher.mass)
+			hit(body)
 			if reflect + launcher.getStat(StatsDB.Stats.REFLECT) > 0:
 				var e = ExampleShrimpBaseEntity.closet(self, func(i: ExampleShrimpBaseEntity): return i != body)
 				if is_instance_valid(e):

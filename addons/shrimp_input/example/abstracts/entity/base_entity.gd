@@ -50,23 +50,27 @@ func _physics_process(delta: float) -> void:
 		ai(delta)
 		if health < getStat(StatsDB.Stats.HEALTH_MAX):
 			health += getStat(StatsDB.Stats.REGENERATION) * delta
+	for effect in effects:
+		effect.update(self, delta)
 
 func ai(_delta: float):
 	pass
 func die():
 	await get_tree().process_frame
 
-func attachEffect(effect: ExampleShrimpBaseEffect):
-	var pos = effects.map(func(e: Object): return e.get_script()).find(effect.get_script())
+func attachEffect(eff: GDScript):
+	var pos = effects.map(func(e: Object): return e.get_script()).find(eff)
 	if pos >= 0:
 		var e: ExampleShrimpBaseEffect = effects[pos]
 		e.layer += 1
 		e.attached(self)
 	else:
-		effects.append(effect)
-		effect.attached(self)
-func consumeEffect(effect: ExampleShrimpBaseEffect):
-	var pos = effects.map(func(e: Object): return e.get_script()).find(effect.get_script())
+		var e = eff.new()
+		add_child(e)
+		effects.append(e)
+		e.attached(self)
+func consumeEffect(eff: GDScript):
+	var pos = effects.map(func(e: Object): return e.get_script()).find(eff)
 	if pos >= 0:
 		var e: ExampleShrimpBaseEffect = effects[pos]
 		e.layer -= 1
@@ -74,6 +78,7 @@ func consumeEffect(effect: ExampleShrimpBaseEffect):
 		if e.layer <= 0:
 			effects.erase(e)
 			e.detached(self)
+			e.queue_free()
 func getStat(key: StatsDB.Stats) -> float:
 	return stats.get(key, 0)
 func setStat(key: StatsDB.Stats, value: float):

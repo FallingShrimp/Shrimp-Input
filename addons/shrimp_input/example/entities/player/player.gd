@@ -11,6 +11,7 @@ const MAX_CHARGE = 2.0
 @onready var attackProgress: ProgressBar = $%AttackProgress
 var SHRIMP_BULLET = load("res://addons/shrimp_input/example/bullets/shrimp/shrimp.tscn")
 var FIRESHRIMP_BULLET = load("res://addons/shrimp_input/example/bullets/fire-shrimp/fire-shrimp.tscn")
+var FROZENSHRIMP_BULLET = load("res://addons/shrimp_input/example/bullets/frozen-shrimp/frozen-shrimp.tscn")
 var DASH_BULLET = load("res://addons/shrimp_input/example/bullets/dash/dash.tscn")
 var DASH_COOLDOWN = 1
 var DASH_INVINCIBLE = 0.5
@@ -77,9 +78,10 @@ func attackLoop():
 		match await attackInput.presses([Actions.HEAVYATTACK, Actions.ATTACK]):
 			Actions.ATTACK:
 				playSound("Attack")
-				attackInput.buffer.consume(1)
 				shoot(SHRIMP_BULLET, 10, getMouseAngle())
 			Actions.HEAVYATTACK:
+				playSound("ChargeStart")
+				shoot(FROZENSHRIMP_BULLET, 5, getMouseAngle())
 				if await attackInput.hold(Actions.HEAVYATTACK, 0.2):
 					charge.maxValue = MAX_CHARGE
 					charge.show()
@@ -87,7 +89,7 @@ func attackLoop():
 						hold += await attackInput.clock.frame()
 						charge.value = hold
 					if hold >= MAX_CHARGE:
-						playSound("Charged")
+						playSound("ChargeEnd")
 					await attackInput.release(Actions.HEAVYATTACK)
 					playSound("HeavyShot")
 					shoot(FIRESHRIMP_BULLET, 10 + hold / MAX_CHARGE * 50, getMouseAngle())

@@ -11,7 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://0apftpg6dljc" path="res://addons/shrimp_input/example/entities/player/sounds/heavy-shot.mp3" id="8_ai477"]
 [ext_resource type="AudioStream" uid="uid://ok2eq57whwxl" path="res://addons/shrimp_input/example/entities/player/sounds/hurt.wav" id="10_818ll"]
 [ext_resource type="AudioStream" uid="uid://xyfub7a16d8e" path="res://addons/shrimp_input/example/entities/player/sounds/collect.wav" id="11_6440c"]
-[ext_resource type="AudioStream" uid="uid://cqaogb5iab5xk" path="res://addons/shrimp_input/example/entities/player/sounds/flash.ogg" id="12_l08ey"]
+[ext_resource type="AudioStream" uid="uid://s8mo8rl4xbq4" path="res://addons/shrimp_input/example/entities/player/sounds/charge-start.wav" id="11_klb6x"]
+[ext_resource type="AudioStream" uid="uid://cqaogb5iab5xk" path="res://addons/shrimp_input/example/entities/player/sounds/charge-end.ogg" id="12_l08ey"]
 [ext_resource type="Texture2D" uid="uid://d0c220qfj6s1d" path="res://addons/shrimp_input/example/entities/player/kernyr.png" id="13_klb6x"]
 
 [sub_resource type="Curve" id="Curve_l08ey"]
@@ -105,14 +106,17 @@ stream = ExtResource("10_818ll")
 [node name="Dash" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="2" unique_id=1117221722]
 stream = ExtResource("7_cxhto")
 
-[node name="HeavyShot" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="3" unique_id=1728303242]
+[node name="ChargeStart" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="3" unique_id=396694091]
+stream = ExtResource("11_klb6x")
+
+[node name="ChargeEnd" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="4" unique_id=1544222885]
+stream = ExtResource("12_l08ey")
+
+[node name="HeavyShot" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="5" unique_id=1728303242]
 stream = ExtResource("8_ai477")
 
-[node name="Collect" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="4" unique_id=1884392811]
+[node name="Collect" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="6" unique_id=1884392811]
 stream = ExtResource("11_6440c")
-
-[node name="Charged" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(701904139) index="5" unique_id=1544222885]
-stream = ExtResource("12_l08ey")
 
 [node name="Texture" parent="." index="7" unique_id=605714463]
 scale = Vector2(0.42141598, 0.42141598)

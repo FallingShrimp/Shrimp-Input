@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bt4xclj7ja1od" path="res://addons/shrimp_input/example/abstracts/bullet/base_bullet.tscn" id="1_67i5s"]
 [ext_resource type="Shader" uid="uid://53nd2yesr42" path="res://addons/shrimp_input/example/bullets/frozen-shrimp/mixed_modulate.gdshader" id="2_4rjk6"]
+[ext_resource type="Script" uid="uid://bndn30r6asqcg" path="res://addons/shrimp_input/example/bullets/frozen-shrimp/frozen_shrimp.gd" id="2_4voct"]
 [ext_resource type="Texture2D" uid="uid://do6qddxx5t4g8" path="res://addons/shrimp_input/example/bullets/shrimp/shrimp.png" id="3_4voct"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cqp6f"]
@@ -48,6 +49,12 @@ alpha_curve = SubResource("CurveTexture_4voct")
 radius = 58.00862
 
 [node name="Bullet" unique_id=483333088 instance=ExtResource("1_67i5s")]
+script = ExtResource("2_4voct")
+damage = 20.0
+lifeTime = 15.0
+penetrate = 0.5
+bounce = 0.0
+reflect = 0.0
 
 [node name="Texture" parent="." index="1" unique_id=2039264544]
 material = SubResource("ShaderMaterial_cqp6f")
